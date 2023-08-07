@@ -1,0 +1,29 @@
+{
+  "name": "brighter-loans-bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "rimraf ./build && tsc",
+    "start": "npm run build && node build/index.js",
+    "start:dev": "npx ts-node ./src/index.ts",
+    "dev": "npx nodemon"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/lodash": "^4.14.196",
+    "@types/node": "^20.4.6",
+    "nodemon": "^3.0.1",
+    "rimraf": "^5.0.1",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.1.6"
+  },
+  "dependencies": {
+    "colors": "^1.4.0",
+    "lodash": "^4.17.21",
+    "puppeteer": "^21.0.0",
+    "winston": "^3.10.0"
+  }
+}

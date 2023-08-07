@@ -1,0 +1,1 @@
+EMAIL=ralo8869@gmail.com SSN=0535  LOAN_AMOUNT=600 IS_WELCOME_BACK=true  URL=https://6gfunding.com/cb1.php?id={Id}&firstName=Ralph&lastName=BRAULT&zip=64093&phone=6604299281&state=MO&emailAddress=RALO8869@GMAIL.COM&address=191%20MO-Y&city=WARRENSBURG&webmasterSourceId=1249 VALID
