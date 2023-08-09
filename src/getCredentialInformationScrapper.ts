@@ -1,18 +1,20 @@
 import { Browser } from 'puppeteer';
 import { Credential } from './interface/credential';
-import { INVALID_URL_REDIRECT, LOAN_AMOUNTS } from './constants';
+import {
+  INVALID_URL_REDIRECT,
+  LOAN_AMOUNTS,
+  TIMEOUT_WAIT_FOR_NAVIGATION_MINUTES,
+  TIMEOUT_WAIT_FOR_NAVIGATION_REFERRER_MINUTES,
+} from './constants';
 import {
   generateOutputMessage,
   getRamdomValue,
   isInvalidURLRedirect,
+  minutesToMilliseconds,
 } from './utils';
 import path from 'path';
 import fs from 'fs';
 import logger from './logger/logger';
-import {
-  TIMEOUT_WAIT_FOR_NAVIGATION_MILLISECONDS,
-  TIMEOUT_WAIT_FOR_NAVIGATION_REFERRER_MILLISECONDS,
-} from './app';
 
 export enum REFERRER_HOSTS {
   STORE_FRONTLOANS = 'forms.storefrontloans.com',
@@ -21,20 +23,27 @@ export enum REFERRER_HOSTS {
   OFFERDETAILS = 'offerdetails.net',
 }
 
+export const TIMEOUT_WAIT_FOR_NAVIGATION_MILLISECONDS = minutesToMilliseconds(
+  TIMEOUT_WAIT_FOR_NAVIGATION_MINUTES,
+);
+
+export const TIMEOUT_WAIT_FOR_NAVIGATION_REFERRER_MILLISECONDS =
+  minutesToMilliseconds(TIMEOUT_WAIT_FOR_NAVIGATION_REFERRER_MINUTES);
+
 export const REFERRER_HOSTS_URL: string[] = [
   'forms.storefrontloans.com',
   'intmconnect.com',
   'esigningapp.com',
   'offerdetails.net',
   'consumertransferservice.com',
-  'go-us.stopgonet.com'
+  'go-us.stopgonet.com',
 ];
 
 export const RE_REFERRER_HOSTS_URL: string[] = [
   'forms.storefrontloans.com',
   'offerdetails.net',
   'consumertransferservice.com',
-  'go-us.stopgonet.com'
+  'go-us.stopgonet.com',
 ];
 
 const logTracking = (message: string, email: string) => {
@@ -53,7 +62,9 @@ const isReferrerHostURL = (url: string) => {
 const isReReferrerHostURL = (url: string) => {
   const host = new URL(url).host;
 
-  return REFERRER_HOSTS_URL.some((referrerHost) => host.includes(referrerHost));
+  return RE_REFERRER_HOSTS_URL.some((referrerHost) =>
+    host.includes(referrerHost),
+  );
 };
 
 // URLS //
@@ -171,6 +182,12 @@ export const getCredentialInformationScrapper = async (
 
         // first opportunity to get a referrer
         if (isReReferrerHostURL(page.url())) {
+          logger.warn(
+            `VALIDATING RE_REFERRER_HOSTS  1st opp firstURLHost=[${firstURLHost}] || currentURL=[${page.url()}] ${
+              credential.email
+            }`,
+          );
+
           await page.waitForNavigation({
             timeout: TIMEOUT_WAIT_FOR_NAVIGATION_REFERRER_MILLISECONDS,
             waitUntil: 'networkidle2',
@@ -179,6 +196,12 @@ export const getCredentialInformationScrapper = async (
 
         // second opportunity to get a referrer
         if (isReReferrerHostURL(page.url())) {
+          logger.warn(
+            `VALIDATING RE_REFERRER_HOSTS  2nd opp firstURLHost=[${firstURLHost}] || currentURL=[${page.url()}] ${
+              credential.email
+            }`,
+          );
+
           await page.waitForNavigation({
             timeout: TIMEOUT_WAIT_FOR_NAVIGATION_REFERRER_MILLISECONDS,
             waitUntil: 'networkidle2',
@@ -242,7 +265,7 @@ export const getCredentialInformationScrapper = async (
   } catch (error) {
     logTracking(
       `ERROR WITH ${credential.email}!!!`,
-      `${credential.email} || ${firstURLHost}`,
+      `${credential.email} || firstURLHost=${firstURLHost} || referrerURL=${referrerURL}`,
     );
 
     logger.error(`getCredentialInformationScrapper ERROR: ${error}`);
@@ -270,6 +293,8 @@ export const getCredentialInformationScrapper = async (
     }
 
     validWriteLineOnFile(outputMessage);
+    
+    logger.info(outputMessage);
 
     await page.close();
   }

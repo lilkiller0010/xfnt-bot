@@ -1,16 +1,16 @@
-import pupeeteer, { Page, Browser } from 'puppeteer';
+import pupeeteer, { Page } from 'puppeteer';
 import fs from 'fs';
 import path from 'path';
 import chunk from 'lodash/chunk';
 
 import { Credential } from './interface/credential';
 import logger from './logger/logger';
-import {
-  getFileNameRange,
-  getCredentials,
-  minutesToMilliseconds,
-} from './utils';
+import { getFileNameRange, getCredentials } from './utils';
 import { getCredentialInformationScrapper } from './getCredentialInformationScrapper';
+import {
+  TIMEOUT_WAIT_FOR_NAVIGATION_MINUTES,
+  TIMEOUT_WAIT_FOR_NAVIGATION_REFERRER_MINUTES,
+} from './constants';
 
 const GROUP_PER_PARTIAL_CREDENTIAL = 10;
 
@@ -18,24 +18,13 @@ const CHANGE_TABS_SECONDS = 3;
 
 const BLANK_PAGE_URL = 'about:blank';
 
-const TIMEOUT_WAIT_FOR_NAVIGATION_MINUTES = 40;
-
-const TIMEOUT_WAIT_FOR_NAVIGATION_REFERRER_MINUTES = 5;
-
-export const TIMEOUT_WAIT_FOR_NAVIGATION_MILLISECONDS = minutesToMilliseconds(
-  TIMEOUT_WAIT_FOR_NAVIGATION_MINUTES,
-);
-
-export const TIMEOUT_WAIT_FOR_NAVIGATION_REFERRER_MILLISECONDS =
-  minutesToMilliseconds(TIMEOUT_WAIT_FOR_NAVIGATION_REFERRER_MINUTES);
-
 export const runWebScraping = async (
   time: string,
   comboListFileName: string,
 ) => {
   const browser = await pupeeteer.launch({
-    // headless: true,
-    headless: false,
+    headless: true,
+    // headless: false,
     args: ['--no-sandbox'],
   });
 
