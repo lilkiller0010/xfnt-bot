@@ -18,12 +18,14 @@ const CHANGE_TABS_SECONDS = 3;
 
 const BLANK_PAGE_URL = 'about:blank';
 
+const HEADLESS = false;
+
 export const runWebScraping = async (
   time: string,
   comboListFileName: string,
 ) => {
   const browser = await pupeeteer.launch({
-    headless: true,
+    headless: HEADLESS,
     // headless: false,
     args: ['--no-sandbox'],
   });
@@ -66,24 +68,32 @@ export const runWebScraping = async (
 
     let lastPageSelectedIndex = 0;
 
-    const intervalChangeTabs = setInterval(async () => {
-      const pages: Page[] = await browser.pages();
-      const pagesWithoutEmpty: Page[] = pages.filter(
-        (page) => page.url() !== BLANK_PAGE_URL,
-      );
+    const intervalChangeTabs = !HEADLESS
+      ? setInterval(async () => {
+          const pages: Page[] = await browser.pages();
+          const pagesWithoutEmpty: Page[] = pages.filter(
+            (page) => page.url() !== BLANK_PAGE_URL,
+          );
 
-      if (lastPageSelectedIndex >= pagesWithoutEmpty.length) {
-        lastPageSelectedIndex = 0;
-      }
+          if (lastPageSelectedIndex >= pagesWithoutEmpty.length) {
+            lastPageSelectedIndex = 0;
+          }
 
-      let currentPage = pagesWithoutEmpty[lastPageSelectedIndex];
+          let currentPage = pagesWithoutEmpty[lastPageSelectedIndex];
 
-      if (currentPage) {
-        currentPage.bringToFront();
-      }
+          if (currentPage) {
+            console.log(`pages quantity: ${pagesWithoutEmpty.length}`);
 
-      lastPageSelectedIndex++;
-    }, CHANGE_TABS_SECONDS * 1000);
+            currentPage.bringToFront();
+
+            console.log(
+              `bringToFront applied to page with URL: ${currentPage.url()} INDEX: ${lastPageSelectedIndex}`,
+            );
+          }
+
+          lastPageSelectedIndex++;
+        }, CHANGE_TABS_SECONDS * 1000)
+      : undefined;
 
     logger.warn('STARTING BOT...');
 
@@ -184,7 +194,9 @@ export const runWebScraping = async (
       }
     }
 
-    clearInterval(intervalChangeTabs);
+    if (intervalChangeTabs) {
+      clearInterval(intervalChangeTabs);
+    }
   } catch (error) {
     logger.error(`ERROR ON HEAD WEB SCRAPING: ${error}`);
 
