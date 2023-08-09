@@ -27,12 +27,14 @@ export const REFERRER_HOSTS_URL: string[] = [
   'esigningapp.com',
   'offerdetails.net',
   'consumertransferservice.com',
+  'go-us.stopgonet.com'
 ];
 
 export const RE_REFERRER_HOSTS_URL: string[] = [
   'forms.storefrontloans.com',
   'offerdetails.net',
   'consumertransferservice.com',
+  'go-us.stopgonet.com'
 ];
 
 const logTracking = (message: string, email: string) => {

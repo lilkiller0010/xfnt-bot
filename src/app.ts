@@ -12,7 +12,7 @@ import {
 } from './utils';
 import { getCredentialInformationScrapper } from './getCredentialInformationScrapper';
 
-const GROUP_PER_PARTIAL_CREDENTIAL = 13;
+const GROUP_PER_PARTIAL_CREDENTIAL = 10;
 
 const CHANGE_TABS_SECONDS = 3;
 
@@ -34,6 +34,7 @@ export const runWebScraping = async (
   comboListFileName: string,
 ) => {
   const browser = await pupeeteer.launch({
+    // headless: true,
     headless: false,
     args: ['--no-sandbox'],
   });

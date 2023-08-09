@@ -37,4 +37,4 @@ lerna-debug.log*
 # data
 
 src/data/*
-!src/data/combo-lists
+src/data/combo-lists
