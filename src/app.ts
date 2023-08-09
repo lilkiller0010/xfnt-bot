@@ -87,7 +87,7 @@ export const runWebScraping = async (
             currentPage.bringToFront();
 
             console.log(
-              `bringToFront applied to page with URL: ${currentPage.url()} INDEX: ${lastPageSelectedIndex}`,
+              `bringToFront applied to page with URL: ${currentPage.url()} TAB_INDEX: ${lastPageSelectedIndex + 1}`,
             );
           }
 
