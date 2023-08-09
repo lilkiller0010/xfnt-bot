@@ -18,7 +18,7 @@ const CHANGE_TABS_SECONDS = 3;
 
 const BLANK_PAGE_URL = 'about:blank';
 
-const HEADLESS = false;
+const HEADLESS = true;
 
 export const runWebScraping = async (
   time: string,
