@@ -30,6 +30,8 @@ export const TIMEOUT_WAIT_FOR_NAVIGATION_MILLISECONDS = minutesToMilliseconds(
 export const TIMEOUT_WAIT_FOR_NAVIGATION_REFERRER_MILLISECONDS =
   minutesToMilliseconds(TIMEOUT_WAIT_FOR_NAVIGATION_REFERRER_MINUTES);
 
+export const SCREENSHOT_DISABLED = true;
+
 export const REFERRER_HOSTS_URL: string[] = [
   'forms.storefrontloans.com',
   'intmconnect.com',
@@ -222,18 +224,22 @@ export const getCredentialInformationScrapper = async (
 
         validWriteLineOnFile(outputMessage);
 
-        await page.screenshot({
-          path: screenshotRedirectPath,
-        });
+        if (SCREENSHOT_DISABLED) {
+          await page.screenshot({
+            path: screenshotRedirectPath,
+          });
+        }
 
         await page.close();
 
         return 0;
       }
 
-      await page.screenshot({
-        path: screenshotRedirectPath,
-      });
+      if (SCREENSHOT_DISABLED) {
+        await page.screenshot({
+          path: screenshotRedirectPath,
+        });
+      }
 
       const outputMessage = generateOutputMessage(
         credential,
@@ -293,7 +299,7 @@ export const getCredentialInformationScrapper = async (
     }
 
     validWriteLineOnFile(outputMessage);
-    
+
     logger.info(outputMessage);
 
     await page.close();
