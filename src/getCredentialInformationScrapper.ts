@@ -21,6 +21,7 @@ export enum REFERRER_HOSTS {
   INTMCONNECT = 'intmconnect.com',
   ESIGNINGAPP = 'esigningapp.com',
   OFFERDETAILS = 'offerdetails.net',
+  LENDYOU = 'lendyou.com',
 }
 
 export const TIMEOUT_WAIT_FOR_NAVIGATION_MILLISECONDS = minutesToMilliseconds(
@@ -39,6 +40,7 @@ export const REFERRER_HOSTS_URL: string[] = [
   'offerdetails.net',
   'consumertransferservice.com',
   'go-us.stopgonet.com',
+  'lendyou.com',
 ];
 
 export const RE_REFERRER_HOSTS_URL: string[] = [
@@ -46,6 +48,7 @@ export const RE_REFERRER_HOSTS_URL: string[] = [
   'offerdetails.net',
   'consumertransferservice.com',
   'go-us.stopgonet.com',
+  'lendyou.com',
 ];
 
 const logTracking = (message: string, email: string) => {
