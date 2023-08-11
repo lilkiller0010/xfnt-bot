@@ -1,9 +1,0 @@
-EMAIL=kimhernan2014@gmail.com SSN=1474 LOAN_AMOUNT=600 IS_WELCOME_BACK=true  URL=https://storefrontloans.com/personal/1bad740aa810 VALID
-EMAIL=cait.shaw@hotmail.com SSN=0506 LOAN_AMOUNT=700 IS_WELCOME_BACK=true  URL=https://storefrontloans.com/personal/1bad7444a8cc VALID
-EMAIL=nculver12@gmail.com SSN=4335 LOAN_AMOUNT=900 IS_WELCOME_BACK=true  URL=https://intmconnect.com/lead/confirm/2990665278 REFERRER_URL=https://forms.storefrontloans.com/personal/lead/confirm/928704634 VALID
-EMAIL=ytramaine@yahoo.com SSN=6210 LOAN_AMOUNT=600 IS_WELCOME_BACK=true  URL=https://esigningapp.com/web/transitions/e17e193b-f39a-4712-9c23-b9cb7be278b1 VALID
-EMAIL=Maxwellmoeshinel97@gmail.com SSN=6079 LOAN_AMOUNT=700 IS_WELCOME_BACK=true  URL=https://esigningapp.com/web/transitions/d57257f2-0208-46c7-a8c4-66d7ecd3d7ea VALID
-EMAIL=tvtuinei702@yahoo.com SSN=3018 LOAN_AMOUNT=700 IS_WELCOME_BACK=true  URL=https://storefrontloans.com/personal/1bad8a8bc7e0 VALID
-EMAIL=nakiabacon43@yahoo.com SSN=9691 LOAN_AMOUNT=600 IS_WELCOME_BACK=true  URL=https://forms.storefrontloans.com/personal/lead/confirm/928715817 REFERRER_URL=https://online.northernstarlending.com/#/instant/welcome VALID
-EMAIL=lisamarie3082@gmail.com SSN=6918 LOAN_AMOUNT=600 IS_WELCOME_BACK=true  URL=https://intmconnect.com/lead/confirm/2990696599 REFERRER_URL=https://forms.storefrontloans.com/lead/go/2990696599?auto=1 VALID
-EMAIL=lisapdx94@gmail.com SSN=8412 LOAN_AMOUNT=900 IS_WELCOME_BACK=true  URL=https://www.speedycash.com/affiliates/nonaff/?ReferringURL=loanstart.com&email=lisapdx94%40gmail.com&fname=Brian&lname=Petersen&phone=5039991179&state=OR&utm_responseid=174915200&utm_userid=928725632&zip=97239 VALID

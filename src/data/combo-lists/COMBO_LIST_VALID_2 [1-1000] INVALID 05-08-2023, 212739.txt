@@ -1,1 +1,0 @@
-EMAIL=hudsonjabari14@gmail.com SSN=0727 LOAN_AMOUNT=500 IS_WELCOME_BACK=false INVALID

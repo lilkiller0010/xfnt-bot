@@ -1,1 +1,0 @@
-EMAIL=destiny_ann_minix@hotmail.com SSN=0422 LOAN_AMOUNT=800 IS_WELCOME_BACK=true  URL=https://clearlineloans.com/conversion?hash=552c52b509d7e0cd2ef2f9b6032bf10f VALID
