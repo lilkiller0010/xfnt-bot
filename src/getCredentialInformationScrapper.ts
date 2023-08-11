@@ -41,6 +41,7 @@ export const REFERRER_HOSTS_URL: string[] = [
   'consumertransferservice.com',
   'go-us.stopgonet.com',
   'lendyou.com',
+  'connect.cashusa.com',
 ];
 
 export const RE_REFERRER_HOSTS_URL: string[] = [
@@ -49,6 +50,7 @@ export const RE_REFERRER_HOSTS_URL: string[] = [
   'consumertransferservice.com',
   'go-us.stopgonet.com',
   'lendyou.com',
+  'connect.cashusa.com',
 ];
 
 const logTracking = (message: string, email: string) => {
