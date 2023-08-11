@@ -1,1 +1,10 @@
 src/data/combo-lists/COMBO_LIST_VALID_4*
+
+
+COMBO_LIST_VALID_6 = Valid.2 (2).txt [5.01k-8k] lines
+
+COMBO_LIST_VALID_7 = Valid.2 (2).txt [8k-10k] lines
+
+COMBO_LIST_VALID_8 = Valid.2 (2).txt [10.01k-12k] lines
+
+COMBO_LIST_VALID_9 = Valid.2 (2).txt [18.01k-20k] lines
