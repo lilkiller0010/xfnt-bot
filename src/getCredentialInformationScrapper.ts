@@ -74,14 +74,42 @@ const isReReferrerHostURL = (url: string) => {
   );
 };
 
+interface PageConfiguration {
+  pageUrl: string;
+  loanAmountSelector: string;
+  formSelector: string;
+}
+
+interface ConfigurationPerPage {
+  _247LoanExpress: PageConfiguration;
+  brighterLoans: PageConfiguration;
+}
+
+const CONFIGURATION_PER_PAGE: ConfigurationPerPage = {
+  brighterLoans: {
+    pageUrl: 'https://brighter.loans/',
+    loanAmountSelector: '#amount',
+    formSelector: '#homepage-form',
+  },
+  _247LoanExpress: {
+    pageUrl: 'https://www.247loanexpress.com/',
+    loanAmountSelector: '#amount',
+    formSelector: '#get-started-form',
+  },
+};
+
+const { pageUrl, loanAmountSelector, formSelector } =
+  CONFIGURATION_PER_PAGE._247LoanExpress;
+
 // URLS //
-const PAGE_URL = 'https://brighter.loans/';
+// const pageUrl = 'https://www.247loanexpress.com/';
+// const PAGE_URL = 'https://brighter.loans/';
 // SELECTORS //
-const loanAmountSelector = '#amount';
+// const loanAmountSelector = '#amount';
 const emailSelector = '#email';
 const ssnSelector = '#shortSSN';
 const submitButtonSelector = '#homepage-form > div.d-grid > button';
-const formSelector = '#homepage-form';
+// const formSelector = '#homepage-form';
 const submitLoanRequestButtonSelector = '#btnSubmit';
 const termsAndConditionsCheckBoxSelector = '#termsAgreed';
 
@@ -114,7 +142,7 @@ export const getCredentialInformationScrapper = async (
       `${screenshotRedirectDirectory}/${credential.email}.png`,
     );
 
-    await page.goto(PAGE_URL, {
+    await page.goto(pageUrl, {
       waitUntil: 'networkidle2',
     });
 
