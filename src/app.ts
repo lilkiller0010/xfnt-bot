@@ -12,13 +12,13 @@ import {
   TIMEOUT_WAIT_FOR_NAVIGATION_REFERRER_MINUTES,
 } from './constants';
 
-const GROUP_PER_PARTIAL_CREDENTIAL = 10;
+const GROUP_PER_PARTIAL_CREDENTIAL = 1;
 
 const CHANGE_TABS_SECONDS = 3;
 
 const BLANK_PAGE_URL = 'about:blank';
 
-const HEADLESS = true;
+const HEADLESS = false;
 
 export const runWebScraping = async (
   time: string,
@@ -37,7 +37,7 @@ export const runWebScraping = async (
 
     // return;
 
-    const partialCredentialsChunkSize = 10;
+    const partialCredentialsChunkSize = 1000;
 
     const partialCredentials: Credential[][] = chunk(
       credentials,
@@ -185,13 +185,24 @@ export const runWebScraping = async (
         try {
           await Promise.all(
             credentialChunk.map(async (credential) => {
-              await getCredentialInformationScrapper(
-                browser,
-                credential,
-                validWriteLineOnFile,
-                invalidWriteLineOnFile,
-                validFileNameRange,
-              );
+              await Promise.all([
+                getCredentialInformationScrapper(
+                  browser,
+                  credential,
+                  validWriteLineOnFile,
+                  invalidWriteLineOnFile,
+                  validFileNameRange,
+                  'americanWebLoan',
+                ),
+                getCredentialInformationScrapper(
+                  browser,
+                  credential,
+                  validWriteLineOnFile,
+                  invalidWriteLineOnFile,
+                  validFileNameRange,
+                  'withULoans',
+                ),
+              ]);
             }),
           );
         } catch (error) {

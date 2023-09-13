@@ -1,7 +1,8 @@
-import { Browser } from 'puppeteer';
+import axios from 'axios';
+import ip from 'ip';
+import pupeeteer, { Browser } from 'puppeteer';
 import { Credential } from './interface/credential';
 import {
-  INVALID_URL_REDIRECT,
   LOAN_AMOUNTS,
   TIMEOUT_WAIT_FOR_NAVIGATION_MINUTES,
   TIMEOUT_WAIT_FOR_NAVIGATION_REFERRER_MINUTES,
@@ -9,20 +10,11 @@ import {
 import {
   generateOutputMessage,
   getRamdomValue,
-  isInvalidURLRedirect,
   minutesToMilliseconds,
 } from './utils';
 import path from 'path';
 import fs from 'fs';
 import logger from './logger/logger';
-
-export enum REFERRER_HOSTS {
-  STORE_FRONTLOANS = 'forms.storefrontloans.com',
-  INTMCONNECT = 'intmconnect.com',
-  ESIGNINGAPP = 'esigningapp.com',
-  OFFERDETAILS = 'offerdetails.net',
-  LENDYOU = 'lendyou.com',
-}
 
 export const TIMEOUT_WAIT_FOR_NAVIGATION_MILLISECONDS = minutesToMilliseconds(
   TIMEOUT_WAIT_FOR_NAVIGATION_MINUTES,
@@ -33,46 +25,12 @@ export const TIMEOUT_WAIT_FOR_NAVIGATION_REFERRER_MILLISECONDS =
 
 export const SCREENSHOT_DISABLED = true;
 
-export const REFERRER_HOSTS_URL: string[] = [
-  'forms.storefrontloans.com',
-  'intmconnect.com',
-  'esigningapp.com',
-  'offerdetails.net',
-  'consumertransferservice.com',
-  'go-us.stopgonet.com',
-  'lendyou.com',
-  'connect.cashusa.com',
-];
-
-export const RE_REFERRER_HOSTS_URL: string[] = [
-  'forms.storefrontloans.com',
-  'offerdetails.net',
-  'consumertransferservice.com',
-  'go-us.stopgonet.com',
-  'lendyou.com',
-  'connect.cashusa.com',
-];
-
 const logTracking = (message: string, email: string) => {
   logger.warn(`${message} || ${email}`);
 };
 
 const getLoanAmountValue = () =>
   LOAN_AMOUNTS[getRamdomValue(0, LOAN_AMOUNTS.length - 1)];
-
-const isReferrerHostURL = (url: string) => {
-  const host = new URL(url).host;
-
-  return REFERRER_HOSTS_URL.some((referrerHost) => host.includes(referrerHost));
-};
-
-const isReReferrerHostURL = (url: string) => {
-  const host = new URL(url).host;
-
-  return RE_REFERRER_HOSTS_URL.some((referrerHost) =>
-    host.includes(referrerHost),
-  );
-};
 
 interface PageConfiguration {
   pageUrl: string;
@@ -81,37 +39,32 @@ interface PageConfiguration {
 }
 
 interface ConfigurationPerPage {
-  _247LoanExpress: PageConfiguration;
-  brighterLoans: PageConfiguration;
+  americanWebLoan: PageConfiguration;
+  withULoans: PageConfiguration;
 }
 
 const CONFIGURATION_PER_PAGE: ConfigurationPerPage = {
-  brighterLoans: {
-    pageUrl: 'https://brighter.loans/',
+  americanWebLoan: {
+    pageUrl: 'https://www.americanwebloan.com/',
     loanAmountSelector: '#amount',
     formSelector: '#homepage-form',
   },
-  _247LoanExpress: {
-    pageUrl: 'https://www.247loanexpress.com/',
+  withULoans: {
+    pageUrl: 'https://www.withuloans.com/',
     loanAmountSelector: '#amount',
     formSelector: '#get-started-form',
   },
 };
 
-const { pageUrl, loanAmountSelector, formSelector } =
-  CONFIGURATION_PER_PAGE._247LoanExpress;
+const SELECTORS = {
+  firstNameInput: '#firstName',
+  lastNameInput: '#lastName',
+  emailInput: '#email',
+  ssnInput: '#ssn',
+  applyNowButton: 'input[type=submit]',
+};
 
-// URLS //
-// const pageUrl = 'https://www.247loanexpress.com/';
-// const PAGE_URL = 'https://brighter.loans/';
-// SELECTORS //
-// const loanAmountSelector = '#amount';
-const emailSelector = '#email';
-const ssnSelector = '#shortSSN';
-const submitButtonSelector = '#homepage-form > div.d-grid > button';
-// const formSelector = '#homepage-form';
-const submitLoanRequestButtonSelector = '#btnSubmit';
-const termsAndConditionsCheckBoxSelector = '#termsAgreed';
+const validateIp = (ip: string) => {};
 
 export const getCredentialInformationScrapper = async (
   browser: Browser,
@@ -119,17 +72,65 @@ export const getCredentialInformationScrapper = async (
   validWriteLineOnFile: (line: string) => void,
   invalidWriteLineOnFile: (line: string) => void,
   validFileName: string,
+  pageConfigKey: keyof ConfigurationPerPage,
 ) => {
-  const page = await browser.newPage();
+  const { pageUrl } = CONFIGURATION_PER_PAGE[pageConfigKey];
 
-  const loanAmountValue = getLoanAmountValue();
+  const HEADLESS = false;
 
-  let firstURL = '';
-  let referrerURL = '';
-  let firstURLHost = '';
-  let isWelcomeBack = false;
+  const _browser = await pupeeteer.launch({
+    headless: HEADLESS,
+    // headless: false,
+    args: ['--no-sandbox'],
+  });
+
+  // const page = await browser.newPage();
+  let page = await _browser.newPage();
+
+  await page.setViewport({
+    width: 1920,
+    height: 1080,
+  });
+
+  const invalidIPs = ['37.120.215.171', '37.120.215.167'];
+  // validation ip
+
+  let isInvalidIp = true;
+
+  // const loanAmountValue = getLoanAmountValue();
 
   try {
+    await page.goto(pageUrl, {
+      waitUntil: 'networkidle2',
+    });
+
+    while (isInvalidIp) {
+      const { data: ip } = await axios.get<string>('https://api.ipify.org');
+
+      console.log({ ip: ip });
+
+      isInvalidIp = invalidIPs.includes(ip);
+
+      if (isInvalidIp) {
+        await page.close();
+
+        page = await _browser.newPage();
+
+        await page.setViewport({
+          width: 1920,
+          height: 1080,
+        });
+
+        await page.goto(pageUrl, {
+          waitUntil: 'networkidle2',
+        });
+      }
+
+      await new Promise((r) => setTimeout(r, 3000));
+    }
+
+    console.log('out of loop');
+
     const screenshotRedirectDirectory = path.join(
       `${__dirname}/data/screenshots-redirect/${validFileName}`,
     );
@@ -142,199 +143,51 @@ export const getCredentialInformationScrapper = async (
       `${screenshotRedirectDirectory}/${credential.email}.png`,
     );
 
-    await page.goto(pageUrl, {
-      waitUntil: 'networkidle2',
-    });
+    // await page.select(loanAmountSelector, loanAmountValue);
 
-    //TODO: Verify this session code
-    const session = await page.target().createCDPSession();
-    await session.send('Page.enable');
-    await session.send('Page.setWebLifecycleState', { state: 'active' });
+    // TODO: Add logic to select a loan amount
 
-    await page.select(loanAmountSelector, loanAmountValue);
+    await page.type(SELECTORS.lastNameInput, credential.lastname);
 
-    await page.type(emailSelector, credential.email);
-    await page.type(ssnSelector, credential.lastSSN);
+    await page.type(SELECTORS.firstNameInput, credential.name);
 
-    const form = await page.$(formSelector);
+    await page.type(SELECTORS.emailInput, credential.email);
+
+    await page.type(SELECTORS.ssnInput, credential.last4ssn);
 
     await Promise.all([
-      await form?.evaluate((form) => form.submit()),
+      await page.click(SELECTORS.applyNowButton),
       await page.waitForNavigation({
         timeout: TIMEOUT_WAIT_FOR_NAVIGATION_MILLISECONDS,
         waitUntil: 'networkidle0',
       }),
     ]);
 
-    isWelcomeBack = (await page.$(submitLoanRequestButtonSelector))
-      ? true
-      : false;
+    await new Promise((r) => setTimeout(r, 1000));
 
-    if (isWelcomeBack) {
-      // await page.screenshot({
-      //   path: screenshotPath, //ACTIVE TO SCREENSHOT WHEN IS WELCOME BACK
-      // });
+    const outputMessage = generateOutputMessage(credential, page.url());
 
-      await page.click(termsAndConditionsCheckBoxSelector);
+    logger.info(outputMessage);
 
-      const submitLoanRequestButton = await page.$(
-        submitLoanRequestButtonSelector,
-      );
+    validWriteLineOnFile(outputMessage);
 
-      await Promise.all([
-        await submitLoanRequestButton?.evaluate((e) => e.click()),
-        logger.warn(`VALIDATING: ${credential.email}`),
-        await page.waitForNavigation({
-          timeout: TIMEOUT_WAIT_FOR_NAVIGATION_MILLISECONDS,
-          waitUntil: 'networkidle2',
-        }),
-      ]);
-
-      await new Promise((r) => setTimeout(r, 2000));
-
-      if (isInvalidURLRedirect(page.url(), INVALID_URL_REDIRECT)) {
-        await page.close();
-
-        return logger.error(
-          `INVALID URL REDIRECT: ${page.url()} - EMAIL:${
-            credential.email
-          } SSN=${credential.lastSSN} LOAN_AMOUNT=${loanAmountValue}`,
-        );
-      }
-
-      if (isReferrerHostURL(page.url())) {
-        firstURL = page.url();
-        firstURLHost = new URL(firstURL).host;
-
-        logger.warn(
-          `VALIDATING REFERRER_HOSTS [${firstURLHost}] : ${credential.email}`,
-        );
-
-        await page.waitForNavigation({
-          timeout: TIMEOUT_WAIT_FOR_NAVIGATION_REFERRER_MILLISECONDS,
-          waitUntil: 'networkidle2',
-        });
-
-        // first opportunity to get a referrer
-        if (isReReferrerHostURL(page.url())) {
-          logger.warn(
-            `VALIDATING RE_REFERRER_HOSTS  1st opp firstURLHost=[${firstURLHost}] || currentURL=[${page.url()}] ${
-              credential.email
-            }`,
-          );
-
-          await page.waitForNavigation({
-            timeout: TIMEOUT_WAIT_FOR_NAVIGATION_REFERRER_MILLISECONDS,
-            waitUntil: 'networkidle2',
-          });
-        }
-
-        // second opportunity to get a referrer
-        if (isReReferrerHostURL(page.url())) {
-          logger.warn(
-            `VALIDATING RE_REFERRER_HOSTS  2nd opp firstURLHost=[${firstURLHost}] || currentURL=[${page.url()}] ${
-              credential.email
-            }`,
-          );
-
-          await page.waitForNavigation({
-            timeout: TIMEOUT_WAIT_FOR_NAVIGATION_REFERRER_MILLISECONDS,
-            waitUntil: 'networkidle2',
-          });
-        }
-
-        referrerURL = page.url();
-
-        const outputMessage = generateOutputMessage(
-          credential,
-          loanAmountValue,
-          isWelcomeBack,
-          firstURL,
-          referrerURL,
-        );
-
-        logger.info(outputMessage);
-
-        validWriteLineOnFile(outputMessage);
-
-        if (SCREENSHOT_DISABLED) {
-          await page.screenshot({
-            path: screenshotRedirectPath,
-          });
-        }
-
-        await page.close();
-
-        return 0;
-      }
-
-      if (SCREENSHOT_DISABLED) {
-        await page.screenshot({
-          path: screenshotRedirectPath,
-        });
-      }
-
-      const outputMessage = generateOutputMessage(
-        credential,
-        loanAmountValue,
-        isWelcomeBack,
-        page.url(),
-      );
-
-      await new Promise((r) => setTimeout(r, 4000));
-
-      logger.info(outputMessage);
-
-      validWriteLineOnFile(outputMessage);
-
-      await page.close();
-    } else {
-      const outputMessage = generateOutputMessage(
-        credential,
-        loanAmountValue,
-        isWelcomeBack,
-      );
-
-      invalidWriteLineOnFile(outputMessage);
-
-      logger.error(outputMessage);
-
-      await page.close();
+    if (SCREENSHOT_DISABLED) {
+      await page.screenshot({
+        path: screenshotRedirectPath,
+      });
     }
   } catch (error) {
     logTracking(
       `ERROR WITH ${credential.email}!!!`,
-      `${credential.email} || firstURLHost=${firstURLHost} || referrerURL=${referrerURL}`,
+      `${credential.email} || url=${page.url()} `,
     );
 
-    logger.error(`getCredentialInformationScrapper ERROR: ${error}`);
-
-    let outputMessage = '';
-
-    if (firstURL) {
-      outputMessage = generateOutputMessage(
-        credential,
-        loanAmountValue,
-        isWelcomeBack,
-        firstURL,
-        referrerURL,
-        true,
-      );
-    } else {
-      outputMessage = generateOutputMessage(
-        credential,
-        loanAmountValue,
-        isWelcomeBack,
-        page.url(),
-        referrerURL,
-        true,
-      );
-    }
-
-    validWriteLineOnFile(outputMessage);
-
-    logger.info(outputMessage);
-
-    await page.close();
+    logger.error(
+      `getCredentialInformationScrapper ERROR: ${error} || EMAIL:${
+        credential.email
+      } || URL: ${page.url()}`,
+    );
+  } finally {
+    await _browser.close();
   }
 };

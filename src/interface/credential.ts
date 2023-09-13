@@ -1,6 +1,15 @@
 export interface Credential {
+  id: string;
+  name: string;
+  lastname: string;
+  bid: string;
+  address: string;
+  city: string;
+  state: string;
+  zipCode: string;
+  phoneNumber: string;
+  phoneNumber2: string;
   email: string;
-  lastSSN: string;
   ssn: string;
-  previousLoanStatus: string;
+  last4ssn: string;
 }

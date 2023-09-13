@@ -14,38 +14,44 @@ export const getCredentials = async (comboListFileName: string) => {
 
     const comboList: Credential[] = (await readFileLines(_comboListFileName))
       .map<Credential>((combo) => {
-        const [_emailWithSnn, _ssn, _loanStatus] = combo.split('|');
-
-        if (!_emailWithSnn || !_ssn || !_loanStatus) {
-          return {
-            email: '',
-            lastSSN: '',
-            ssn: '',
-            previousLoanStatus: '',
-          };
-        }
-
-        const [email, lastSSN] = _emailWithSnn
-          .split(':')
-          .map((str) => str.trim());
-
-        const ssn = _ssn.split('=')[1].trim();
-
-        const previousLoanStatus = _loanStatus.split('=')[1].trim();
+        const [
+          id,
+          name,
+          lastname,
+          bid,
+          address,
+          city,
+          state,
+          zipCode,
+          phoneNumber,
+          phoneNumber2,
+          email,
+          ssn,
+        ] = combo.trim().split(':');
 
         return {
+          id,
+          name,
+          lastname,
+          bid,
+          address,
+          city,
+          state,
+          zipCode,
+          phoneNumber,
+          phoneNumber2,
           email,
-          lastSSN,
           ssn,
-          previousLoanStatus,
+          last4ssn: ssn.slice(-4),
         };
       })
       .filter(
         (credential) =>
-          credential?.email &&
-          credential?.lastSSN &&
+          credential?.name &&
+          credential?.lastname &&
           credential?.ssn &&
-          credential?.previousLoanStatus,
+          credential?.email &&
+          credential?.last4ssn,
       );
 
     logger.debug('COMBO LIST FETCHED');

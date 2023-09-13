@@ -3,31 +3,11 @@ import logger from '../logger/logger';
 
 export const generateOutputMessage = (
   crendential: Credential,
-  loanAmountValue: string,
-  isWelcomeBack: boolean,
   url?: string,
-  referrerURL?: string,
-  onCatch?: boolean,
 ): string => {
-  const { email, lastSSN: ssn } = crendential;
+  const { email, last4ssn: ssn } = crendential;
 
-  if (isWelcomeBack) {
-    const validMessage = onCatch
-      ? `EMAIL=${email} SSN=${ssn} LOAN_AMOUNT=${loanAmountValue} IS_WELCOME_BACK=${isWelcomeBack}  URL=${url} ${
-          referrerURL ? `REFERRER_URL=${referrerURL} ` : ''
-        } ONCATH VALID`
-      : `EMAIL=${email} SSN=${ssn} LOAN_AMOUNT=${loanAmountValue} IS_WELCOME_BACK=${isWelcomeBack}  URL=${url} ${
-          referrerURL ? `REFERRER_URL=${referrerURL} ` : ''
-        }VALID`;
+  const message = `EMAIL=${email} SSN=${ssn} URL=${url}`;
 
-    return validMessage;
-  } else {
-    const invalidMessage = `EMAIL=${email} SSN=${ssn} LOAN_AMOUNT=${loanAmountValue} IS_WELCOME_BACK=${isWelcomeBack} INVALID`;
-
-    logger.error(
-      `EMAIL=${email} SSN=${ssn} LOAN_AMOUNT=${loanAmountValue} IS_WELCOME_BACK=${isWelcomeBack} INVALID`,
-    );
-
-    return invalidMessage;
-  }
+  return message;
 };
