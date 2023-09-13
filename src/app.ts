@@ -33,7 +33,11 @@ export const runWebScraping = async (
   try {
     const credentials = await getCredentials(comboListFileName);
 
-    const partialCredentialsChunkSize = 1000;
+    console.log(credentials.slice(0, 10));
+
+    // return;
+
+    const partialCredentialsChunkSize = 10;
 
     const partialCredentials: Credential[][] = chunk(
       credentials,
@@ -87,7 +91,9 @@ export const runWebScraping = async (
             currentPage.bringToFront();
 
             console.log(
-              `bringToFront applied to page with URL: ${currentPage.url()} TAB_INDEX: ${lastPageSelectedIndex + 1}`,
+              `bringToFront applied to page with URL: ${currentPage.url()} TAB_INDEX: ${
+                lastPageSelectedIndex + 1
+              }`,
             );
           }
 
@@ -171,7 +177,7 @@ export const runWebScraping = async (
       );
 
       const credentialsChunks = chunk(
-        currentPartialCredential,
+        credentials,
         GROUP_PER_PARTIAL_CREDENTIAL,
       );
 

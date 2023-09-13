@@ -9,7 +9,7 @@ export const generateOutputMessage = (
   referrerURL?: string,
   onCatch?: boolean,
 ): string => {
-  const { email, ssn } = crendential;
+  const { email, lastSSN: ssn } = crendential;
 
   if (isWelcomeBack) {
     const validMessage = onCatch

@@ -154,7 +154,7 @@ export const getCredentialInformationScrapper = async (
     await page.select(loanAmountSelector, loanAmountValue);
 
     await page.type(emailSelector, credential.email);
-    await page.type(ssnSelector, credential.ssn);
+    await page.type(ssnSelector, credential.lastSSN);
 
     const form = await page.$(formSelector);
 
@@ -198,7 +198,7 @@ export const getCredentialInformationScrapper = async (
         return logger.error(
           `INVALID URL REDIRECT: ${page.url()} - EMAIL:${
             credential.email
-          } SSN=${credential.ssn} LOAN_AMOUNT=${loanAmountValue}`,
+          } SSN=${credential.lastSSN} LOAN_AMOUNT=${loanAmountValue}`,
         );
       }
 
