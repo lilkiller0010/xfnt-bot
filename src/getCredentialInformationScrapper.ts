@@ -64,7 +64,59 @@ const SELECTORS = {
   applyNowButton: 'input[type=submit]',
 };
 
-const validateIp = (ip: string) => {};
+const getIP = async () => {
+  try {
+    const { data: ip } = await axios.get<string>('https://api.ipify.org');
+    return ip;
+  } catch (error) {
+    // defualt ip when request fails
+    return '127.0.0.1';
+  }
+};
+
+const validateIp = async (
+  ip: string,
+  pageConfigKey: keyof ConfigurationPerPage,
+) => {
+  const IPs_Directory = path.join(`${__dirname}/data/ips`);
+
+  if (!fs.existsSync(IPs_Directory)) {
+    fs.mkdirSync(IPs_Directory, { recursive: true });
+  }
+
+  const readFile = async () => {
+    if (!fs.existsSync(`${IPs_Directory}/${pageConfigKey}.txt`)) {
+      fs.writeFileSync(`${IPs_Directory}/${pageConfigKey}.txt`, '', 'utf8');
+    }
+
+    const fileContent = await fs.promises.readFile(
+      `${IPs_Directory}/${pageConfigKey}.txt`,
+      'utf8',
+    );
+
+    return fileContent;
+  };
+
+  const fileData = await readFile();
+
+  const ipsData = fileData ? fileData.split(/\n/).filter(Boolean) : [];
+
+  const isIPUsed = ipsData.includes(ip);
+
+  if (!isIPUsed) {
+    logger.warn(`New IP: ${ip}`);
+
+    ipsData.push(ip);
+
+    fs.writeFileSync(
+      `${IPs_Directory}/${pageConfigKey}.txt`,
+      ipsData.join('\n'),
+      'utf8',
+    );
+  }
+
+  return isIPUsed;
+};
 
 export const getCredentialInformationScrapper = async (
   browser: Browser,
@@ -92,12 +144,9 @@ export const getCredentialInformationScrapper = async (
     height: 1080,
   });
 
-  const invalidIPs = ['37.120.215.171', '37.120.215.167'];
-  // validation ip
+  let ip = '';
 
   let isInvalidIp = true;
-
-  // const loanAmountValue = getLoanAmountValue();
 
   try {
     await page.goto(pageUrl, {
@@ -105,11 +154,9 @@ export const getCredentialInformationScrapper = async (
     });
 
     while (isInvalidIp) {
-      const { data: ip } = await axios.get<string>('https://api.ipify.org');
+      ip = await getIP();
 
-      console.log({ ip: ip });
-
-      isInvalidIp = invalidIPs.includes(ip);
+      isInvalidIp = await validateIp(ip, pageConfigKey);
 
       if (isInvalidIp) {
         await page.close();
@@ -165,7 +212,7 @@ export const getCredentialInformationScrapper = async (
 
     await new Promise((r) => setTimeout(r, 1000));
 
-    const outputMessage = generateOutputMessage(credential, page.url());
+    const outputMessage = generateOutputMessage(credential, page.url(), ip);
 
     logger.info(outputMessage);
 
@@ -177,6 +224,7 @@ export const getCredentialInformationScrapper = async (
       });
     }
   } catch (error) {
+    console.error(error);
     logTracking(
       `ERROR WITH ${credential.email}!!!`,
       `${credential.email} || url=${page.url()} `,

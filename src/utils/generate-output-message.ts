@@ -1,13 +1,13 @@
 import { Credential } from '../interface/credential';
-import logger from '../logger/logger';
 
 export const generateOutputMessage = (
   crendential: Credential,
-  url?: string,
+  url: string,
+  ip: string,
 ): string => {
   const { email, last4ssn: ssn } = crendential;
 
-  const message = `EMAIL=${email} SSN=${ssn} URL=${url}`;
+  const message = `EMAIL=${email} SSN=${ssn} URL=${url} IP=${ip}`;
 
   return message;
 };
