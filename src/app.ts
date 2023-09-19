@@ -192,16 +192,16 @@ export const runWebScraping = async (
                   validWriteLineOnFile,
                   invalidWriteLineOnFile,
                   validFileNameRange,
-                  'americanWebLoan',
+                  'xfinity',
                 ),
-                getCredentialInformationScrapper(
-                  browser,
-                  credential,
-                  validWriteLineOnFile,
-                  invalidWriteLineOnFile,
-                  validFileNameRange,
-                  'withULoans',
-                ),
+                // getCredentialInformationScrapper(
+                //   browser,
+                //   credential,
+                //   validWriteLineOnFile,
+                //   invalidWriteLineOnFile,
+                //   validFileNameRange,
+                //   'withULoans',
+                // ),
               ]);
             }),
           );
