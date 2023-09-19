@@ -27,7 +27,7 @@ export const runWebScraping = async (
   const browser = await pupeeteer.launch({
     headless: HEADLESS,
     // headless: false,
-    args: ['--no-sandbox'],
+    args: ['--proxy-server=162.244.132.210:6021'],
   });
 
   try {

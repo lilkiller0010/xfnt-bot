@@ -58,7 +58,13 @@ const SELECTORS = {
 
 const getIP = async () => {
   try {
-    const { data: ip } = await axios.get<string>('https://api.ipify.org');
+    const { data: ip } = await axios.get<string>('https://api.ipify.org', {
+      proxy: {
+        protocol: 'http',
+        host: '162.244.132.210',
+        port: 6021,
+      },
+    });
     return ip;
   } catch (error) {
     logger.error(error);
@@ -123,10 +129,10 @@ export const getCredentialInformationScrapper = async (
 
   const HEADLESS = false;
 
-  const _browser = await pupeeteer.launch({
+  let _browser = await pupeeteer.launch({
     headless: HEADLESS,
     // headless: false,
-    args: ['--no-sandbox'],
+    args: ['--proxy-server=162.244.132.210:6021'],
   });
 
   // const page = await browser.newPage();
@@ -153,20 +159,25 @@ export const getCredentialInformationScrapper = async (
 
       if (isInvalidIp) {
         console.log(`CURRENT IP: ${ip}`);
-
-        await page.close();
-
-        page = await _browser.newPage();
-
-        await page.setViewport({
-          width: 1920 / 1.5,
-          height: 1080 / 1.5,
-        });
-
-        await page.goto(pageUrl, {
-          waitUntil: 'networkidle2',
-        });
       }
+      await _browser.close();
+
+      _browser = await pupeeteer.launch({
+        headless: HEADLESS,
+        // headless: false,
+        args: ['--proxy-server=162.244.132.210:6021'],
+      });
+
+      page = await _browser.newPage();
+
+      await page.setViewport({
+        width: 1920 / 1.5,
+        height: 1080 / 1.5,
+      });
+
+      await page.goto(pageUrl, {
+        waitUntil: 'networkidle2',
+      });
 
       await new Promise((r) => setTimeout(r, 3000));
     }
