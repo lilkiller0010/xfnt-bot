@@ -1,0 +1,1950 @@
+{
+  "success": 1,
+  "error-messages": null,
+  "decisionResponse": {
+    "ACC_BEACON_ID": "52b4696d2e9be437f2b326c9d667cbc67bc4",
+    "ACC_SESSION_ID": "833e1504123142a6b29115abb63f4a13",
+    "ACC_TOKEN_ID": "db375335757494e6b1eda7029e0075660243",
+    "APP_TYPE": "",
+    "APP_LENDER_ID": "39",
+    "APP_SOURCE": "ZeroParallel",
+    "APP_MILITARY_INDICATOR": "N",
+    "APP_STORE_BRANCH": "",
+    "APP_PROMO_CD": "",
+    "APP_PRODUCT_TYPE": "SL",
+    "APP_FIRST_NAME": "ROBERT",
+    "APP_MIDDLE_NAME": "",
+    "APP_LAST_NAME": "BADGERIII",
+    "APP_DOB": "10/09/1981",
+    "APP_SSN": "003642544",
+    "APP_ADDRESS_1": "439 Valparaiso Ct",
+    "APP_ADDRESS_2": "",
+    "APP_CITY": "Valley Park",
+    "APP_STATE": "MO",
+    "APP_ZIP": "63088",
+    "APP_ID_NUM": "P173041011",
+    "APP_LICENSE_TYPE": "DL",
+    "APP_TIME_AT_ADDRESS": "12",
+    "APP_HOUSING_TYPE": "OTH",
+    "APP_HOUSING_STATUS": "O",
+    "APP_HOME_PHONE_NUMBER": "6363285628",
+    "APP_CELL_PHONE_NUMBER": "6363285628",
+    "APP_MOBILE_PHONE_VERIFICATION": "",
+    "APP_TIME_OWN_HOME_PHONE": "7-12",
+    "APP_TIME_OWN_CELL_PHONE": "7-12",
+    "APP_CELL_PHONE_SERVICE_TYPE": "PP",
+    "APP_EMAIL_ADDRESS": "badger_rob@hotmail.com",
+    "APP_CHECKING_SAVINGS": "",
+    "APP_EMPLOYMENT_STATUS": "FT",
+    "APP_DIRECT_DEPOSIT_IND": "D",
+    "APP_EMPLOYER_NAME": "Countrywide Asset And Auto Recovery",
+    "APP_OCCUPATION": "Employed",
+    "APP_EMPLOYER_ADDRESS": "NA",
+    "APP_EMPLOYER_CITY": "Valley Park",
+    "APP_EMPLOYER_STATE": "MO",
+    "APP_EMPLOYER_ZIP": "63088",
+    "APP_EMPLOYER_PHONE": "3147398444",
+    "APP_LENGTH_OF_EMPLOYMENT": "60",
+    "APP_PAY_AMOUNT": "2308",
+    "APP_PAY_FREQUENCY": "OW",
+    "APP_NEXT_PAY_DATE": "09/29/2023",
+    "APP_GOVT_ASSISTANCE_AMT": "",
+    "APP_GOVT_ASSISTANCE_FREQUENCY": "",
+    "APP_OTHER_INCOME_AMT": "",
+    "APP_OTHER_INCOME_FREQUENCY": "",
+    "APP_BANK_IND": "Y",
+    "APP_BANK_NAME": "First Community Cr Union",
+    "APP_BANK_ROUTING_NUMBER": "281081877",
+    "APP_BANK_ACCOUNT_NUMBER": "92001671",
+    "APP_LOAN_PURPOSE": "Medical Expenses",
+    "CA_APP_LOAN_PURPOSE": "Medical Expenses",
+    "APP_IP_ADDRESS": "185.197.192.213",
+    "APP_WI_MARRIED_IND": "",
+    "APP_WI_UNMARRIED_IND": "",
+    "APP_WI_SPOUSE_NM": "",
+    "APP_SPOUSE_ADDRESS_1": "",
+    "APP_SPOUSE_ADDRESS_2": "",
+    "APP_SPOUSE_CITY": "",
+    "APP_SPOUSE_STATE": "",
+    "APP_SPOUSE_ZIP": "",
+    "APP_MKT_TXT_MSG": "",
+    "APP_EFT_ENROLL": "",
+    "APP_HOUSING_EXPENSE": "0.00",
+    "APP_AUTOMOBILE_EXPENSE": "",
+    "APP_NUMBER_OF_OTHER_LOANS": "",
+    "ACC_REMARKS": "",
+    "APP_SPOUSE_NM": "",
+    "APP_MARRIED_IND": "",
+    "APP_UNMARRIED_IND": "",
+    "APP_REQUESTED_LOAN_AMT": "500",
+    "APP_UPDATE_IND": "0",
+    "APP_REDECISION_IND": "1",
+    "ELMS_REFI_ACCOUNT_ID": "",
+    "ELMS_REFI_PRINCIPAL_BALANCE": "",
+    "APP_APPLICATION_ID": "6509e8b2f1f179627500d61c",
+    "CTL_EXISTING_FLAG": "NA",
+    "REQUESTED_LOAN_AMT": "",
+    "APPLICATION_DATE": "2023-09-19 13:30:10",
+    "APP_LOGIN_ID": "",
+    "APP_USER_ID": "",
+    "APP_EMAIL_ADDRESS_IND": "Y",
+    "APP_NUM_DEPENDENTS": "",
+    "APP_UTILITY_EXPENSE": "0.00",
+    "APP_FOOD_EXPENSE": "0.00",
+    "APP_OTHER_EXPENSE": "0.00",
+    "APP_EMPLOYMENT_IND": "Y",
+    "APP_REFERENCE_NAME1": "",
+    "APP_REFERENCE_ADDRESS1": "14:30:02#employment#2023-04-14T15:00:24Z",
+    "APP_REFERENCE_PHONE1": "",
+    "APP_REFERENCE_RELATIONSHIP1": "",
+    "APP_REFERENCE_NAME2": "",
+    "APP_REFERENCE_ADDRESS2": "0#0#false#Cellular#MO#Single unit#O#f#f#V",
+    "APP_REFERENCE_PHONE2": "",
+    "APP_REFERENCE_RELATIONSHIP2": "",
+    "APP_REFERENCE_NAME3": "",
+    "APP_REFERENCE_ADDRESS3": "",
+    "APP_REFERENCE_PHONE3": "",
+    "APP_REFERENCE_RELATIONSHIP3": "",
+    "APP_REFERENCE_NAME4": "",
+    "APP_REFERENCE_ADDRESS4": "",
+    "APP_REFERENCE_PHONE4": "",
+    "APP_REFERENCE_RELATIONSHIP4": "",
+    "APP_ORIG_WHSL_ROUGH_VALUE": "",
+    "APP_ORIG_VEH_AGE": "",
+    "APP_OFFER_CODE": "",
+    "APP_ORIG_VEH_MAKE": "",
+    "APP_VEH_CONDITION": "",
+    "APP_VEH_REG_ST": "",
+    "APP_VEH_TYPE": "",
+    "APP_VEH_MILEAGE": "",
+    "APP_VEH_LOAN_VALUE": "",
+    "APP_COAPPLICANT": "",
+    "APP_AGE": "",
+    "APP_COAPPLICANT_ADDRESS": "",
+    "APP_CURRENT_LOAN_BAL": "",
+    "APP_MAILING_ADDRESS": "439 Valparaiso Ct",
+    "APP_MAILING_ADDRESS_OPT": "",
+    "APP_MAILING_CITY": "Valley Park",
+    "APP_MAILING_STATE": "MO",
+    "APP_MAILING_ZIPCODE": "63088",
+    "APP_MKT_QUESTION": "",
+    "APP_ORIG_VEH_MODEL": "",
+    "APP_PLATE_NUMBER": "",
+    "APP_SOURCE_GROUPED": "",
+    "APP_SSN2": "",
+    "APP_SUBPRODUCT_TYPE": "",
+    "APP_VIN": "",
+    "APP_LENDER_ID_STATE": "MO",
+    "APP_APLICATION_ID_GEN": "",
+    "DEC_FINAL_DECISION": "A",
+    "DEC_ADV_NAME_OF_CRA2": "",
+    "DEC_ADV_ADDRESS_OF_CRA2": "",
+    "DEC_ADV_TELEPHONE_OF_CRA2": "",
+    "DEC_ADV_RISK_SCORE_NAME": "Clear Credit Risk Score",
+    "DEC_ADV_RISK_SCORE_VALUE": "537",
+    "DEC_ADV_DATE_RISK_SCORE_CALCULATED": "2023-09-19",
+    "DEC_ADV_MIN_RISK_SCORE_RANGE": "300",
+    "DEC_ADV_MAX_RISK_SCORE_RANGE": "850",
+    "DEC_ADV_SCORE_REASON1": "You have a delinquency reported on an account",
+    "DEC_ADV_SCORE_REASON2": "Number of employers or work phone numbers recently reported",
+    "DEC_ADV_SCORE_REASON3": "Length of time since online payday loan opened",
+    "DEC_ADV_NAME_OF_CRA": "Clarity Services, Inc., a part of Experian",
+    "DEC_ADV_ADDRESS_OF_CRA": "P.O. Box 16, Allen, TX 75013",
+    "DEC_ADV_TELEPHONE_OF_CRA": "(866) 390-3118",
+    "DEC_LOAN_OFFER_TYPE": "Bi-Weekly",
+    "DEC_LOAN_AMOUNT1": "500",
+    "DEC_LOAN_TERM1": "26",
+    "DEC_LOAN_RATE1": "3.600",
+    "DEC_LOAN_PAYMENT_AMT1": "71.692",
+    "DEC_LOAN_RATE1_TXT": "360.00%",
+    "DEC_LOAN_TERM1_TXT": "12 Months / 26 Payments",
+    "DEC_MIN_LOAN_AMOUNT1": "500",
+    "DEC_LOAN_AMOUNT2": "500",
+    "DEC_LOAN_TERM2": "12",
+    "DEC_LOAN_RATE2": "3.600",
+    "DEC_MIN_LOAN_AMOUNT2": "500",
+    "DEC_LOAN_TERM2_TXT": "6 Months / 12 Payments",
+    "DEC_LOAN_RATE2_TXT": "360.00%",
+    "DEC_LOAN_PAYMENT_AMT2": "87.739",
+    "DEC_LOAN_AMOUNT3": "500",
+    "DEC_LOAN_TERM3": "6",
+    "DEC_LOAN_RATE3": "3.600",
+    "DEC_LOAN_PAYMENT_AMT3": "128.037",
+    "DEC_LOAN_RATE3_TXT": "360.00%",
+    "DEC_LOAN_TERM3_TXT": "3 Months / 6 Payments",
+    "DEC_MIN_LOAN_AMOUNT3": "500",
+    "DEC_LOAN_AMOUNT4": "",
+    "DEC_LOAN_TERM4": "",
+    "DEC_LOAN_RATE4": "",
+    "DEC_LOAN_PAYMENT_AMT4": "",
+    "DEC_LOAN_RATE4_TXT": "",
+    "DEC_LOAN_TERM4_TXT": "",
+    "DEC_MIN_LOAN_AMOUNT4": "",
+    "DEC_PRE_DECLINE_REASONS": "0000000000000",
+    "DEC_CLARITY_DECLINE_REASONS": "X0000000000V0W000",
+    "DEC_FACTORTRUST_DECLINE_REASONS": "",
+    "DEC_CLARITY_DECISION": "",
+    "DEC_FACTORTRUST_DECISION": "",
+    "DEC_CREDIT_BUREAU_USED": "Clarity",
+    "DEC_ALL_DECLINE_REASONS": "000000000000000000000000",
+    "DEC_OTHER_DECLINE_RSN_TXT": "",
+    "DEC_ADV_CREDITOR_NM": "SIMPLE FAST LOANS, INC.",
+    "DEC_ADV_CREDITOR_ADDR1": "8601 DUNWOODY PLACE SUITE 406",
+    "DEC_ADV_CREDITOR_ADDR2": "ATLANTA, GA 30350",
+    "DEC_ADV_CREDITOR_PHONE": "(866) 521-1445",
+    "DEC_AUTO_EMAIL_IND": "0",
+    "DEC_LOAN_AMOUNT1_TXT": "$500",
+    "DEC_LOAN_AMOUNT2_TXT": "",
+    "DEC_LOAN_AMOUNT3_TXT": "",
+    "DEC_LOAN_AMOUNT4_TXT": "",
+    "DEC_Fund_Status": "O",
+    "DEC_FUND_BRANCH": "MO2010",
+    "DEC_APPROVE_STRATEGY": "A",
+    "DEC_APPROVE_ROUTING": "O",
+    "DEC_CAMPAIGN_IND": "0",
+    "DEC_LOAN_CSO_RATE1": "",
+    "DEC_LOAN_CSO_RATE2": "",
+    "DEC_LOAN_CSO_RATE3": "",
+    "DEC_LOAN_CSO_RATE4": "",
+    "DEC_APPROVAL_STATUS": "",
+    "DEC_APPROVAL_URL": "https://simplefastloans.com/?APP_APPLICATION_ID=6509e8b2f1f179627500d61c",
+    "DEC_DE_TIME": "5000.67",
+    "DEC_FRAUD_REASON": "",
+    "DEC_FRAUD_REVIEW_SEQ": "0000000000",
+    "DEC_FRAUD_SEQ": "00000",
+    "DEC_INSUFFICIENT_SCORE_REASON1": "",
+    "DEC_INSUFFICIENT_SCORE_REASON2": "",
+    "DEC_INSUFFICIENT_SCORE_REASON3": "",
+    "DEC_OFFER_COMMENTS_1": "",
+    "DEC_OFFER_COMMENTS_2": "",
+    "DEC_OFFER_COMMENTS_3": "",
+    "DEC_OFFER_COMMENTS_4": "",
+    "DEC_PRODUCT_OFFER_1": "Signature Loan",
+    "DEC_PRODUCT_OFFER_2": "Signature Loan",
+    "DEC_PRODUCT_OFFER_3": "Signature Loan",
+    "DEC_PRODUCT_OFFER_4": "",
+    "DEC_REASON_BANKRUPTCY": "",
+    "DEC_REASON_COLLECTION_ACTION": "",
+    "DEC_REASON_CREDIT_BUREAU_REPORT": "",
+    "DEC_REASON_CREDIT_INCOMPLETE": "",
+    "DEC_REASON_DELIQUENT_CREDIT_OBLIGATION": "",
+    "DEC_REASON_EXCESSIVE_OBLIGATIONS": "",
+    "DEC_REASON_FORECLOSURE": "",
+    "DEC_REASON_GARNISHMENT": "",
+    "DEC_REASON_INSUFFICIENT_CREDIT_REFERENCE": "",
+    "DEC_REASON_INSUFFICIENT_INCOME": "",
+    "DEC_REASON_INSUFFICIENT_SCORE": "",
+    "DEC_REASON_LENGTH_EMPLOYMENT": "",
+    "DEC_REASON_LENGTH_RESIDENCE": "",
+    "DEC_REASON_LIMITED_CREDIT_EXPERIENCE": "",
+    "DEC_REASON_NOCREDIT_FILE": "",
+    "DEC_REASON_POOR_CREDIT": "",
+    "DEC_REASON_TEMP_EMPLOYMENT": "",
+    "DEC_REASON_TEMP_RESIDENCE": "",
+    "DEC_REASONCODEDESC1": "",
+    "DEC_REDIRECT_IND": "Y",
+    "DEC_SCORE_NAME1": "LeadGen Conversion Model3",
+    "DEC_SCORE_VALUE1": "0.28",
+    "DEC_SOURCE_GROUPED": "LEADGEN",
+    "DEC_INT_RATE1": "3.600",
+    "DEC_INT_RATE2": "3.600",
+    "DEC_INT_RATE3": "3.600",
+    "DEC_LOAN_OTHER_RATE1": "",
+    "DEC_LOAN_OTHER_RATE2": "",
+    "DEC_LOAN_OTHER_RATE3": "",
+    "DEC_VERIFICATION_METHOD": "-",
+    "DEC_FRAUD_REVIEW_IND": "0",
+    "DEC_FRAUD_REVIEW_RSN_1": "Accertify Review",
+    "DEC_FRAUD_REVIEW_RSN_2": "Very High CCR_Score",
+    "DEC_FRAUD_REVIEW_RSN_3": "High Income",
+    "DEC_FRAUD_REVIEW_RSN_4": "Unable to Fund. Change Routing # to 111000025",
+    "DEC_SCORE_NAME3": "",
+    "DEC_SCORE_VALUE3": "",
+    "DEC_RBP_DISCLOSURE_IND": "",
+    "SYSTEM_RECORD_ID": "6509e8b2f1f179627500d61c",
+    "SYSTEM_COMPANY_KEY": "CLA",
+    "SYSTEM_COMPANY_ID": "1",
+    "SYSTEM_APPLICATION_KEY": "origination",
+    "SYSTEM_APPLICATION_ID": "176",
+    "SYSTEM_SCREEN_KEY": "",
+    "SYSTEM_SCREEN_ID": "",
+    "SYSTEM_BUTTON_KEY": "",
+    "SYSTEM_SCREEN_FLOW_KEY": "",
+    "SYSTEM_SCREEN_FLOW_ID": "",
+    "SYSTEM_CREATED_BY": "admin@gdslink.com",
+    "SYSTEM_EDITED_BY": "admin@gdslink.com",
+    "SYSTEM_OWNED_BY": "admin@gdslink.com",
+    "SYSTEM_CREATED_BY_ROLE": "User_Admin",
+    "SYSTEM_EDITED_BY_ROLE": "User_Admin",
+    "SYSTEM_OWNED_BY_ROLE": "User_Admin",
+    "SYSTEM_CREATED_AT": "2023-09-19T18:30:10Z",
+    "SYSTEM_UPDATED_AT": "2023-09-21T00:05:24Z",
+    "SYSTEM_ASSIGNED_AT": "2023-09-19T18:30:10Z",
+    "SYSTEM_LOCKED": "",
+    "SYSTEM_HIDDEN": "false",
+    "SYSTEM_CURRENT_PARENT": "",
+    "SYSTEM_WORDS": "",
+    "SYSTEM_ATTACHMENTS_COUNT": "0",
+    "SELECTED_CSO_LOAN_RATE": "",
+    "SELECTED_LOAN_AMT": "",
+    "SELECTED_LOAN_RATE": "",
+    "SELECTED_PRODUCT_OFFERED": "",
+    "SELECTED_LOAN_TERMS": "",
+    "APP_PLAID_ACCOUNT_IDS": "",
+    "APP_PLAID_TOKEN": "",
+    "PLAID_ASSET_REPORT_TOKEN": "",
+    "PLAID_ACCESS_TOKEN": "",
+    "PLAID_ASSET_REPORT_ID": "",
+    "ONLINE_OFFERS": [
+      {
+        "product_id": "539",
+        "funding_date": "2023-09-21",
+        "amount": "500.00",
+        "apr": "351.69",
+        "int_rate": "360.00",
+        "payment": "167.35",
+        "payment_schedule": {
+          "payment": [
+            {
+              "paymentDate": "2023-10-13",
+              "beginningBalance": "500.00",
+              "principal": "58.86",
+              "charges": "108.49",
+              "other": "0.00",
+              "payment": "167.35",
+              "endingBalance": "441.14"
+            },
+            {
+              "paymentDate": "2023-10-27",
+              "beginningBalance": "441.14",
+              "principal": "66.99",
+              "charges": "60.91",
+              "other": "0.00",
+              "payment": "127.90",
+              "endingBalance": "374.15"
+            },
+            {
+              "paymentDate": "2023-11-10",
+              "beginningBalance": "374.15",
+              "principal": "76.24",
+              "charges": "51.66",
+              "other": "0.00",
+              "payment": "127.90",
+              "endingBalance": "297.92"
+            },
+            {
+              "paymentDate": "2023-11-24",
+              "beginningBalance": "297.92",
+              "principal": "86.76",
+              "charges": "41.14",
+              "other": "0.00",
+              "payment": "127.90",
+              "endingBalance": "211.16"
+            },
+            {
+              "paymentDate": "2023-12-08",
+              "beginningBalance": "211.16",
+              "principal": "98.74",
+              "charges": "29.16",
+              "other": "0.00",
+              "payment": "127.90",
+              "endingBalance": "112.41"
+            },
+            {
+              "paymentDate": "2023-12-22",
+              "beginningBalance": "112.41",
+              "principal": "112.41",
+              "charges": "15.52",
+              "other": "0.00",
+              "payment": "127.94",
+              "endingBalance": "0.00"
+            }
+          ]
+        },
+        "eft_schedule": {
+          "scheduleType": "Customized",
+          "schedule": {
+            "installment": [
+              {
+                "paymentNumber": "1",
+                "paymentDate": "2023-10-13",
+                "paymentAmount": "167.35",
+                "revisedDate": "2023-10-13",
+                "revisedAmount": [],
+                "eftStatus": []
+              },
+              {
+                "paymentNumber": "2",
+                "paymentDate": "2023-10-27",
+                "paymentAmount": "127.90",
+                "revisedDate": "2023-10-27",
+                "revisedAmount": [],
+                "eftStatus": []
+              },
+              {
+                "paymentNumber": "3",
+                "paymentDate": "2023-11-10",
+                "paymentAmount": "127.90",
+                "revisedDate": "2023-11-10",
+                "revisedAmount": [],
+                "eftStatus": []
+              },
+              {
+                "paymentNumber": "4",
+                "paymentDate": "2023-11-24",
+                "paymentAmount": "127.90",
+                "revisedDate": "2023-11-24",
+                "revisedAmount": [],
+                "eftStatus": []
+              },
+              {
+                "paymentNumber": "5",
+                "paymentDate": "2023-12-08",
+                "paymentAmount": "127.90",
+                "revisedDate": "2023-12-08",
+                "revisedAmount": [],
+                "eftStatus": []
+              },
+              {
+                "paymentNumber": "6",
+                "paymentDate": "2023-12-22",
+                "paymentAmount": "127.94",
+                "revisedDate": "2023-12-22",
+                "revisedAmount": [],
+                "eftStatus": []
+              }
+            ]
+          }
+        },
+        "payments": "6",
+        "freq": "Bi-Weekly",
+        "parent_offer": 3,
+        "dec": 3,
+        "min": "500"
+      },
+      {
+        "product_id": "539",
+        "funding_date": "2023-09-21",
+        "amount": "500.00",
+        "apr": "351.69",
+        "int_rate": "360.00",
+        "payment": "167.35",
+        "payment_schedule": {
+          "payment": [
+            {
+              "paymentDate": "2023-10-13",
+              "beginningBalance": "500.00",
+              "principal": "58.86",
+              "charges": "108.49",
+              "other": "0.00",
+              "payment": "167.35",
+              "endingBalance": "441.14"
+            },
+            {
+              "paymentDate": "2023-10-27",
+              "beginningBalance": "441.14",
+              "principal": "66.99",
+              "charges": "60.91",
+              "other": "0.00",
+              "payment": "127.90",
+              "endingBalance": "374.15"
+            },
+            {
+              "paymentDate": "2023-11-10",
+              "beginningBalance": "374.15",
+              "principal": "76.24",
+              "charges": "51.66",
+              "other": "0.00",
+              "payment": "127.90",
+              "endingBalance": "297.92"
+            },
+            {
+              "paymentDate": "2023-11-24",
+              "beginningBalance": "297.92",
+              "principal": "86.76",
+              "charges": "41.14",
+              "other": "0.00",
+              "payment": "127.90",
+              "endingBalance": "211.16"
+            },
+            {
+              "paymentDate": "2023-12-08",
+              "beginningBalance": "211.16",
+              "principal": "98.74",
+              "charges": "29.16",
+              "other": "0.00",
+              "payment": "127.90",
+              "endingBalance": "112.41"
+            },
+            {
+              "paymentDate": "2023-12-22",
+              "beginningBalance": "112.41",
+              "principal": "112.41",
+              "charges": "15.52",
+              "other": "0.00",
+              "payment": "127.94",
+              "endingBalance": "0.00"
+            }
+          ]
+        },
+        "eft_schedule": {
+          "scheduleType": "Customized",
+          "schedule": {
+            "installment": [
+              {
+                "paymentNumber": "1",
+                "paymentDate": "2023-10-13",
+                "paymentAmount": "167.35",
+                "revisedDate": "2023-10-13",
+                "revisedAmount": [],
+                "eftStatus": []
+              },
+              {
+                "paymentNumber": "2",
+                "paymentDate": "2023-10-27",
+                "paymentAmount": "127.90",
+                "revisedDate": "2023-10-27",
+                "revisedAmount": [],
+                "eftStatus": []
+              },
+              {
+                "paymentNumber": "3",
+                "paymentDate": "2023-11-10",
+                "paymentAmount": "127.90",
+                "revisedDate": "2023-11-10",
+                "revisedAmount": [],
+                "eftStatus": []
+              },
+              {
+                "paymentNumber": "4",
+                "paymentDate": "2023-11-24",
+                "paymentAmount": "127.90",
+                "revisedDate": "2023-11-24",
+                "revisedAmount": [],
+                "eftStatus": []
+              },
+              {
+                "paymentNumber": "5",
+                "paymentDate": "2023-12-08",
+                "paymentAmount": "127.90",
+                "revisedDate": "2023-12-08",
+                "revisedAmount": [],
+                "eftStatus": []
+              },
+              {
+                "paymentNumber": "6",
+                "paymentDate": "2023-12-22",
+                "paymentAmount": "127.94",
+                "revisedDate": "2023-12-22",
+                "revisedAmount": [],
+                "eftStatus": []
+              }
+            ]
+          }
+        },
+        "payments": "6",
+        "freq": "Bi-Weekly",
+        "parent_offer": 3,
+        "dec": 0,
+        "min": "500"
+      },
+      {
+        "product_id": "539",
+        "funding_date": "2023-09-21",
+        "amount": "500.00",
+        "apr": "354.11",
+        "int_rate": "360.00",
+        "payment": "127.04",
+        "payment_schedule": {
+          "payment": [
+            {
+              "paymentDate": "2023-10-13",
+              "beginningBalance": "500.00",
+              "principal": "18.55",
+              "charges": "108.49",
+              "other": "0.00",
+              "payment": "127.04",
+              "endingBalance": "481.45"
+            },
+            {
+              "paymentDate": "2023-10-27",
+              "beginningBalance": "481.45",
+              "principal": "21.11",
+              "charges": "66.48",
+              "other": "0.00",
+              "payment": "87.59",
+              "endingBalance": "460.34"
+            },
+            {
+              "paymentDate": "2023-11-10",
+              "beginningBalance": "460.34",
+              "principal": "24.03",
+              "charges": "63.56",
+              "other": "0.00",
+              "payment": "87.59",
+              "endingBalance": "436.32"
+            },
+            {
+              "paymentDate": "2023-11-24",
+              "beginningBalance": "436.32",
+              "principal": "27.34",
+              "charges": "60.25",
+              "other": "0.00",
+              "payment": "87.59",
+              "endingBalance": "408.97"
+            },
+            {
+              "paymentDate": "2023-12-08",
+              "beginningBalance": "408.97",
+              "principal": "31.12",
+              "charges": "56.47",
+              "other": "0.00",
+              "payment": "87.59",
+              "endingBalance": "377.86"
+            },
+            {
+              "paymentDate": "2023-12-22",
+              "beginningBalance": "377.86",
+              "principal": "35.41",
+              "charges": "52.18",
+              "other": "0.00",
+              "payment": "87.59",
+              "endingBalance": "342.44"
+            },
+            {
+              "paymentDate": "2024-01-05",
+              "beginningBalance": "342.44",
+              "principal": "40.31",
+              "charges": "47.28",
+              "other": "0.00",
+              "payment": "87.59",
+              "endingBalance": "302.14"
+            },
+            {
+              "paymentDate": "2024-01-19",
+              "beginningBalance": "302.14",
+              "principal": "45.87",
+              "charges": "41.72",
+              "other": "0.00",
+              "payment": "87.59",
+              "endingBalance": "256.26"
+            },
+            {
+              "paymentDate": "2024-02-02",
+              "beginningBalance": "256.26",
+              "principal": "52.20",
+              "charges": "35.39",
+              "other": "0.00",
+              "payment": "87.59",
+              "endingBalance": "204.06"
+            },
+            {
+              "paymentDate": "2024-02-16",
+              "beginningBalance": "204.06",
+              "principal": "59.41",
+              "charges": "28.18",
+              "other": "0.00",
+              "payment": "87.59",
+              "endingBalance": "144.65"
+            },
+            {
+              "paymentDate": "2024-03-01",
+              "beginningBalance": "144.65",
+              "principal": "67.62",
+              "charges": "19.97",
+              "other": "0.00",
+              "payment": "87.59",
+              "endingBalance": "77.03"
+            },
+            {
+              "paymentDate": "2024-03-15",
+              "beginningBalance": "77.03",
+              "principal": "77.03",
+              "charges": "10.64",
+              "other": "0.00",
+              "payment": "87.67",
+              "endingBalance": "0.00"
+            }
+          ]
+        },
+        "eft_schedule": {
+          "scheduleType": "Customized",
+          "schedule": {
+            "installment": [
+              {
+                "paymentNumber": "1",
+                "paymentDate": "2023-10-13",
+                "paymentAmount": "127.04",
+                "revisedDate": "2023-10-13",
+                "revisedAmount": [],
+                "eftStatus": []
+              },
+              {
+                "paymentNumber": "2",
+                "paymentDate": "2023-10-27",
+                "paymentAmount": "87.59",
+                "revisedDate": "2023-10-27",
+                "revisedAmount": [],
+                "eftStatus": []
+              },
+              {
+                "paymentNumber": "3",
+                "paymentDate": "2023-11-10",
+                "paymentAmount": "87.59",
+                "revisedDate": "2023-11-10",
+                "revisedAmount": [],
+                "eftStatus": []
+              },
+              {
+                "paymentNumber": "4",
+                "paymentDate": "2023-11-24",
+                "paymentAmount": "87.59",
+                "revisedDate": "2023-11-24",
+                "revisedAmount": [],
+                "eftStatus": []
+              },
+              {
+                "paymentNumber": "5",
+                "paymentDate": "2023-12-08",
+                "paymentAmount": "87.59",
+                "revisedDate": "2023-12-08",
+                "revisedAmount": [],
+                "eftStatus": []
+              },
+              {
+                "paymentNumber": "6",
+                "paymentDate": "2023-12-22",
+                "paymentAmount": "87.59",
+                "revisedDate": "2023-12-22",
+                "revisedAmount": [],
+                "eftStatus": []
+              },
+              {
+                "paymentNumber": "7",
+                "paymentDate": "2024-01-05",
+                "paymentAmount": "87.59",
+                "revisedDate": "2024-01-05",
+                "revisedAmount": [],
+                "eftStatus": []
+              },
+              {
+                "paymentNumber": "8",
+                "paymentDate": "2024-01-19",
+                "paymentAmount": "87.59",
+                "revisedDate": "2024-01-19",
+                "revisedAmount": [],
+                "eftStatus": []
+              },
+              {
+                "paymentNumber": "9",
+                "paymentDate": "2024-02-02",
+                "paymentAmount": "87.59",
+                "revisedDate": "2024-02-02",
+                "revisedAmount": [],
+                "eftStatus": []
+              },
+              {
+                "paymentNumber": "10",
+                "paymentDate": "2024-02-16",
+                "paymentAmount": "87.59",
+                "revisedDate": "2024-02-16",
+                "revisedAmount": [],
+                "eftStatus": []
+              },
+              {
+                "paymentNumber": "11",
+                "paymentDate": "2024-03-01",
+                "paymentAmount": "87.59",
+                "revisedDate": "2024-03-01",
+                "revisedAmount": [],
+                "eftStatus": []
+              },
+              {
+                "paymentNumber": "12",
+                "paymentDate": "2024-03-15",
+                "paymentAmount": "87.67",
+                "revisedDate": "2024-03-15",
+                "revisedAmount": [],
+                "eftStatus": []
+              }
+            ]
+          }
+        },
+        "payments": "12",
+        "freq": "Bi-Weekly",
+        "parent_offer": 2,
+        "dec": 2,
+        "min": "500"
+      },
+      {
+        "product_id": "539",
+        "funding_date": "2023-09-21",
+        "amount": "500.00",
+        "apr": "354.11",
+        "int_rate": "360.00",
+        "payment": "127.04",
+        "payment_schedule": {
+          "payment": [
+            {
+              "paymentDate": "2023-10-13",
+              "beginningBalance": "500.00",
+              "principal": "18.55",
+              "charges": "108.49",
+              "other": "0.00",
+              "payment": "127.04",
+              "endingBalance": "481.45"
+            },
+            {
+              "paymentDate": "2023-10-27",
+              "beginningBalance": "481.45",
+              "principal": "21.11",
+              "charges": "66.48",
+              "other": "0.00",
+              "payment": "87.59",
+              "endingBalance": "460.34"
+            },
+            {
+              "paymentDate": "2023-11-10",
+              "beginningBalance": "460.34",
+              "principal": "24.03",
+              "charges": "63.56",
+              "other": "0.00",
+              "payment": "87.59",
+              "endingBalance": "436.32"
+            },
+            {
+              "paymentDate": "2023-11-24",
+              "beginningBalance": "436.32",
+              "principal": "27.34",
+              "charges": "60.25",
+              "other": "0.00",
+              "payment": "87.59",
+              "endingBalance": "408.97"
+            },
+            {
+              "paymentDate": "2023-12-08",
+              "beginningBalance": "408.97",
+              "principal": "31.12",
+              "charges": "56.47",
+              "other": "0.00",
+              "payment": "87.59",
+              "endingBalance": "377.86"
+            },
+            {
+              "paymentDate": "2023-12-22",
+              "beginningBalance": "377.86",
+              "principal": "35.41",
+              "charges": "52.18",
+              "other": "0.00",
+              "payment": "87.59",
+              "endingBalance": "342.44"
+            },
+            {
+              "paymentDate": "2024-01-05",
+              "beginningBalance": "342.44",
+              "principal": "40.31",
+              "charges": "47.28",
+              "other": "0.00",
+              "payment": "87.59",
+              "endingBalance": "302.14"
+            },
+            {
+              "paymentDate": "2024-01-19",
+              "beginningBalance": "302.14",
+              "principal": "45.87",
+              "charges": "41.72",
+              "other": "0.00",
+              "payment": "87.59",
+              "endingBalance": "256.26"
+            },
+            {
+              "paymentDate": "2024-02-02",
+              "beginningBalance": "256.26",
+              "principal": "52.20",
+              "charges": "35.39",
+              "other": "0.00",
+              "payment": "87.59",
+              "endingBalance": "204.06"
+            },
+            {
+              "paymentDate": "2024-02-16",
+              "beginningBalance": "204.06",
+              "principal": "59.41",
+              "charges": "28.18",
+              "other": "0.00",
+              "payment": "87.59",
+              "endingBalance": "144.65"
+            },
+            {
+              "paymentDate": "2024-03-01",
+              "beginningBalance": "144.65",
+              "principal": "67.62",
+              "charges": "19.97",
+              "other": "0.00",
+              "payment": "87.59",
+              "endingBalance": "77.03"
+            },
+            {
+              "paymentDate": "2024-03-15",
+              "beginningBalance": "77.03",
+              "principal": "77.03",
+              "charges": "10.64",
+              "other": "0.00",
+              "payment": "87.67",
+              "endingBalance": "0.00"
+            }
+          ]
+        },
+        "eft_schedule": {
+          "scheduleType": "Customized",
+          "schedule": {
+            "installment": [
+              {
+                "paymentNumber": "1",
+                "paymentDate": "2023-10-13",
+                "paymentAmount": "127.04",
+                "revisedDate": "2023-10-13",
+                "revisedAmount": [],
+                "eftStatus": []
+              },
+              {
+                "paymentNumber": "2",
+                "paymentDate": "2023-10-27",
+                "paymentAmount": "87.59",
+                "revisedDate": "2023-10-27",
+                "revisedAmount": [],
+                "eftStatus": []
+              },
+              {
+                "paymentNumber": "3",
+                "paymentDate": "2023-11-10",
+                "paymentAmount": "87.59",
+                "revisedDate": "2023-11-10",
+                "revisedAmount": [],
+                "eftStatus": []
+              },
+              {
+                "paymentNumber": "4",
+                "paymentDate": "2023-11-24",
+                "paymentAmount": "87.59",
+                "revisedDate": "2023-11-24",
+                "revisedAmount": [],
+                "eftStatus": []
+              },
+              {
+                "paymentNumber": "5",
+                "paymentDate": "2023-12-08",
+                "paymentAmount": "87.59",
+                "revisedDate": "2023-12-08",
+                "revisedAmount": [],
+                "eftStatus": []
+              },
+              {
+                "paymentNumber": "6",
+                "paymentDate": "2023-12-22",
+                "paymentAmount": "87.59",
+                "revisedDate": "2023-12-22",
+                "revisedAmount": [],
+                "eftStatus": []
+              },
+              {
+                "paymentNumber": "7",
+                "paymentDate": "2024-01-05",
+                "paymentAmount": "87.59",
+                "revisedDate": "2024-01-05",
+                "revisedAmount": [],
+                "eftStatus": []
+              },
+              {
+                "paymentNumber": "8",
+                "paymentDate": "2024-01-19",
+                "paymentAmount": "87.59",
+                "revisedDate": "2024-01-19",
+                "revisedAmount": [],
+                "eftStatus": []
+              },
+              {
+                "paymentNumber": "9",
+                "paymentDate": "2024-02-02",
+                "paymentAmount": "87.59",
+                "revisedDate": "2024-02-02",
+                "revisedAmount": [],
+                "eftStatus": []
+              },
+              {
+                "paymentNumber": "10",
+                "paymentDate": "2024-02-16",
+                "paymentAmount": "87.59",
+                "revisedDate": "2024-02-16",
+                "revisedAmount": [],
+                "eftStatus": []
+              },
+              {
+                "paymentNumber": "11",
+                "paymentDate": "2024-03-01",
+                "paymentAmount": "87.59",
+                "revisedDate": "2024-03-01",
+                "revisedAmount": [],
+                "eftStatus": []
+              },
+              {
+                "paymentNumber": "12",
+                "paymentDate": "2024-03-15",
+                "paymentAmount": "87.67",
+                "revisedDate": "2024-03-15",
+                "revisedAmount": [],
+                "eftStatus": []
+              }
+            ]
+          }
+        },
+        "payments": "12",
+        "freq": "Bi-Weekly",
+        "parent_offer": 2,
+        "dec": 0,
+        "min": "500"
+      },
+      {
+        "product_id": "539",
+        "funding_date": "2023-09-21",
+        "amount": "500.00",
+        "apr": "355.51",
+        "int_rate": "360.00",
+        "payment": "110.97",
+        "payment_schedule": {
+          "payment": [
+            {
+              "paymentDate": "2023-10-13",
+              "beginningBalance": "500.00",
+              "principal": "2.48",
+              "charges": "108.49",
+              "other": "0.00",
+              "payment": "110.97",
+              "endingBalance": "497.52"
+            },
+            {
+              "paymentDate": "2023-10-27",
+              "beginningBalance": "497.52",
+              "principal": "2.82",
+              "charges": "68.70",
+              "other": "0.00",
+              "payment": "71.52",
+              "endingBalance": "494.70"
+            },
+            {
+              "paymentDate": "2023-11-10",
+              "beginningBalance": "494.70",
+              "principal": "3.21",
+              "charges": "68.31",
+              "other": "0.00",
+              "payment": "71.52",
+              "endingBalance": "491.49"
+            },
+            {
+              "paymentDate": "2023-11-24",
+              "beginningBalance": "491.49",
+              "principal": "3.65",
+              "charges": "67.87",
+              "other": "0.00",
+              "payment": "71.52",
+              "endingBalance": "487.84"
+            },
+            {
+              "paymentDate": "2023-12-08",
+              "beginningBalance": "487.84",
+              "principal": "4.16",
+              "charges": "67.36",
+              "other": "0.00",
+              "payment": "71.52",
+              "endingBalance": "483.68"
+            },
+            {
+              "paymentDate": "2023-12-22",
+              "beginningBalance": "483.68",
+              "principal": "4.73",
+              "charges": "66.79",
+              "other": "0.00",
+              "payment": "71.52",
+              "endingBalance": "478.94"
+            },
+            {
+              "paymentDate": "2024-01-05",
+              "beginningBalance": "478.94",
+              "principal": "5.39",
+              "charges": "66.13",
+              "other": "0.00",
+              "payment": "71.52",
+              "endingBalance": "473.56"
+            },
+            {
+              "paymentDate": "2024-01-19",
+              "beginningBalance": "473.56",
+              "principal": "6.13",
+              "charges": "65.39",
+              "other": "0.00",
+              "payment": "71.52",
+              "endingBalance": "467.43"
+            },
+            {
+              "paymentDate": "2024-02-02",
+              "beginningBalance": "467.43",
+              "principal": "6.98",
+              "charges": "64.54",
+              "other": "0.00",
+              "payment": "71.52",
+              "endingBalance": "460.45"
+            },
+            {
+              "paymentDate": "2024-02-16",
+              "beginningBalance": "460.45",
+              "principal": "7.94",
+              "charges": "63.58",
+              "other": "0.00",
+              "payment": "71.52",
+              "endingBalance": "452.51"
+            },
+            {
+              "paymentDate": "2024-03-01",
+              "beginningBalance": "452.51",
+              "principal": "9.04",
+              "charges": "62.48",
+              "other": "0.00",
+              "payment": "71.52",
+              "endingBalance": "443.47"
+            },
+            {
+              "paymentDate": "2024-03-15",
+              "beginningBalance": "443.47",
+              "principal": "10.28",
+              "charges": "61.24",
+              "other": "0.00",
+              "payment": "71.52",
+              "endingBalance": "433.19"
+            },
+            {
+              "paymentDate": "2024-03-29",
+              "beginningBalance": "433.19",
+              "principal": "11.70",
+              "charges": "59.82",
+              "other": "0.00",
+              "payment": "71.52",
+              "endingBalance": "421.49"
+            },
+            {
+              "paymentDate": "2024-04-12",
+              "beginningBalance": "421.49",
+              "principal": "13.32",
+              "charges": "58.20",
+              "other": "0.00",
+              "payment": "71.52",
+              "endingBalance": "408.16"
+            },
+            {
+              "paymentDate": "2024-04-26",
+              "beginningBalance": "408.16",
+              "principal": "15.16",
+              "charges": "56.36",
+              "other": "0.00",
+              "payment": "71.52",
+              "endingBalance": "393.01"
+            },
+            {
+              "paymentDate": "2024-05-10",
+              "beginningBalance": "393.01",
+              "principal": "17.25",
+              "charges": "54.27",
+              "other": "0.00",
+              "payment": "71.52",
+              "endingBalance": "375.75"
+            },
+            {
+              "paymentDate": "2024-05-24",
+              "beginningBalance": "375.75",
+              "principal": "19.64",
+              "charges": "51.88",
+              "other": "0.00",
+              "payment": "71.52",
+              "endingBalance": "356.12"
+            },
+            {
+              "paymentDate": "2024-06-07",
+              "beginningBalance": "356.12",
+              "principal": "22.35",
+              "charges": "49.17",
+              "other": "0.00",
+              "payment": "71.52",
+              "endingBalance": "333.77"
+            },
+            {
+              "paymentDate": "2024-06-21",
+              "beginningBalance": "333.77",
+              "principal": "25.43",
+              "charges": "46.09",
+              "other": "0.00",
+              "payment": "71.52",
+              "endingBalance": "308.34"
+            },
+            {
+              "paymentDate": "2024-07-05",
+              "beginningBalance": "308.34",
+              "principal": "28.94",
+              "charges": "42.58",
+              "other": "0.00",
+              "payment": "71.52",
+              "endingBalance": "279.39"
+            },
+            {
+              "paymentDate": "2024-07-19",
+              "beginningBalance": "279.39",
+              "principal": "32.94",
+              "charges": "38.58",
+              "other": "0.00",
+              "payment": "71.52",
+              "endingBalance": "246.45"
+            },
+            {
+              "paymentDate": "2024-08-02",
+              "beginningBalance": "246.45",
+              "principal": "37.49",
+              "charges": "34.03",
+              "other": "0.00",
+              "payment": "71.52",
+              "endingBalance": "208.96"
+            },
+            {
+              "paymentDate": "2024-08-16",
+              "beginningBalance": "208.96",
+              "principal": "42.67",
+              "charges": "28.85",
+              "other": "0.00",
+              "payment": "71.52",
+              "endingBalance": "166.30"
+            },
+            {
+              "paymentDate": "2024-08-30",
+              "beginningBalance": "166.30",
+              "principal": "48.56",
+              "charges": "22.96",
+              "other": "0.00",
+              "payment": "71.52",
+              "endingBalance": "117.74"
+            },
+            {
+              "paymentDate": "2024-09-13",
+              "beginningBalance": "117.74",
+              "principal": "55.26",
+              "charges": "16.26",
+              "other": "0.00",
+              "payment": "71.52",
+              "endingBalance": "62.48"
+            },
+            {
+              "paymentDate": "2024-09-27",
+              "beginningBalance": "62.48",
+              "principal": "62.48",
+              "charges": "8.63",
+              "other": "0.00",
+              "payment": "71.11",
+              "endingBalance": "0.00"
+            }
+          ]
+        },
+        "eft_schedule": {
+          "scheduleType": "Customized",
+          "schedule": {
+            "installment": [
+              {
+                "paymentNumber": "1",
+                "paymentDate": "2023-10-13",
+                "paymentAmount": "110.97",
+                "revisedDate": "2023-10-13",
+                "revisedAmount": [],
+                "eftStatus": []
+              },
+              {
+                "paymentNumber": "2",
+                "paymentDate": "2023-10-27",
+                "paymentAmount": "71.52",
+                "revisedDate": "2023-10-27",
+                "revisedAmount": [],
+                "eftStatus": []
+              },
+              {
+                "paymentNumber": "3",
+                "paymentDate": "2023-11-10",
+                "paymentAmount": "71.52",
+                "revisedDate": "2023-11-10",
+                "revisedAmount": [],
+                "eftStatus": []
+              },
+              {
+                "paymentNumber": "4",
+                "paymentDate": "2023-11-24",
+                "paymentAmount": "71.52",
+                "revisedDate": "2023-11-24",
+                "revisedAmount": [],
+                "eftStatus": []
+              },
+              {
+                "paymentNumber": "5",
+                "paymentDate": "2023-12-08",
+                "paymentAmount": "71.52",
+                "revisedDate": "2023-12-08",
+                "revisedAmount": [],
+                "eftStatus": []
+              },
+              {
+                "paymentNumber": "6",
+                "paymentDate": "2023-12-22",
+                "paymentAmount": "71.52",
+                "revisedDate": "2023-12-22",
+                "revisedAmount": [],
+                "eftStatus": []
+              },
+              {
+                "paymentNumber": "7",
+                "paymentDate": "2024-01-05",
+                "paymentAmount": "71.52",
+                "revisedDate": "2024-01-05",
+                "revisedAmount": [],
+                "eftStatus": []
+              },
+              {
+                "paymentNumber": "8",
+                "paymentDate": "2024-01-19",
+                "paymentAmount": "71.52",
+                "revisedDate": "2024-01-19",
+                "revisedAmount": [],
+                "eftStatus": []
+              },
+              {
+                "paymentNumber": "9",
+                "paymentDate": "2024-02-02",
+                "paymentAmount": "71.52",
+                "revisedDate": "2024-02-02",
+                "revisedAmount": [],
+                "eftStatus": []
+              },
+              {
+                "paymentNumber": "10",
+                "paymentDate": "2024-02-16",
+                "paymentAmount": "71.52",
+                "revisedDate": "2024-02-16",
+                "revisedAmount": [],
+                "eftStatus": []
+              },
+              {
+                "paymentNumber": "11",
+                "paymentDate": "2024-03-01",
+                "paymentAmount": "71.52",
+                "revisedDate": "2024-03-01",
+                "revisedAmount": [],
+                "eftStatus": []
+              },
+              {
+                "paymentNumber": "12",
+                "paymentDate": "2024-03-15",
+                "paymentAmount": "71.52",
+                "revisedDate": "2024-03-15",
+                "revisedAmount": [],
+                "eftStatus": []
+              },
+              {
+                "paymentNumber": "13",
+                "paymentDate": "2024-03-29",
+                "paymentAmount": "71.52",
+                "revisedDate": "2024-03-29",
+                "revisedAmount": [],
+                "eftStatus": []
+              },
+              {
+                "paymentNumber": "14",
+                "paymentDate": "2024-04-12",
+                "paymentAmount": "71.52",
+                "revisedDate": "2024-04-12",
+                "revisedAmount": [],
+                "eftStatus": []
+              },
+              {
+                "paymentNumber": "15",
+                "paymentDate": "2024-04-26",
+                "paymentAmount": "71.52",
+                "revisedDate": "2024-04-26",
+                "revisedAmount": [],
+                "eftStatus": []
+              },
+              {
+                "paymentNumber": "16",
+                "paymentDate": "2024-05-10",
+                "paymentAmount": "71.52",
+                "revisedDate": "2024-05-10",
+                "revisedAmount": [],
+                "eftStatus": []
+              },
+              {
+                "paymentNumber": "17",
+                "paymentDate": "2024-05-24",
+                "paymentAmount": "71.52",
+                "revisedDate": "2024-05-24",
+                "revisedAmount": [],
+                "eftStatus": []
+              },
+              {
+                "paymentNumber": "18",
+                "paymentDate": "2024-06-07",
+                "paymentAmount": "71.52",
+                "revisedDate": "2024-06-07",
+                "revisedAmount": [],
+                "eftStatus": []
+              },
+              {
+                "paymentNumber": "19",
+                "paymentDate": "2024-06-21",
+                "paymentAmount": "71.52",
+                "revisedDate": "2024-06-21",
+                "revisedAmount": [],
+                "eftStatus": []
+              },
+              {
+                "paymentNumber": "20",
+                "paymentDate": "2024-07-05",
+                "paymentAmount": "71.52",
+                "revisedDate": "2024-07-05",
+                "revisedAmount": [],
+                "eftStatus": []
+              },
+              {
+                "paymentNumber": "21",
+                "paymentDate": "2024-07-19",
+                "paymentAmount": "71.52",
+                "revisedDate": "2024-07-19",
+                "revisedAmount": [],
+                "eftStatus": []
+              },
+              {
+                "paymentNumber": "22",
+                "paymentDate": "2024-08-02",
+                "paymentAmount": "71.52",
+                "revisedDate": "2024-08-02",
+                "revisedAmount": [],
+                "eftStatus": []
+              },
+              {
+                "paymentNumber": "23",
+                "paymentDate": "2024-08-16",
+                "paymentAmount": "71.52",
+                "revisedDate": "2024-08-16",
+                "revisedAmount": [],
+                "eftStatus": []
+              },
+              {
+                "paymentNumber": "24",
+                "paymentDate": "2024-08-30",
+                "paymentAmount": "71.52",
+                "revisedDate": "2024-08-30",
+                "revisedAmount": [],
+                "eftStatus": []
+              },
+              {
+                "paymentNumber": "25",
+                "paymentDate": "2024-09-13",
+                "paymentAmount": "71.52",
+                "revisedDate": "2024-09-13",
+                "revisedAmount": [],
+                "eftStatus": []
+              },
+              {
+                "paymentNumber": "26",
+                "paymentDate": "2024-09-27",
+                "paymentAmount": "71.11",
+                "revisedDate": "2024-09-27",
+                "revisedAmount": [],
+                "eftStatus": []
+              }
+            ]
+          }
+        },
+        "payments": "26",
+        "freq": "Bi-Weekly",
+        "parent_offer": 1,
+        "dec": 1,
+        "min": "500"
+      },
+      {
+        "product_id": "539",
+        "funding_date": "2023-09-21",
+        "amount": "500.00",
+        "apr": "355.51",
+        "int_rate": "360.00",
+        "payment": "110.97",
+        "payment_schedule": {
+          "payment": [
+            {
+              "paymentDate": "2023-10-13",
+              "beginningBalance": "500.00",
+              "principal": "2.48",
+              "charges": "108.49",
+              "other": "0.00",
+              "payment": "110.97",
+              "endingBalance": "497.52"
+            },
+            {
+              "paymentDate": "2023-10-27",
+              "beginningBalance": "497.52",
+              "principal": "2.82",
+              "charges": "68.70",
+              "other": "0.00",
+              "payment": "71.52",
+              "endingBalance": "494.70"
+            },
+            {
+              "paymentDate": "2023-11-10",
+              "beginningBalance": "494.70",
+              "principal": "3.21",
+              "charges": "68.31",
+              "other": "0.00",
+              "payment": "71.52",
+              "endingBalance": "491.49"
+            },
+            {
+              "paymentDate": "2023-11-24",
+              "beginningBalance": "491.49",
+              "principal": "3.65",
+              "charges": "67.87",
+              "other": "0.00",
+              "payment": "71.52",
+              "endingBalance": "487.84"
+            },
+            {
+              "paymentDate": "2023-12-08",
+              "beginningBalance": "487.84",
+              "principal": "4.16",
+              "charges": "67.36",
+              "other": "0.00",
+              "payment": "71.52",
+              "endingBalance": "483.68"
+            },
+            {
+              "paymentDate": "2023-12-22",
+              "beginningBalance": "483.68",
+              "principal": "4.73",
+              "charges": "66.79",
+              "other": "0.00",
+              "payment": "71.52",
+              "endingBalance": "478.94"
+            },
+            {
+              "paymentDate": "2024-01-05",
+              "beginningBalance": "478.94",
+              "principal": "5.39",
+              "charges": "66.13",
+              "other": "0.00",
+              "payment": "71.52",
+              "endingBalance": "473.56"
+            },
+            {
+              "paymentDate": "2024-01-19",
+              "beginningBalance": "473.56",
+              "principal": "6.13",
+              "charges": "65.39",
+              "other": "0.00",
+              "payment": "71.52",
+              "endingBalance": "467.43"
+            },
+            {
+              "paymentDate": "2024-02-02",
+              "beginningBalance": "467.43",
+              "principal": "6.98",
+              "charges": "64.54",
+              "other": "0.00",
+              "payment": "71.52",
+              "endingBalance": "460.45"
+            },
+            {
+              "paymentDate": "2024-02-16",
+              "beginningBalance": "460.45",
+              "principal": "7.94",
+              "charges": "63.58",
+              "other": "0.00",
+              "payment": "71.52",
+              "endingBalance": "452.51"
+            },
+            {
+              "paymentDate": "2024-03-01",
+              "beginningBalance": "452.51",
+              "principal": "9.04",
+              "charges": "62.48",
+              "other": "0.00",
+              "payment": "71.52",
+              "endingBalance": "443.47"
+            },
+            {
+              "paymentDate": "2024-03-15",
+              "beginningBalance": "443.47",
+              "principal": "10.28",
+              "charges": "61.24",
+              "other": "0.00",
+              "payment": "71.52",
+              "endingBalance": "433.19"
+            },
+            {
+              "paymentDate": "2024-03-29",
+              "beginningBalance": "433.19",
+              "principal": "11.70",
+              "charges": "59.82",
+              "other": "0.00",
+              "payment": "71.52",
+              "endingBalance": "421.49"
+            },
+            {
+              "paymentDate": "2024-04-12",
+              "beginningBalance": "421.49",
+              "principal": "13.32",
+              "charges": "58.20",
+              "other": "0.00",
+              "payment": "71.52",
+              "endingBalance": "408.16"
+            },
+            {
+              "paymentDate": "2024-04-26",
+              "beginningBalance": "408.16",
+              "principal": "15.16",
+              "charges": "56.36",
+              "other": "0.00",
+              "payment": "71.52",
+              "endingBalance": "393.01"
+            },
+            {
+              "paymentDate": "2024-05-10",
+              "beginningBalance": "393.01",
+              "principal": "17.25",
+              "charges": "54.27",
+              "other": "0.00",
+              "payment": "71.52",
+              "endingBalance": "375.75"
+            },
+            {
+              "paymentDate": "2024-05-24",
+              "beginningBalance": "375.75",
+              "principal": "19.64",
+              "charges": "51.88",
+              "other": "0.00",
+              "payment": "71.52",
+              "endingBalance": "356.12"
+            },
+            {
+              "paymentDate": "2024-06-07",
+              "beginningBalance": "356.12",
+              "principal": "22.35",
+              "charges": "49.17",
+              "other": "0.00",
+              "payment": "71.52",
+              "endingBalance": "333.77"
+            },
+            {
+              "paymentDate": "2024-06-21",
+              "beginningBalance": "333.77",
+              "principal": "25.43",
+              "charges": "46.09",
+              "other": "0.00",
+              "payment": "71.52",
+              "endingBalance": "308.34"
+            },
+            {
+              "paymentDate": "2024-07-05",
+              "beginningBalance": "308.34",
+              "principal": "28.94",
+              "charges": "42.58",
+              "other": "0.00",
+              "payment": "71.52",
+              "endingBalance": "279.39"
+            },
+            {
+              "paymentDate": "2024-07-19",
+              "beginningBalance": "279.39",
+              "principal": "32.94",
+              "charges": "38.58",
+              "other": "0.00",
+              "payment": "71.52",
+              "endingBalance": "246.45"
+            },
+            {
+              "paymentDate": "2024-08-02",
+              "beginningBalance": "246.45",
+              "principal": "37.49",
+              "charges": "34.03",
+              "other": "0.00",
+              "payment": "71.52",
+              "endingBalance": "208.96"
+            },
+            {
+              "paymentDate": "2024-08-16",
+              "beginningBalance": "208.96",
+              "principal": "42.67",
+              "charges": "28.85",
+              "other": "0.00",
+              "payment": "71.52",
+              "endingBalance": "166.30"
+            },
+            {
+              "paymentDate": "2024-08-30",
+              "beginningBalance": "166.30",
+              "principal": "48.56",
+              "charges": "22.96",
+              "other": "0.00",
+              "payment": "71.52",
+              "endingBalance": "117.74"
+            },
+            {
+              "paymentDate": "2024-09-13",
+              "beginningBalance": "117.74",
+              "principal": "55.26",
+              "charges": "16.26",
+              "other": "0.00",
+              "payment": "71.52",
+              "endingBalance": "62.48"
+            },
+            {
+              "paymentDate": "2024-09-27",
+              "beginningBalance": "62.48",
+              "principal": "62.48",
+              "charges": "8.63",
+              "other": "0.00",
+              "payment": "71.11",
+              "endingBalance": "0.00"
+            }
+          ]
+        },
+        "eft_schedule": {
+          "scheduleType": "Customized",
+          "schedule": {
+            "installment": [
+              {
+                "paymentNumber": "1",
+                "paymentDate": "2023-10-13",
+                "paymentAmount": "110.97",
+                "revisedDate": "2023-10-13",
+                "revisedAmount": [],
+                "eftStatus": []
+              },
+              {
+                "paymentNumber": "2",
+                "paymentDate": "2023-10-27",
+                "paymentAmount": "71.52",
+                "revisedDate": "2023-10-27",
+                "revisedAmount": [],
+                "eftStatus": []
+              },
+              {
+                "paymentNumber": "3",
+                "paymentDate": "2023-11-10",
+                "paymentAmount": "71.52",
+                "revisedDate": "2023-11-10",
+                "revisedAmount": [],
+                "eftStatus": []
+              },
+              {
+                "paymentNumber": "4",
+                "paymentDate": "2023-11-24",
+                "paymentAmount": "71.52",
+                "revisedDate": "2023-11-24",
+                "revisedAmount": [],
+                "eftStatus": []
+              },
+              {
+                "paymentNumber": "5",
+                "paymentDate": "2023-12-08",
+                "paymentAmount": "71.52",
+                "revisedDate": "2023-12-08",
+                "revisedAmount": [],
+                "eftStatus": []
+              },
+              {
+                "paymentNumber": "6",
+                "paymentDate": "2023-12-22",
+                "paymentAmount": "71.52",
+                "revisedDate": "2023-12-22",
+                "revisedAmount": [],
+                "eftStatus": []
+              },
+              {
+                "paymentNumber": "7",
+                "paymentDate": "2024-01-05",
+                "paymentAmount": "71.52",
+                "revisedDate": "2024-01-05",
+                "revisedAmount": [],
+                "eftStatus": []
+              },
+              {
+                "paymentNumber": "8",
+                "paymentDate": "2024-01-19",
+                "paymentAmount": "71.52",
+                "revisedDate": "2024-01-19",
+                "revisedAmount": [],
+                "eftStatus": []
+              },
+              {
+                "paymentNumber": "9",
+                "paymentDate": "2024-02-02",
+                "paymentAmount": "71.52",
+                "revisedDate": "2024-02-02",
+                "revisedAmount": [],
+                "eftStatus": []
+              },
+              {
+                "paymentNumber": "10",
+                "paymentDate": "2024-02-16",
+                "paymentAmount": "71.52",
+                "revisedDate": "2024-02-16",
+                "revisedAmount": [],
+                "eftStatus": []
+              },
+              {
+                "paymentNumber": "11",
+                "paymentDate": "2024-03-01",
+                "paymentAmount": "71.52",
+                "revisedDate": "2024-03-01",
+                "revisedAmount": [],
+                "eftStatus": []
+              },
+              {
+                "paymentNumber": "12",
+                "paymentDate": "2024-03-15",
+                "paymentAmount": "71.52",
+                "revisedDate": "2024-03-15",
+                "revisedAmount": [],
+                "eftStatus": []
+              },
+              {
+                "paymentNumber": "13",
+                "paymentDate": "2024-03-29",
+                "paymentAmount": "71.52",
+                "revisedDate": "2024-03-29",
+                "revisedAmount": [],
+                "eftStatus": []
+              },
+              {
+                "paymentNumber": "14",
+                "paymentDate": "2024-04-12",
+                "paymentAmount": "71.52",
+                "revisedDate": "2024-04-12",
+                "revisedAmount": [],
+                "eftStatus": []
+              },
+              {
+                "paymentNumber": "15",
+                "paymentDate": "2024-04-26",
+                "paymentAmount": "71.52",
+                "revisedDate": "2024-04-26",
+                "revisedAmount": [],
+                "eftStatus": []
+              },
+              {
+                "paymentNumber": "16",
+                "paymentDate": "2024-05-10",
+                "paymentAmount": "71.52",
+                "revisedDate": "2024-05-10",
+                "revisedAmount": [],
+                "eftStatus": []
+              },
+              {
+                "paymentNumber": "17",
+                "paymentDate": "2024-05-24",
+                "paymentAmount": "71.52",
+                "revisedDate": "2024-05-24",
+                "revisedAmount": [],
+                "eftStatus": []
+              },
+              {
+                "paymentNumber": "18",
+                "paymentDate": "2024-06-07",
+                "paymentAmount": "71.52",
+                "revisedDate": "2024-06-07",
+                "revisedAmount": [],
+                "eftStatus": []
+              },
+              {
+                "paymentNumber": "19",
+                "paymentDate": "2024-06-21",
+                "paymentAmount": "71.52",
+                "revisedDate": "2024-06-21",
+                "revisedAmount": [],
+                "eftStatus": []
+              },
+              {
+                "paymentNumber": "20",
+                "paymentDate": "2024-07-05",
+                "paymentAmount": "71.52",
+                "revisedDate": "2024-07-05",
+                "revisedAmount": [],
+                "eftStatus": []
+              },
+              {
+                "paymentNumber": "21",
+                "paymentDate": "2024-07-19",
+                "paymentAmount": "71.52",
+                "revisedDate": "2024-07-19",
+                "revisedAmount": [],
+                "eftStatus": []
+              },
+              {
+                "paymentNumber": "22",
+                "paymentDate": "2024-08-02",
+                "paymentAmount": "71.52",
+                "revisedDate": "2024-08-02",
+                "revisedAmount": [],
+                "eftStatus": []
+              },
+              {
+                "paymentNumber": "23",
+                "paymentDate": "2024-08-16",
+                "paymentAmount": "71.52",
+                "revisedDate": "2024-08-16",
+                "revisedAmount": [],
+                "eftStatus": []
+              },
+              {
+                "paymentNumber": "24",
+                "paymentDate": "2024-08-30",
+                "paymentAmount": "71.52",
+                "revisedDate": "2024-08-30",
+                "revisedAmount": [],
+                "eftStatus": []
+              },
+              {
+                "paymentNumber": "25",
+                "paymentDate": "2024-09-13",
+                "paymentAmount": "71.52",
+                "revisedDate": "2024-09-13",
+                "revisedAmount": [],
+                "eftStatus": []
+              },
+              {
+                "paymentNumber": "26",
+                "paymentDate": "2024-09-27",
+                "paymentAmount": "71.11",
+                "revisedDate": "2024-09-27",
+                "revisedAmount": [],
+                "eftStatus": []
+              }
+            ]
+          }
+        },
+        "payments": "26",
+        "freq": "Bi-Weekly",
+        "parent_offer": 1,
+        "dec": 0,
+        "min": "500"
+      }
+    ],
+    "ONLINE_OFFERS_ERROR": "",
+    "ELMS_ACCOUNT_ID": "",
+    "ELMS_MAIN_ACCOUNT_STATUS": "",
+    "ELMS_ORIGINATION_DATE": "",
+    "ELMS_APPLICANT_SIGNED": "",
+    "ELMS_ESIGN_PACKAGE_STATUS": "",
+    "ELMS_ESIGN_PACKAGE_URL": ""
+  },
+  "principalBalance": "",
+  "elmsAccountId": ""
+}

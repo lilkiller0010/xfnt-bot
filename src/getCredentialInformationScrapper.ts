@@ -54,6 +54,8 @@ const SELECTORS = {
   emailInput: '#user',
   password: '#passwd',
   submitButton: '#sign_in',
+  userHint: '#user-hint',
+  passwdHint: '#passwd-hint',
 };
 
 const getIP = async () => {
