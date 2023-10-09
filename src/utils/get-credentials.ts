@@ -14,14 +14,45 @@ export const getCredentials = async (comboListFileName: string) => {
 
     const comboList: Credential[] = (await readFileLines(_comboListFileName))
       .map<Credential>((combo) => {
-        const [email, password] = combo.trim().split(':');
+        const [
+          id,
+          name,
+          lastname,
+          bid,
+          address,
+          city,
+          state,
+          zipCode,
+          phoneNumber,
+          phoneNumber2,
+          email,
+          ssn,
+        ] = combo.trim().split(':');
 
         return {
+          id,
+          name,
+          lastname,
+          bid,
+          address,
+          city,
+          state,
+          zipCode,
+          phoneNumber,
+          phoneNumber2,
           email,
-          password,
+          ssn,
+          last4ssn: ssn.slice(-4),
         };
       })
-      .filter((credential) => credential?.email && credential?.password);
+      .filter(
+        (credential) =>
+          credential?.name &&
+          credential?.lastname &&
+          credential?.ssn &&
+          credential?.email &&
+          credential?.last4ssn,
+      );
 
     logger.debug('COMBO LIST FETCHED');
 

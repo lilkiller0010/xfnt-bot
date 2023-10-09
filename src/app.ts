@@ -12,7 +12,7 @@ import {
   TIMEOUT_WAIT_FOR_NAVIGATION_REFERRER_MINUTES,
 } from './constants';
 
-const GROUP_PER_PARTIAL_CREDENTIAL = 1;
+const GROUP_PER_PARTIAL_CREDENTIAL = 10;
 
 const CHANGE_TABS_SECONDS = 3;
 
@@ -27,7 +27,7 @@ export const runWebScraping = async (
   const browser = await pupeeteer.launch({
     headless: HEADLESS,
     // headless: false,
-    args: ['--proxy-server=162.244.132.210:6021'],
+    // args: ['--proxy-server=162.244.132.210:6021'],
   });
 
   try {
@@ -192,7 +192,7 @@ export const runWebScraping = async (
                   validWriteLineOnFile,
                   invalidWriteLineOnFile,
                   validFileNameRange,
-                  'pilotflyingj',
+                  'myfastcash',
                 ),
                 // getCredentialInformationScrapper(
                 //   browser,
