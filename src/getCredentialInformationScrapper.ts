@@ -58,13 +58,18 @@ const SELECTORS = {
   passwdHint: '#passwd-hint',
 };
 
+const proxyConfig = {
+  host: '162.244.132.210',
+  port: 6022,
+};
+
 const getIP = async () => {
   try {
     const { data: ip } = await axios.get<string>('https://api.ipify.org', {
       proxy: {
         protocol: 'http',
-        host: '162.244.132.210',
-        port: 6021,
+        host: proxyConfig.host,
+        port: proxyConfig.port,
       },
     });
     return ip;
@@ -134,7 +139,7 @@ export const getCredentialInformationScrapper = async (
   let _browser = await pupeeteer.launch({
     headless: HEADLESS,
     // headless: false,
-    args: ['--proxy-server=162.244.132.210:6021'],
+    args: [`--proxy-server=${proxyConfig.host}:${proxyConfig.port}`],
   });
 
   // const page = await browser.newPage();
@@ -167,7 +172,7 @@ export const getCredentialInformationScrapper = async (
       _browser = await pupeeteer.launch({
         headless: HEADLESS,
         // headless: false,
-        args: ['--proxy-server=162.244.132.210:6021'],
+        args: [`--proxy-server=${proxyConfig.host}:${proxyConfig.port}`],
       });
 
       page = await _browser.newPage();
