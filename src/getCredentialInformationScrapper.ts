@@ -1,5 +1,4 @@
 import axios from 'axios';
-import ip from 'ip';
 import pupeeteer, { Browser } from 'puppeteer';
 import { Credential } from './interface/credential';
 import {
@@ -15,6 +14,7 @@ import {
 import path from 'path';
 import fs from 'fs';
 import logger from './logger/logger';
+import { HEADLESS, proxyConfig } from './app';
 
 export const TIMEOUT_WAIT_FOR_NAVIGATION_MILLISECONDS = minutesToMilliseconds(
   TIMEOUT_WAIT_FOR_NAVIGATION_MINUTES,
@@ -66,11 +66,12 @@ const SELECTORS = {
 
 const getIP = async () => {
   try {
-    const { data: ip } = await axios.get<string>('https://api.ipify.org', {
+    const { data: ip } = await axios.get<string>('http://api.ipify.org', {
+      timeout: 5000,
       proxy: {
         protocol: 'http',
-        host: '162.244.132.210',
-        port: 6021,
+        host: proxyConfig.host,
+        port: proxyConfig.port,
       },
     });
     return ip;
@@ -135,12 +136,11 @@ export const getCredentialInformationScrapper = async (
 ) => {
   const { pageUrl } = CONFIGURATION_PER_PAGE[pageConfigKey];
 
-  const HEADLESS = false;
-
   let _browser = await pupeeteer.launch({
     headless: HEADLESS,
     // headless: false,
     // args: ['--proxy-server=162.244.132.210:6021'],
+    args: [`--proxy-server=${proxyConfig.host}:${proxyConfig.port}`],
   });
 
   // const page = await browser.newPage();
@@ -153,42 +153,45 @@ export const getCredentialInformationScrapper = async (
 
   let ip = '';
 
-  let isInvalidIp = true;
+  let isInvalidIp = false;
 
   try {
     await page.goto(pageUrl, {
       waitUntil: 'domcontentloaded',
+      timeout: TIMEOUT_WAIT_FOR_NAVIGATION_MILLISECONDS,
     });
 
-    // while (isInvalidIp) {
-    //   ip = await getIP();
+    while (isInvalidIp) {
+      ip = await getIP();
 
-    //   isInvalidIp = await validateIp(ip, pageConfigKey);
+      isInvalidIp = await validateIp(ip, pageConfigKey);
 
-    //   if (isInvalidIp) {
-    //     console.log(`CURRENT IP: ${ip}`);
-    //   }
-    //   await _browser.close();
+      if (isInvalidIp) {
+        console.log(`CURRENT IP: ${ip}`);
+      }
 
-    //   _browser = await pupeeteer.launch({
-    //     headless: HEADLESS,
-    //     // headless: false,
-    //     args: ['--proxy-server=162.244.132.210:6021'],
-    //   });
+      await _browser.close();
 
-    //   page = await _browser.newPage();
+      _browser = await pupeeteer.launch({
+        headless: HEADLESS,
+        // headless: false,
+        args: [`--proxy-server=${proxyConfig.host}:${proxyConfig.port}`],
+      });
 
-    //   await page.setViewport({
-    //     width: 1920 / 1.5,
-    //     height: 1080 / 1.5,
-    //   });
+      page = await _browser.newPage();
 
-    //   await page.goto(pageUrl, {
-    //     waitUntil: 'networkidle2',
-    //   });
+      await page.setViewport({
+        width: 1920 / 1.5,
+        height: 1080 / 1.5,
+      });
 
-    //   await new Promise((r) => setTimeout(r, 3000));
-    // }
+      await page.goto(pageUrl, {
+        waitUntil: 'networkidle2',
+        timeout: TIMEOUT_WAIT_FOR_NAVIGATION_MILLISECONDS,
+      });
+
+      await new Promise((r) => setTimeout(r, 3000));
+    }
 
     // console.log('out of loop');
 

@@ -18,7 +18,12 @@ const CHANGE_TABS_SECONDS = 3;
 
 const BLANK_PAGE_URL = 'about:blank';
 
-const HEADLESS = false;
+export const HEADLESS = true;
+
+export const proxyConfig = {
+  host: '162.244.132.210',
+  port: 6022,
+};
 
 export const runWebScraping = async (
   time: string,
@@ -27,7 +32,7 @@ export const runWebScraping = async (
   const browser = await pupeeteer.launch({
     headless: HEADLESS,
     // headless: false,
-    args: ['--proxy-server=162.244.132.210:6021'],
+    args: [`--proxy-server=${proxyConfig.host}:${proxyConfig.port}`],
   });
 
   try {
