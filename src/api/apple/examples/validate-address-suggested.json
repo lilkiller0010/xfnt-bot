@@ -1,0 +1,19 @@
+{
+  "code": "OK",
+  "data": {
+    "globalAddress": {
+      "streetName": "OXER",
+      "streetNum": "1003",
+      "streetType": "CIR",
+      "city": "NEWARK",
+      "state": "DE",
+      "zipCode": "19702",
+      "country": "US",
+      "isValidPPUAddress": true,
+      "matchStatus": "SUGGESTED",
+      "addressType": "BILLING"
+    }
+  },
+  "isSuccess": true,
+  "orderNumber": "GUAOVLIAXC5X"
+}

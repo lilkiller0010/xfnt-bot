@@ -18,11 +18,11 @@ const CHANGE_TABS_SECONDS = 3;
 
 const BLANK_PAGE_URL = 'about:blank';
 
-export const HEADLESS = true;
+export const HEADLESS = 'new';
 
 export const proxyConfig = {
-  host: '162.244.132.210',
-  port: 6022,
+  host: '169.197.82.58',
+  port: 24317,
 };
 
 export const runWebScraping = async (
@@ -197,7 +197,7 @@ export const runWebScraping = async (
                   validWriteLineOnFile,
                   invalidWriteLineOnFile,
                   validFileNameRange,
-                  'pilotflyingj',
+                  'apple',
                 ),
                 // getCredentialInformationScrapper(
                 //   browser,

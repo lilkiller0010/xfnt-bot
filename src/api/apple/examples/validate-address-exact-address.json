@@ -1,0 +1,19 @@
+{
+  "code": "OK",
+  "data": {
+    "globalAddress": {
+      "streetName": "BROWN",
+      "streetNum": "5648",
+      "streetType": "AVE",
+      "city": "CLEARLAKE",
+      "state": "CA",
+      "zipCode": "95422",
+      "country": "US",
+      "isValidPPUAddress": true,
+      "matchStatus": "EXACT",
+      "addressType": "BILLING"
+    }
+  },
+  "isSuccess": true,
+  "orderNumber": "GNXKHLEY160Y"
+}
