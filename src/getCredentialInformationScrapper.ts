@@ -114,11 +114,17 @@ const generateInputNameSelector = (name: string) => `[name=${name}]`;
 const API_URLS = {
   apple: {
     validateAddress:
-      '/WebObjects/IPACustomer.woa/wa/IPAPreAuthAction/api/validate-address',
+      '/preauth/api/validate-address',
+    // validateAddress:
+    //   '/WebObjects/IPACustomer.woa/wa/IPAPreAuthAction/api/validate-address',
+    // creditCheck:
+    //   '/WebObjects/IPACustomer.woa/wa/IPAPreAuthAction/api/credit-check',
     creditCheck:
-      '/WebObjects/IPACustomer.woa/wa/IPAPreAuthAction/api/credit-check',
+      '/preauth/api/credit-check',
     downPayment:
-      '/WebObjects/IPACustomer.woa/wa/IPAPreAuthAction/api/down_payment',
+      '/preauth/api/down_payment',
+    // downPayment:
+    //   '/WebObjects/IPACustomer.woa/wa/IPAPreAuthAction/api/down_payment',
   },
 };
 
@@ -131,14 +137,14 @@ const SELECTORS = {
   paymentOptions: {
     // finance: "[for='27309d31-6efe-11ee-8d1d-4dbb2e2b063b']",
     finance:
-      '.rf-po-bfe-purchaseoptionsedit .rf-po-bfe-dimension-base:nth-child(2) input',
+      '.rf-po-bfe-purchaseoptionsedit .rf-po-bfe-dimension-base:nth-child(2) input', // check
     carrier: '.rf-po-bfe-tabpills-container > li:nth-child(3) > button',
     att: '.rf-po-bfe-financingoptions-tabs-container > div:nth-child(3) > fieldset .rf-po-bfe-financingoption:nth-child(1) input',
     no_apple_care: '#applecareplus_59_noapplecare_label',
     continue_button: '.as-purchaseinfo-button button',
   },
   att_apply_page: {
-    newCustomer: 'input#NEW',
+    newCustomer: 'input#NEW', // check
     continue_button:
       '#root > div.show > div > div > div > form > div.buttons-div.button-customer-selection > button',
   },
@@ -261,6 +267,19 @@ export const getCredentialInformationScrapper = async (
   await page.setViewport({
     width: 1920 / 1.5,
     height: 1080 / 1.5,
+  });
+
+  await page.setRequestInterception(true);
+
+  page.on('request', (request) => {
+    if (
+      ['image', 'font'].indexOf(request.resourceType()) !== -1
+    ) {
+      // console.log('###Aborting non essential request to speed up site...');
+      request.abort();
+    } else {
+      request.continue();
+    }
   });
 
   let ip = '';

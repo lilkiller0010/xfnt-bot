@@ -1,0 +1,30 @@
+null:Martin:Nordberg:7-11-1983:575 Ellis Hollow Creek RD:Ithaca:NY:14850:3159598268:3159598268:martinenordberg1171983@gmail.com:087174406
+null:Bin:Jia:4-15-1990:2565 South RD #8B:Poughkeepsie:NY:12601:7183801387:7183801387:binjia1541990@outlook.com:075605863
+null:Simon:Fricker:10-28-1969:250 E 40th ST:New York:NY:10016:5166666811:5166666811:simonafricker28101969@gmail.com:077914875
+null:Ronald:Balducci:8-21-1960:25 Oakwood CMN:Lancaster:NY:14086:9177697359:9177697359:ronaldabalducci2181960@gmail.com:059369985
+null:Scott:Curtis:7-8-1969:1870 Mapleview DR:Shortsville:NY:14548:8457244013:8457244013:scottgcurtis871969@yahoo.com:074158414
+null:David:Nordberg:5-13-1975:42 W 39th ST #3RD FL:New York:NY:10018:5189607119:5189607119:davidknordberg1351975@outlook.com:124969549
+null:Theodore:Peel:7-31-1987:1568 E 15th ST:Brooklyn:NY:11230:6314834694:6314834694:theodorevpeel3171987@yahoo.com:073143272
+null:Janet:Fricker:6-23-1980:123 William ST #STE 802:New York:NY:10038:6466849175:6466849175:janetefricker2361980@gmail.com:087898358
+null:David:Fricker:12-30-1964:35 Kelly PL:Deer Park:NY:11729:6463245185:6463245185:davidafricker30121964@gmail.com:115335344
+null:Jennifer:Curtis:7-24-1986:469 Bloomingrove DR:Troy:NY:12180:8387078604:8387078604:jenniferdcurtis2471986@outlook.com:070069518
+null:Chelsea:Jia:2-8-1986:40 Pebble LN:Levittown:NY:11756:7182316035:7182316035:chelseaxjia821986@gmail.com:063389206
+null:Guangwei:Jia:7-27-1957:1785 Lakeland AVE:Ronkonkoma:NY:11779:6072836364:6072836364:guangweiwjia2771957@outlook.com:115167928
+null:Michelle:Balducci:12-23-1973:40 Ramland RD #STE 18:Orangeburg:NY:10962:8453505087:8453505087:michellejbalducci23121973@yahoo.com:103699473
+null:Hui:Jia:5-15-1961:212 Eckford ST #3:Brooklyn:NY:11222:3322489668:3322489668:huijia1551961@gmail.com:083066668
+null:Lynnea:Nordberg:7-14-1980:279 Bird AVE:Sidney:NY:13838:8385378304:8385378304:lynneannordberg1471980@outlook.com:060052978
+null:Robert:Peel:3-27-1995:140 Broadway:New York:NY:10005:6469269395:6469269395:robertepeel2731995@gmail.com:086758115
+null:Zheng:Jia:6-14-1968:1345 of The Americas AVE:New York:NY:10019:3478603508:3478603508:zhengmjia1461968@outlook.com:088772772
+null:Alfredo:Curtis:2-3-1961:16007 109th AVE:Jamaica:NY:11433:6465551968:6465551968:alfredopcurtis321961@outlook.com:093058534
+null:Mary:Peel:12-31-1955:93 Patton RD:Newburgh:NY:12550:5856057466:5856057466:maryhpeel31121955@outlook.com:112054068
+null:James:Balducci:12-13-1993:7 Brescia BLVD:Hopewell Junction:NY:12533:5855935501:5855935501:jamesbalducci13121993@gmail.com:123383180
+null:Jeffrey:Hafer:10-30-1960:600 3rd AVE:New York:NY:10016:3475033651:3475033651:jeffreyhhafer30101960@yahoo.com:074016070
+null:Harry:Nordberg:11-28-1960:240 Old 58 Rte S:Gouverneur:NY:13642:9347472656:9347472656:harrynnordberg28111960@gmail.com:062025844
+null:Steven:Fricker:2-27-1967:580 5th AVE #STE. 711:New York:NY:10036:2124727601:2124727601:stevenfricker2721967@gmail.com:086683768
+null:Jennifer:Curtis:9-9-1963:28 Eagle TRCE:Ballston Lake:NY:12019:5858124033:5858124033:jenniferccurtis991963@yahoo.com:113194541
+null:Joseph:Balducci:7-3-1970:23 Constitution CT:Tuxedo Park:NY:10987:3477166929:3477166929:josephlbalducci371970@gmail.com:065548298
+null:Ben:Nordberg:2-7-1980:152 Ludlow ST:New York:NY:10002:3157198659:3157198659:bennordberg721980@gmail.com:056038380
+null:Elaine:Fricker:3-8-1964:452 5th AVE:New York:NY:10018:7185414125:7185414125:elainecfricker831964@gmail.com:090374592
+null:Jason:Fricker:4-19-1962:15 Holland AVE:Pine Bush:NY:12566:6464502508:6464502508:jasonmfricker1941962@yahoo.com:127655801
+null:Teddi:Curtis:2-20-1958:675 Hudson ST #5TH FL:New York:NY:10014:8452882393:8452882393:teddijcurtis2021958@yahoo.com:064235631
+null:Barbara:Peel:10-9-1963:55 Sherman ST:Brooklyn:NY:11215:5186734261:5186734261:barbarajpeel9101963@yahoo.com:067098528
