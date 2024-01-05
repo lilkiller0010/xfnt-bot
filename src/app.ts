@@ -23,7 +23,7 @@ export const HEADLESS = 'new';
 
 export const proxyConfig = {
   host: '142.202.220.242',
-  port: 17866,
+  port: 18079,
 };
 
 export const runWebScraping = async (
