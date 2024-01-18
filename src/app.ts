@@ -18,12 +18,12 @@ const CHANGE_TABS_SECONDS = 3;
 
 const BLANK_PAGE_URL = 'about:blank';
 
-// export const HEADLESS = 'new';
-export const HEADLESS = false;
+export const HEADLESS = 'new';
+// export const HEADLESS = false;
 
 export const proxyConfig = {
-  host: '142.202.220.242',
-  port: 18079,
+  host: '169.197.82.58',
+  port: 27211,
 };
 
 export const runWebScraping = async (
@@ -198,7 +198,7 @@ export const runWebScraping = async (
                   validWriteLineOnFile,
                   invalidWriteLineOnFile,
                   validFileNameRange,
-                  'fidelity',
+                  'wfVerify',
                 ),
                 // getCredentialInformationScrapper(
                 //   browser,
