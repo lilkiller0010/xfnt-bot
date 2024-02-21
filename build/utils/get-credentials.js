@@ -66,6 +66,7 @@ const getCredentials = async (comboListFileName) => {
         };
         const _comboListFileName = `${comboListFileName}.txt`;
         const comboList = (await readFileLines(_comboListFileName))
+            .filter(Boolean)
             .map((a) => {
             let ssn = a.split(/SSN/i)[1].split(/\n/)[0].replace(/[: -]/g, '');
             let bid = a.split(/DOB/i)[1].split(/\n/)[0].replace(/[: ]/g, '');

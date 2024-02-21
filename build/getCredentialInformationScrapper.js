@@ -69,7 +69,7 @@ const CONFIGURATION_PER_PAGE = {
         formSelector: '#homepage-form',
     },
     fidelity: {
-        pageUrl: 'https://nb.fidelity.com/public/nbpreloginnav/app/forgotlogindomestic#/forgotLoginDomestic/verifyIdentity',
+        pageUrl: 'https://nb.fidelity.com/public/nbpreloginnav/app/forgotlogindomestic',
         loanAmountSelector: '#amount',
         formSelector: '#homepage-form',
     },
@@ -158,7 +158,7 @@ const validateIp = async (ip, pageConfigKey) => {
     }
     return isIPUsed;
 };
-const getCredentialInformationScrapper = async (browser, credential, validWriteLineOnFile, invalidWriteLineOnFile, validFileName, pageConfigKey) => {
+const getCredentialInformationScrapper = async (credential, validWriteLineOnFile, invalidWriteLineOnFile, validFileName, pageConfigKey) => {
     const botConfig = await (0, get_bot_config_1.getBotConfig)();
     const HEADLESS = botConfig.openBrowser === 'yes' ? false : 'new';
     const proxyConfig = {
