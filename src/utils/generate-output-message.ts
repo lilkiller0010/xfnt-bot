@@ -1,11 +1,7 @@
 import { Credential } from '../interface/credential';
 
 export const generateOutputMessage = (crendential: Credential): string => {
-  const { email } = crendential;
-
-  const message = `EMAIL=${email} SSN=${crendential.ssn} data=${JSON.stringify(
-    crendential,
-  )}`;
+  const message = `SSN=${crendential.ssn} data=${JSON.stringify(crendential)}`;
 
   return message;
 };

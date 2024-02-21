@@ -20,3 +20,4 @@ __exportStar(require("./get-file-name-range"), exports);
 __exportStar(require("./get-ramdom-value"), exports);
 __exportStar(require("./is-invalid-url-redirect"), exports);
 __exportStar(require("./get-time"), exports);
+__exportStar(require("./minutes-to-milliseconds"), exports);

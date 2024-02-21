@@ -6,6 +6,6 @@ exports.INVALID_URL_REDIRECT = [
     'brighter.loans',
     '247-lend.com',
     '247lend.com',
-    'connect.cashusa.com',
+    // 'connect.cashusa.com',
     '6gfunding.com',
 ];

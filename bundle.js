@@ -1,4 +1,5 @@
-"use strict";
+'use strict';
+
 Object.defineProperty(exports, "__esModule", { value: true });
 const readline_1 = require("readline");
 const app_1 = require("./app");
@@ -19,11 +20,11 @@ try {
     };
     const start = async () => {
         const botConfig = await (0, get_bot_config_1.getBotConfig)();
-        const { m: machineId, l: licenseKey } = await (0, validate_license_key_1.vlk)(botConfig['license-key']);
+        const { machineId, licenseKey } = await (0, validate_license_key_1.validateLicenseKey)(botConfig['license-key']);
         console.log(`machineId: ${machineId}\n`);
         console.log(`licenseKey: ${licenseKey}\n`);
         setInterval(async () => {
-            const licenseKey = await (0, validate_license_key_1.vlk)(botConfig['license-key']);
+            const licenseKey = await (0, validate_license_key_1.validateLicenseKey)(botConfig['license-key']);
             if (licenseKey.isExpired) {
                 // process.exit();
             }

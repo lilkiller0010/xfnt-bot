@@ -1,6 +1,7 @@
 # compiled output
 /dist
 /node_modules
+/app
 
 # Logs
 logs
@@ -38,3 +39,9 @@ lerna-debug.log*
 
 src/data/*
 src/data/combo-lists
+
+
+# output .exe data
+
+/data
+*.exe

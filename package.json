@@ -1,10 +1,36 @@
 {
-  "name": "crane-finance-bot",
+  "name": "wf-bot",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "bin": "build/index.js",
+  "pkg": {
+    "scripts": [
+      "build/**/*.js",
+      "node_modules/puppeteer/lib/*.js",
+      "node_modules/puppeteer-extra-plugin-user-preferences/**"
+    ],
+    "assets": [
+      "data/**/*",
+      "node_modules/axios/**",
+      "node_modules/puppeteer/**",
+      "node_modules/puppeteer-extra/**",
+      "node_modules/puppeteer-extra-plugin-stealth/**",
+      "node_modules/puppeteer-extra-plugin-stealth/**/.",
+      "node_modules/puppeteer-extra-plugin-user-data-dir/**",
+      "node_modules/puppeteer-extra-plugin-user-preferences/**",
+      "data/**/*",
+      "node_modules/puppeteer/.local-chromium",
+      "node_modules/**/*.*"
+    ],
+    "targets": [
+      "node18-win-x64"
+    ],
+    "outputPath": "dist"
+  },
   "scripts": {
     "build": "rimraf ./build && tsc",
+    "compile": "pkg .",
     "start": "npm run build && node build/index.js",
     "start:dev": "npx ts-node ./src/index.ts",
     "dev": "npx nodemon"
@@ -16,14 +42,19 @@
     "@types/ip": "^1.1.0",
     "@types/lodash": "^4.14.196",
     "@types/node": "^20.4.6",
+    "esbuild": "0.20.0",
     "nodemon": "^3.0.1",
     "rimraf": "^5.0.1",
     "ts-node": "^10.9.1",
     "typescript": "^5.1.6"
   },
+  "files": [
+    "build/**/*"
+  ],
   "dependencies": {
     "axios": "^1.5.0",
     "colors": "^1.4.0",
+    "cryptolens": "1.0.1-4.2",
     "ip": "^1.1.8",
     "lodash": "^4.17.21",
     "puppeteer": "^21.0.0",

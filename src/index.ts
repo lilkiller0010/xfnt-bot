@@ -2,29 +2,52 @@ import { createInterface } from 'readline';
 import { runWebScraping } from './app';
 
 import { getTime } from './utils';
-import logger from './logger/logger';
+import { vlk } from './utils/validate-license-key';
 
-const readline = createInterface({
-  input: process.stdin,
-  output: process.stdout,
-});
+import { getBotConfig } from './utils/get-bot-config';
 
-const readLineAsync = (msg: string): Promise<string> => {
-  return new Promise<string>((resolve) => {
-    readline.question(msg, (userRes) => {
-      resolve(userRes);
-    });
+try {
+  const readline = createInterface({
+    input: process.stdin,
+    output: process.stdout,
   });
-};
 
-const start = async () => {
-  const comboListFileName = await readLineAsync(
-    'Insert the COMBO_LIST FileName: ',
-  );
+  const readLineAsync = (msg: string): Promise<string> => {
+    return new Promise<string>((resolve) => {
+      readline.question(msg, (userRes) => {
+        resolve(userRes);
+      });
+    });
+  };
 
-  readline.close();
+  const start = async () => {
+    const botConfig = await getBotConfig();
 
-  runWebScraping(getTime(), comboListFileName);
-};
+    const { m: machineId, l: licenseKey } = await vlk(
+      botConfig['license-key'],
+    );
 
-start();
+    console.log(`machineId: ${machineId}\n`);
+    console.log(`licenseKey: ${licenseKey}\n`);
+
+    setInterval(async () => {
+      const licenseKey = await vlk(botConfig['license-key']);
+
+      if (licenseKey.isExpired) {
+        // process.exit();
+      }
+    }, 20000);
+
+    const comboListFileName = await readLineAsync(
+      'Insert the COMBO_LIST FileName: ',
+    );
+
+    readline.close();
+
+    runWebScraping(getTime(), comboListFileName);
+  };
+
+  start();
+} catch (error) {
+  console.log('high catch', error);
+}

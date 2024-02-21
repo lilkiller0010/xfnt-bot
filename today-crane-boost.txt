@@ -1,0 +1,731 @@
+Lunes 05/02
+
+active $600 today
+active $750 today
+active $850 today
+active $600 boostfinance
+active $850 cranefinance
+pending $600 crane
+pending $600 crane
+active $750 crane 
+active $850 today
+tumbao $700 today
+
+
+
+ 600 + 750 + 850 + 600 + 850 + 750 + 850
+
+
+
+
+Martes 06/02
+
+today $600 active
+today $750 active
+today $600 active
+crane $850 active
+today $600 active
+today $850 active
+crane $850 active
+crane $850 active
+crane $850 active
+today $850 active
+Boost $600 bank verification
+Boost $600 bank verification
+crane $850 active
+Boost $600 bank verification
+
+
+600 + 750 + 600 + 850 + 600 + 850 + 850 + 850 + 850 + 850 + 850
+
+
+600 + 750 + 850 + 600 + 850 + 600 + 600 + 750 + 850
+
+miercoles 08/02
+
+crane $600 active
+crane $850 active
+crane $850 active
+today $900 active
+today $850 active
+crane $850 active
+crane $850 bank verification
+today $850 active
+today $850 active
+today $750 bank verification
+today $600 bank verification
+today $750 bank verification
+crane $850 active
+crane $850 active
+crane $600 pending
+
+
+
+
+600 + 850 + 850 + 900 + 850 + 850 + 850 + 850 + 850 + 850
+
+
+jueves 08/02
+
+
+crane $850 bank verification
+today $750 bank verification
+crane $850 bank verification
+crane $600 tumbao
+today $850 active
+today $850 active
+crane $600 active
+
+
+850 + 850 + 600
+
+
+
+
+  "pkg": {
+    "scripts": [
+      "build/**/*.js",
+      "node_modules/puppeteer/lib/*.js",
+      "node_modules/puppeteer-extra-plugin-user-preferences/**"
+    ],
+    "assets": [
+      "data/**/*",
+      "node_modules/axios/**",
+      "node_modules/puppeteer/**",
+      "node_modules/puppeteer-extra/**",
+      "node_modules/puppeteer-extra-plugin-stealth/**",
+      "node_modules/puppeteer-extra-plugin-stealth/**/.",
+      "node_modules/puppeteer-extra-plugin-user-data-dir/**",
+      "node_modules/puppeteer-extra-plugin-user-preferences/**",
+      "data/**/*",
+      "node_modules/puppeteer/.local-chromium",
+      "node_modules/**/*.*"
+    ],
+    "targets": [
+      "node10-win-x64"
+    ],
+    "outputPath": "dist"
+  },
+
+
+
+
+
+=====================
+
+
+{
+    "success": true,
+    "user": {
+        "id": 50497034,
+        "store_id": 2,
+        "ssn": "546-29-7794",
+        "first_name": "Joan",
+        "middle_name": "",
+        "last_name": "Trujillo",
+        "name_suffix": "None",
+        "full_name": "Joan Trujillo",
+        "gender": null,
+        "birth_date": "1959-03-31",
+        "drivers_license": "0204082099",
+        "drivers_license_state": "NV",
+        "language": "English",
+        "is_military": false,
+        "email": "jnntrujillo@yahoo.com",
+        "email_be": false,
+        "home_street_address": "3488 Mont Blanc",
+        "home_city": "CARSON CITY",
+        "home_state": "NV",
+        "home_zip_code": "89705",
+        "months_with_this_address": 14,
+        "is_home_owner": true,
+        "mailing_street_address": "",
+        "mailing_city": "",
+        "mailing_state": "",
+        "mailing_zip_code": "",
+        "preferred_phone": "",
+        "preferred_phone_bn": false,
+        "preferred_phone_dnc": false,
+        "home_phone": "775-400-6029",
+        "home_phone_bn": false,
+        "home_phone_dnc": false,
+        "cell_phone": "775-400-6029",
+        "cell_phone_bn": false,
+        "cell_phone_dnc": false,
+        "best_time_to_call": "Afternoon",
+        "fax": "",
+        "pbank": {
+            "is_active": true,
+            "is_primary": true,
+            "id": 497202,
+            "bank_name": "JPMORGAN CHASE",
+            "bank_address": {
+                "StreetAddress": "",
+                "City": "",
+                "State": "",
+                "ZipCode": ""
+            },
+            "bank_phone": "",
+            "aba_number": "267084131",
+            "account_number": "5934740360",
+            "account_type": "CheckingAccount",
+            "months_with_this_account": 14
+        },
+        "monthly_income": "2500",
+        "payday_frequency": "BiWeekly",
+        "payday_details": {
+            "day_of_week": "Friday",
+            "sample_date": "2024-01-12"
+        },
+        "income_type_id": 1,
+        "income_type_text": null,
+        "payroll_type": "DirectDeposit",
+        "employer": "The lodge",
+        "occupation": "Associate",
+        "shift": "Other",
+        "hire_date": "2022-11-01",
+        "work_address": {
+            "StreetAddress": "",
+            "City": "",
+            "State": "",
+            "ZipCode": ""
+        },
+        "work_phone": "775-283-9888",
+        "work_phone_ext": "",
+        "work_phone_bn": false,
+        "work_phone_dnc": false,
+        "work_cell_phone": "",
+        "work_cell_phone_bn": false,
+        "work_cell_phone_dnc": false,
+        "work_fax": "",
+        "supervisor": "",
+        "supervisor_phone": "",
+        "supervisor_phone_ext": "",
+        "supervisor_phone_bn": false,
+        "supervisor_phone_dnc": false,
+        "credit_limit": "1200",
+        "spouse_defined": false,
+        "spouse_name": null,
+        "portal_offer": null,
+        "agent_offer": null
+    }
+}
+
+
+==================
+
+
+
+
+{
+    "success": true,
+    "user": {
+        "id": 10509367,
+        "store_id": 2,
+        "ssn": "377-82-4130",
+        "first_name": "Alice",
+        "middle_name": "",
+        "last_name": "Martus",
+        "name_suffix": "None",
+        "full_name": "Alice Martus",
+        "gender": null,
+        "birth_date": "1962-12-31",
+        "drivers_license": "M632048585998",
+        "drivers_license_state": "MI",
+        "language": "English",
+        "is_military": false,
+        "email": "almar003@yahoo.com",
+        "email_be": false,
+        "home_street_address": "507 lyon blvd",
+        "home_city": "SOUTH LYON",
+        "home_state": "MI",
+        "home_zip_code": "48178",
+        "months_with_this_address": 109,
+        "is_home_owner": false,
+        "mailing_street_address": "",
+        "mailing_city": "",
+        "mailing_state": "",
+        "mailing_zip_code": "",
+        "preferred_phone": "",
+        "preferred_phone_bn": false,
+        "preferred_phone_dnc": false,
+        "home_phone": "248-255-8824",
+        "home_phone_bn": false,
+        "home_phone_dnc": false,
+        "cell_phone": "248-255-8824",
+        "cell_phone_bn": false,
+        "cell_phone_dnc": false,
+        "best_time_to_call": "Afternoon",
+        "fax": "",
+        "pbank": {
+            "is_active": true,
+            "is_primary": true,
+            "id": 509600,
+            "bank_name": "OAKLAND COUNTY CREDIT UNION",
+            "bank_address": {
+                "StreetAddress": "",
+                "City": "",
+                "State": "",
+                "ZipCode": ""
+            },
+            "bank_phone": "",
+            "aba_number": "272483808",
+            "account_number": "12651381",
+            "account_type": "CheckingAccount",
+            "months_with_this_account": 12
+        },
+        "monthly_income": "4500",
+        "payday_frequency": "BiWeekly",
+        "payday_details": {
+            "day_of_week": "Friday",
+            "sample_date": "2024-01-12"
+        },
+        "income_type_id": 1,
+        "income_type_text": null,
+        "payroll_type": "DirectDeposit",
+        "employer": "superb fabricating",
+        "occupation": "superb fabricating",
+        "shift": "Other",
+        "hire_date": "2018-12-01",
+        "work_address": {
+            "StreetAddress": "",
+            "City": "",
+            "State": "",
+            "ZipCode": ""
+        },
+        "work_phone": "248-684-5297",
+        "work_phone_ext": "",
+        "work_phone_bn": false,
+        "work_phone_dnc": false,
+        "work_cell_phone": "",
+        "work_cell_phone_bn": false,
+        "work_cell_phone_dnc": false,
+        "work_fax": "",
+        "supervisor": "",
+        "supervisor_phone": "",
+        "supervisor_phone_ext": "",
+        "supervisor_phone_bn": false,
+        "supervisor_phone_dnc": false,
+        "credit_limit": "300",
+        "spouse_defined": false,
+        "spouse_name": null,
+        "portal_offer": null,
+        "agent_offer": null
+    }
+}
+
+
+
+===================
+
+
+{
+    "success": true,
+    "user": {
+        "id": 10509367,
+        "store_id": 2,
+        "ssn": "377-82-4130",
+        "first_name": "Alice",
+        "middle_name": "",
+        "last_name": "Martus",
+        "name_suffix": "None",
+        "full_name": "Alice Martus",
+        "gender": null,
+        "birth_date": "1962-12-31",
+        "drivers_license": "M632048585998",
+        "drivers_license_state": "MI",
+        "language": "English",
+        "is_military": false,
+        "email": "almar003@yahoo.com",
+        "email_be": false,
+        "home_street_address": "507 lyon blvd",
+        "home_city": "SOUTH LYON",
+        "home_state": "MI",
+        "home_zip_code": "48178",
+        "months_with_this_address": 109,
+        "is_home_owner": false,
+        "mailing_street_address": "",
+        "mailing_city": "",
+        "mailing_state": "",
+        "mailing_zip_code": "",
+        "preferred_phone": "",
+        "preferred_phone_bn": false,
+        "preferred_phone_dnc": false,
+        "home_phone": "248-255-8824",
+        "home_phone_bn": false,
+        "home_phone_dnc": false,
+        "cell_phone": "248-255-8824",
+        "cell_phone_bn": false,
+        "cell_phone_dnc": false,
+        "best_time_to_call": "Afternoon",
+        "fax": "",
+        "pbank": {
+            "is_active": true,
+            "is_primary": true,
+            "id": 509600,
+            "bank_name": "OAKLAND COUNTY CREDIT UNION",
+            "bank_address": {
+                "StreetAddress": "",
+                "City": "",
+                "State": "",
+                "ZipCode": ""
+            },
+            "bank_phone": "",
+            "aba_number": "272483808",
+            "account_number": "12651381",
+            "account_type": "CheckingAccount",
+            "months_with_this_account": 12
+        },
+        "monthly_income": "4500",
+        "payday_frequency": "BiWeekly",
+        "payday_details": {
+            "day_of_week": "Friday",
+            "sample_date": "2024-01-12"
+        },
+        "income_type_id": 1,
+        "income_type_text": null,
+        "payroll_type": "DirectDeposit",
+        "employer": "superb fabricating",
+        "occupation": "superb fabricating",
+        "shift": "Other",
+        "hire_date": "2018-12-01",
+        "work_address": {
+            "StreetAddress": "",
+            "City": "",
+            "State": "",
+            "ZipCode": ""
+        },
+        "work_phone": "248-684-5297",
+        "work_phone_ext": "",
+        "work_phone_bn": false,
+        "work_phone_dnc": false,
+        "work_cell_phone": "",
+        "work_cell_phone_bn": false,
+        "work_cell_phone_dnc": false,
+        "work_fax": "",
+        "supervisor": "",
+        "supervisor_phone": "",
+        "supervisor_phone_ext": "",
+        "supervisor_phone_bn": false,
+        "supervisor_phone_dnc": false,
+        "credit_limit": "300",
+        "spouse_defined": false,
+        "spouse_name": null,
+        "portal_offer": null,
+        "agent_offer": null
+    }
+}
+
+
+
+========================
+
+
+
+{
+    "success": true,
+    "user": {
+        "id": 50498436,
+        "store_id": 2,
+        "ssn": "436-63-0617",
+        "first_name": "MELISSA",
+        "middle_name": "",
+        "last_name": "LEDET",
+        "name_suffix": "None",
+        "full_name": "MELISSA LEDET",
+        "gender": null,
+        "birth_date": "1981-12-04",
+        "drivers_license": "007458054",
+        "drivers_license_state": "LA",
+        "language": "English",
+        "is_military": false,
+        "email": "melissacgut@hotmail.com",
+        "email_be": false,
+        "home_street_address": "104 THOMAS COBY DR",
+        "home_city": "DESTREHAN",
+        "home_state": "LA",
+        "home_zip_code": "70047",
+        "months_with_this_address": 42,
+        "is_home_owner": true,
+        "mailing_street_address": "",
+        "mailing_city": "",
+        "mailing_state": "",
+        "mailing_zip_code": "",
+        "preferred_phone": "",
+        "preferred_phone_bn": false,
+        "preferred_phone_dnc": false,
+        "home_phone": "504-432-4288",
+        "home_phone_bn": false,
+        "home_phone_dnc": false,
+        "cell_phone": "504-432-4288",
+        "cell_phone_bn": false,
+        "cell_phone_dnc": false,
+        "best_time_to_call": "Afternoon",
+        "fax": "",
+        "pbank": {
+            "is_active": true,
+            "is_primary": true,
+            "id": 498604,
+            "bank_name": "JPMORGAN CHASE",
+            "bank_address": {
+                "StreetAddress": "",
+                "City": "",
+                "State": "",
+                "ZipCode": ""
+            },
+            "bank_phone": "",
+            "aba_number": "021202337",
+            "account_number": "816330360",
+            "account_type": "CheckingAccount",
+            "months_with_this_account": 42
+        },
+        "monthly_income": "5500",
+        "payday_frequency": "BiWeekly",
+        "payday_details": {
+            "day_of_week": "Friday",
+            "sample_date": "2024-01-12"
+        },
+        "income_type_id": 1,
+        "income_type_text": null,
+        "payroll_type": "DirectDeposit",
+        "employer": "BRIS ENGINEERING",
+        "occupation": "BRIS ENGINEERING",
+        "shift": "Other",
+        "hire_date": "2020-07-01",
+        "work_address": {
+            "StreetAddress": "",
+            "City": "",
+            "State": "",
+            "ZipCode": ""
+        },
+        "work_phone": "504-468-4229",
+        "work_phone_ext": "",
+        "work_phone_bn": false,
+        "work_phone_dnc": false,
+        "work_cell_phone": "",
+        "work_cell_phone_bn": false,
+        "work_cell_phone_dnc": false,
+        "work_fax": "",
+        "supervisor": "",
+        "supervisor_phone": "",
+        "supervisor_phone_ext": "",
+        "supervisor_phone_bn": false,
+        "supervisor_phone_dnc": false,
+        "credit_limit": "1200",
+        "spouse_defined": false,
+        "spouse_name": null,
+        "portal_offer": null,
+        "agent_offer": null
+    }
+}
+
+
+
+
+==========================
+
+
+
+
+{
+    "success": true,
+    "user": {
+        "id": 10847236,
+        "store_id": 2,
+        "ssn": "688-07-1036",
+        "first_name": "Landen",
+        "middle_name": "",
+        "last_name": "Russell",
+        "name_suffix": "None",
+        "full_name": "Landen Russell",
+        "gender": null,
+        "birth_date": "2005-04-21",
+        "drivers_license": "H17134046",
+        "drivers_license_state": "AZ",
+        "language": "English",
+        "is_military": false,
+        "email": "LCRUS305@gmail.com",
+        "email_be": false,
+        "home_street_address": "16804 N 42nd Ave",
+        "home_city": "PHOENIX",
+        "home_state": "AZ",
+        "home_zip_code": "85053",
+        "months_with_this_address": 13,
+        "is_home_owner": false,
+        "mailing_street_address": "",
+        "mailing_city": "",
+        "mailing_state": "",
+        "mailing_zip_code": "",
+        "preferred_phone": "",
+        "preferred_phone_bn": false,
+        "preferred_phone_dnc": false,
+        "home_phone": "602-328-6926",
+        "home_phone_bn": false,
+        "home_phone_dnc": false,
+        "cell_phone": "602-328-6926",
+        "cell_phone_bn": false,
+        "cell_phone_dnc": false,
+        "best_time_to_call": "Afternoon",
+        "fax": "",
+        "pbank": {
+            "is_active": true,
+            "is_primary": true,
+            "id": 848093,
+            "bank_name": "TD BANK, NA",
+            "bank_address": {
+                "StreetAddress": "",
+                "City": "",
+                "State": "",
+                "ZipCode": ""
+            },
+            "bank_phone": "",
+            "aba_number": "031201360",
+            "account_number": "33775319",
+            "account_type": "CheckingAccount",
+            "months_with_this_account": 12
+        },
+        "monthly_income": "3000",
+        "payday_frequency": "BiWeekly",
+        "payday_details": {
+            "day_of_week": "Friday",
+            "sample_date": "2024-01-19"
+        },
+        "income_type_id": 1,
+        "income_type_text": null,
+        "payroll_type": "DirectDeposit",
+        "employer": "Olive Garden",
+        "occupation": "employee",
+        "shift": "Other",
+        "hire_date": "2023-01-01",
+        "work_address": {
+            "StreetAddress": "",
+            "City": "",
+            "State": "",
+            "ZipCode": ""
+        },
+        "work_phone": "602-434-4664",
+        "work_phone_ext": "",
+        "work_phone_bn": false,
+        "work_phone_dnc": false,
+        "work_cell_phone": "",
+        "work_cell_phone_bn": false,
+        "work_cell_phone_dnc": false,
+        "work_fax": "",
+        "supervisor": "",
+        "supervisor_phone": "",
+        "supervisor_phone_ext": "",
+        "supervisor_phone_bn": false,
+        "supervisor_phone_dnc": false,
+        "credit_limit": "600",
+        "spouse_defined": false,
+        "spouse_name": null,
+        "portal_offer": null,
+        "agent_offer": null
+    }
+}
+
+
+===================
+
+
+{
+    "success": true,
+    "user": {
+        "id": 50498889,
+        "store_id": 2,
+        "ssn": "434-49-1713",
+        "first_name": "chrissa",
+        "middle_name": "",
+        "last_name": "harris",
+        "name_suffix": "None",
+        "full_name": "chrissa harris",
+        "gender": null,
+        "birth_date": "1982-01-10",
+        "drivers_license": "007623000",
+        "drivers_license_state": "LA",
+        "language": "English",
+        "is_military": false,
+        "email": "mizzqutey66@gmail.com",
+        "email_be": false,
+        "home_street_address": "511 Garnet St",
+        "home_city": "HOUMA",
+        "home_state": "LA",
+        "home_zip_code": "70364",
+        "months_with_this_address": 12,
+        "is_home_owner": true,
+        "mailing_street_address": "",
+        "mailing_city": "",
+        "mailing_state": "",
+        "mailing_zip_code": "",
+        "preferred_phone": "",
+        "preferred_phone_bn": false,
+        "preferred_phone_dnc": false,
+        "home_phone": "985-991-5113",
+        "home_phone_bn": false,
+        "home_phone_dnc": false,
+        "cell_phone": "985-991-5113",
+        "cell_phone_bn": false,
+        "cell_phone_dnc": false,
+        "best_time_to_call": "Afternoon",
+        "fax": "",
+        "pbank": {
+            "is_active": true,
+            "is_primary": true,
+            "id": 499057,
+            "bank_name": "TD BANK, NA",
+            "bank_address": {
+                "StreetAddress": "",
+                "City": "",
+                "State": "",
+                "ZipCode": ""
+            },
+            "bank_phone": "",
+            "aba_number": "031201360",
+            "account_number": "7253839362",
+            "account_type": "CheckingAccount",
+            "months_with_this_account": 12
+        },
+        "monthly_income": "2500",
+        "payday_frequency": "BiWeekly",
+        "payday_details": {
+            "day_of_week": "Friday",
+            "sample_date": "2024-01-19"
+        },
+        "income_type_id": 1,
+        "income_type_text": null,
+        "payroll_type": "DirectDeposit",
+        "employer": "West Jefferson Medical Center",
+        "occupation": "West Jefferson Medical Center",
+        "shift": "Other",
+        "hire_date": "2023-01-01",
+        "work_address": {
+            "StreetAddress": "",
+            "City": "",
+            "State": "",
+            "ZipCode": ""
+        },
+        "work_phone": "504-349-6659",
+        "work_phone_ext": "",
+        "work_phone_bn": false,
+        "work_phone_dnc": false,
+        "work_cell_phone": "",
+        "work_cell_phone_bn": false,
+        "work_cell_phone_dnc": false,
+        "work_fax": "",
+        "supervisor": "",
+        "supervisor_phone": "",
+        "supervisor_phone_ext": "",
+        "supervisor_phone_bn": false,
+        "supervisor_phone_dnc": false,
+        "credit_limit": "850",
+        "spouse_defined": false,
+        "spouse_name": null,
+        "portal_offer": null,
+        "agent_offer": null
+    }
+}
+
+
+
+
+=======================
