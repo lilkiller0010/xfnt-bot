@@ -1,10 +1,10 @@
 export interface FidelitySearchResponse {
-  responseBaseInfo: ResponseBaseInfo;
+  responseBaseInfo?: ResponseBaseInfo;
 }
 
 export interface ResponseBaseInfo {
   sessionTokens: null;
-  status: Status;
+  status?: Status;
 }
 
 export interface Status {
@@ -14,3 +14,14 @@ export interface Status {
   Context: string;
   Relationships: string[];
 }
+
+// code :  message
+
+// 1200 = "Success"
+// 1201 = "Authentication Not Completed"
+
+// enum FidelityResponseMessages {
+//   Success = 'Success',
+//   AuthenticationNotCompleted = 'Authentication Not Completed',
+//   Matchfound = 'Match found',
+// }

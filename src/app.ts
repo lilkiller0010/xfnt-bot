@@ -157,7 +157,7 @@ export const runWebScraping = async (
                   validWriteLineOnFile,
                   invalidWriteLineOnFile,
                   validFileNameRange,
-                  'wfVerify',
+                  'fidelity',
                 ),
               ]);
             }),

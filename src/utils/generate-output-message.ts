@@ -1,7 +1,29 @@
 import { Credential } from '../interface/credential';
 
-export const generateOutputMessage = (crendential: Credential): string => {
-  const message = `SSN=${crendential.ssn} data=${JSON.stringify(crendential)}`;
+type GenerateOutputMessage = {
+  credential: Credential;
+  searchResponseMessage: string;
+  otp?: boolean;
+  phoneLast4Digit?: string[];
+  isCompleteRegister?: boolean;
+};
+
+export const generateOutputMessage = ({
+  credential,
+  searchResponseMessage,
+  otp,
+  phoneLast4Digit,
+  isCompleteRegister,
+}: GenerateOutputMessage): string => {
+  const message = `SSN=${
+    credential.ssn
+  } SearchResponseMessage=${searchResponseMessage} ${
+    otp ? `REQUIREOTP ` : ''
+  } ${
+    phoneLast4Digit ? `PHONELAST4DIGIT=${phoneLast4Digit.toString()} ` : ''
+  } ${isCompleteRegister ? `isCompleteRegister ` : ''}data=${JSON.stringify(
+    credential,
+  )}`;
 
   return message;
 };
