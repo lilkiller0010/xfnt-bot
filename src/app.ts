@@ -18,6 +18,13 @@ const CHANGE_TABS_SECONDS = 3;
 const HITS_FOLDER = 'hits';
 
 const HITS_FULL_DIRECTORY = `/data/${HITS_FOLDER}`;
+// export const HEADLESS = 'new';
+export const HEADLESS = false;
+
+export const proxyConfig = {
+  host: '142.202.220.242',
+  port: 18079,
+};
 
 export const runWebScraping = async (
   time: string,

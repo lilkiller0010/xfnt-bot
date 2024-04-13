@@ -1,0 +1,37 @@
+SSN=602588590 data={"id":"829957","name":"Samantha","lastname":"Rojas","bid":"1992/06/03","address":"7450 and a half Guthrie Street","city":"San Bernardino","state":"CA","zipCode":"92410","phoneNumber":"9099558163","phoneNumber2":"9099558163","email":"sammy3carolyn@gmail.com","ssn":"602588590","last4ssn":"8590"}
+
+
+
+
+SSN=149761730 data={"id":"829968","name":"Kimberly","lastname":"Tredway","bid":"1975/03/17","address":"45b kossuth street rm 5","city":"WHARTON","state":"NJ","zipCode":"07885","phoneNumber":"8624147999","phoneNumber2":"9735108872","email":"tredwaykim281@gmail.com","ssn":"149761730","last4ssn":"1730"}
+
+
+
+
+SSN=274689408 data={"id":"829979","name":"fayasha","lastname":"gibson","bid":"1971/10/24","address":"1465 townsend apt.2 null","city":"Youngstown","state":"OH","zipCode":"44505","phoneNumber":"3305591638","phoneNumber2":"3305591638","email":"fayasha@yahoo.com","ssn":"274689408","last4ssn":"9408"}
+
+
+
+SSN=551774134 data={"id":"829984","name":"KELLY","lastname":"ROY","bid":"1980/04/27","address":"826 N BARRANCA AVE APT 12","city":"COVINA","state":"CA","zipCode":"91723","phoneNumber":"4242193453","phoneNumber2":"4242193453","email":"kelly22x3mama@gmail.com","ssn":"551774134","last4ssn":"4134"}
+
+
+
+
+SSN=080603796 data={"id":"829992","name":"Dawn","lastname":"Bloxsom","bid":"1976/06/13","address":"1211 Culbreath Road","city":"Brooksville","state":"FL","zipCode":"34602","phoneNumber":"3522325148","phoneNumber2":"3522325148","email":"dawn_bloxsom@yahoo.com","ssn":"080603796","last4ssn":"3796"}
+
+
+
+SSN=266759879 data={"id":"830012","name":"EMANUELE","lastname":"SARNELLI","bid":"1966/08/09","address":"169 BLANDING BLVD","city":"ORANGE PARK","state":"FL","zipCode":"32073","phoneNumber":"9047071527","phoneNumber2":"9047071527","email":"sarnelli@bellsouth.net","ssn":"266759879","last4ssn":"9879"}
+
+
+
+
+SSN=540739076 data={"id":"830051","name":"Bharath","lastname":"Swanson","bid":"1998/02/20","address":"2105  Se 145th Ave null","city":"Portland","state":"OR","zipCode":"97233","phoneNumber":"5036801704","phoneNumber2":"5036801704","email":"bharathswanson@yahoo.com","ssn":"540739076","last4ssn":"9076"}
+
+
+
+SSN=327905675 data={"id":"830053","name":"Shakeela","lastname":"Johnson","bid":"1994/03/14","address":"4848 N Winthrop Ave Apt 905","city":"Chicago","state":"IL","zipCode":"60640","phoneNumber":"3127349767","phoneNumber2":"3127349767","email":"shakeelajohnson2010@yahoo.com","ssn":"327905675","last4ssn":"5675"}
+
+
+
+SSN=419375546 data={"id":"830061","name":"JONATHAN","lastname":"DAY","bid":"1991/05/27","address":"46  HAMMOND CIRCLE null","city":"ATTALLA","state":"AL","zipCode":"35954","phoneNumber":"2564409051","phoneNumber2":"2564409051","email":"jday52791@icloud.com","ssn":"419375546","last4ssn":"5546"}
