@@ -18,8 +18,8 @@ const CHANGE_TABS_SECONDS = 3;
 
 const BLANK_PAGE_URL = 'about:blank';
 
-export const HEADLESS = 'new';
-// export const HEADLESS = false;
+// export const HEADLESS = 'new';
+export const HEADLESS = false;
 
 export const proxyConfig = {
   host: '142.202.220.242',
