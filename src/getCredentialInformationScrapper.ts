@@ -155,6 +155,10 @@ export const getCredentialInformationScrapper = async (
   const page = await browser.newPage();
   // let page = await _browser.newPage();
 
+  await page.authenticate({
+    username: 'lilkiller',
+    password: 'klkklkklk',
+  });
   await page.setViewport({
     width: 1920,
     height: 1080,
